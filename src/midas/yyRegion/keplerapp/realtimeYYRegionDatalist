@@ -1,0 +1,208 @@
+{
+    "code": 200,
+    "msg": {
+        "time": "09:00:00",
+        "all": {
+            "tBudget_charge": {
+                "dayGrow": "NAN",
+                "dayGrowValue": "0",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": null,
+                "hisValueList": [
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "key": "real_tBudget_charge",
+                "realValue": "0",
+                "title": "总预算消耗比",
+                "weekGrow": "NAN",
+                "weekGrowValue": "0",
+                "yestValue": "0.0"
+            },
+            "tBudget": {
+                "dayGrow": "NAN",
+                "dayGrowValue": "0",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": null,
+                "hisValueList": [
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "key": "real_tBudget",
+                "realValue": "0",
+                "title": "总预算",
+                "weekGrow": "NAN",
+                "weekGrowValue": "0",
+                "yestValue": "0"
+            },
+            "nBudget_charge": {
+                "dayGrow": "NAN",
+                "dayGrowValue": "0",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": null,
+                "hisValueList": [
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "key": "real_nBudget_charge",
+                "realValue": "0",
+                "title": "首充预算消耗比",
+                "weekGrow": "NAN",
+                "weekGrowValue": "0",
+                "yestValue": "0.0"
+            },
+            "nCharge": {
+                "dayGrow": "NAN",
+                "dayGrowValue": "0",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": null,
+                "hisValueList": [
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "key": "real_nCharge",
+                "realValue": "0",
+                "title": "首充收入",
+                "weekGrow": "NAN",
+                "weekGrowValue": "0",
+                "yestValue": "0"
+            },
+            "cBudget_charge": {
+                "dayGrow": "NAN",
+                "dayGrowValue": "0",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": null,
+                "hisValueList": [
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "key": "real_cBudget_charge",
+                "realValue": "0",
+                "title": "续充预算消耗比",
+                "weekGrow": "NAN",
+                "weekGrowValue": "0",
+                "yestValue": "0.0"
+            },
+            "cBudget": {
+                "dayGrow": "NAN",
+                "dayGrowValue": "0",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": null,
+                "hisValueList": [
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "key": "real_cBudget",
+                "realValue": "0",
+                "title": "续充预算",
+                "weekGrow": "NAN",
+                "weekGrowValue": "0",
+                "yestValue": "0"
+            },
+            "nBudget": {
+                "dayGrow": "NAN",
+                "dayGrowValue": "0",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": null,
+                "hisValueList": [
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "key": "real_nBudget",
+                "realValue": "0",
+                "title": "首充预算",
+                "weekGrow": "NAN",
+                "weekGrowValue": "0",
+                "yestValue": "0"
+            },
+            "tCharge": {
+                "dayGrow": "NAN",
+                "dayGrowValue": "0",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": null,
+                "hisValueList": [
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "key": "real_tCharge",
+                "realValue": "0",
+                "title": "总收入",
+                "weekGrow": "NAN",
+                "weekGrowValue": "0",
+                "yestValue": "0"
+            },
+            "cCharge": {
+                "dayGrow": "NAN",
+                "dayGrowValue": "0",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": null,
+                "hisValueList": [
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "key": "real_cCharge",
+                "realValue": "0",
+                "title": "续充收入",
+                "weekGrow": "NAN",
+                "weekGrowValue": "0",
+                "yestValue": "0"
+            }
+        }
+    },
+    "region": null,
+    "tag": null
+}

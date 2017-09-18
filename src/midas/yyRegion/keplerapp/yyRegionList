@@ -1,0 +1,40 @@
+{
+    "code": 200,
+    "msg": {
+        "yyRegionList": [
+            {
+                "dictItemCode": "-10000",
+                "dictItemName": "餐饮组"
+            },{
+                "dictItemCode": "-100020",
+                "dictItemName": "餐饮组"
+            },{
+                "dictItemCode": "-100030",
+                "dictItemName": "餐饮组"
+            },{
+                "dictItemCode": "-100040",
+                "dictItemName": "餐饮组"
+            },{
+                "dictItemCode": "-10000",
+                "dictItemName": "餐饮组"
+            },{
+                "dictItemCode": "-10000",
+                "dictItemName": "餐饮组"
+            },{
+                "dictItemCode": "-10000",
+                "dictItemName": "餐饮组"
+            },{
+                "dictItemCode": "-10000",
+                "dictItemName": "餐饮组"
+            },{
+                "dictItemCode": "-10000",
+                "dictItemName": "餐饮组"
+            },{
+                "dictItemCode": "-10000",
+                "dictItemName": "餐饮组"
+            }
+        ]
+    },
+    "region": null,
+    "tag": null
+}

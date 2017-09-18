@@ -1,0 +1,43 @@
+{
+    "bu": null,
+    "buElementModelList": [],
+    "code": 200,
+    "msg": {
+        "data": {
+            "titleList": [
+                "收入"
+            ],
+            "dataGridList": [
+                [
+                    {
+                        "dataList": null,
+                        "dayGrow": "-3.52",
+                        "dayGrowValue": "-292,730",
+                        "dayValue": "8,305,347",
+                        "dimKey": null,
+                        "dimTitle": null,
+                        "hisDateList": null,
+                        "hisValueList": [
+                            "0",
+                            "0",
+                            "0",
+                            "0",
+                            "0",
+                            "0",
+                            "0"
+                        ],
+                        "key": "cash",
+                        "realValue": "8,012,617",
+                        "title": "收入",
+                        "weekGrow": "26.61",
+                        "weekGrowValue": "1,683,921",
+                        "weekValue": "6,328,696",
+                        "yestValue": "8,012,617"
+                    }
+                ]
+            ]
+        }
+    },
+    "queryDate": null,
+    "siteType": null
+}

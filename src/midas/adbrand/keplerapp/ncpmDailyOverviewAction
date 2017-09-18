@@ -1,0 +1,300 @@
+{
+    "bu": "-10001",
+    "code": 200,
+    "index": null,
+    "msg": {
+        "topCashValue": "568,959",
+        "resDataMap": {
+            "cash": {
+                "dayGrow": "-18.75",
+                "dayGrowValue": "0",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": [
+                    "'11-17'",
+                    "'11-18'",
+                    "'11-19'",
+                    "'11-20'",
+                    "'11-21'",
+                    "'11-22'",
+                    "'11-23'",
+                    "'11-24'"
+                ],
+                "hisValueList": [
+                    "177594",
+                    "117739",
+                    "319916",
+                    "114701",
+                    "119732",
+                    "449371",
+                    "337862",
+                    "274516"
+                ],
+                "key": "cash",
+                "realValue": "0",
+                "title": "收入",
+                "weekGrow": "54.57",
+                "weekGrowValue": "0",
+                "yestValue": "274,516"
+            },
+            "charge": {
+                "dayGrow": "-15.63",
+                "dayGrowValue": "0",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": [
+                    "'11-17'",
+                    "'11-18'",
+                    "'11-19'",
+                    "'11-20'",
+                    "'11-21'",
+                    "'11-22'",
+                    "'11-23'",
+                    "'11-24'"
+                ],
+                "hisValueList": [
+                    "915906",
+                    "827263",
+                    "709854",
+                    "446445",
+                    "180244",
+                    "457294",
+                    "357186",
+                    "301358"
+                ],
+                "key": "charge",
+                "realValue": "0",
+                "title": "消耗",
+                "weekGrow": "-67.1",
+                "weekGrowValue": "0",
+                "yestValue": "301,358"
+            },
+            "budget": {
+                "dayGrow": "-100.0",
+                "dayGrowValue": "0",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": [
+                    "'11-17'",
+                    "'11-18'",
+                    "'11-19'",
+                    "'11-20'",
+                    "'11-21'",
+                    "'11-22'",
+                    "'11-23'",
+                    "'11-24'"
+                ],
+                "hisValueList": [
+                    "2081741",
+                    "1476951",
+                    "779462",
+                    "2057657",
+                    "2169377",
+                    "1737948",
+                    "1606057",
+                    0
+                ],
+                "key": "budget",
+                "realValue": "0",
+                "title": "预算",
+                "weekGrow": "-100.0",
+                "weekGrowValue": "0",
+                "yestValue": "0"
+            },
+            "budget_charge": {
+                "dayGrow": "-100.0",
+                "dayGrowValue": "0",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": [
+                    "'11-17'",
+                    "'11-18'",
+                    "'11-19'",
+                    "'11-20'",
+                    "'11-21'",
+                    "'11-22'",
+                    "'11-23'",
+                    "'11-24'"
+                ],
+                "hisValueList": [
+                    "44.0",
+                    "56.0",
+                    "91.1",
+                    "21.7",
+                    "8.3",
+                    "26.3",
+                    "22.2",
+                    0
+                ],
+                "key": "budget_charge",
+                "realValue": "0",
+                "title": "预算消耗比",
+                "weekGrow": "-100.0",
+                "weekGrowValue": "0",
+                "yestValue": "0.0"
+            },
+            "pass_imp": {
+                "dayGrow": "-8.74",
+                "dayGrowValue": "0",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": [
+                    "'11-17'",
+                    "'11-18'",
+                    "'11-19'",
+                    "'11-20'",
+                    "'11-21'",
+                    "'11-22'",
+                    "'11-23'",
+                    "'11-24'"
+                ],
+                "hisValueList": [
+                    "36816109",
+                    "35605758",
+                    "32435770",
+                    "19601893",
+                    "6212075",
+                    "16146989",
+                    "13102945",
+                    "11957641"
+                ],
+                "key": "pass_imp",
+                "realValue": "0",
+                "title": "有效曝光",
+                "weekGrow": "-67.52",
+                "weekGrowValue": "0",
+                "yestValue": "11,957,641"
+            },
+            "pass_click": {
+                "dayGrow": "-3.11",
+                "dayGrowValue": "0",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": [
+                    "'11-17'",
+                    "'11-18'",
+                    "'11-19'",
+                    "'11-20'",
+                    "'11-21'",
+                    "'11-22'",
+                    "'11-23'",
+                    "'11-24'"
+                ],
+                "hisValueList": [
+                    "201548",
+                    "226048",
+                    "155891",
+                    "144187",
+                    "45128",
+                    "61332",
+                    "47363",
+                    "45892"
+                ],
+                "key": "pass_click",
+                "realValue": "0",
+                "title": "有效点击",
+                "weekGrow": "-77.23",
+                "weekGrowValue": "0",
+                "yestValue": "45,892"
+            },
+            "pass_CTR": {
+                "dayGrow": "5.56",
+                "dayGrowValue": "0",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": [
+                    "'11-17'",
+                    "'11-18'",
+                    "'11-19'",
+                    "'11-20'",
+                    "'11-21'",
+                    "'11-22'",
+                    "'11-23'",
+                    "'11-24'"
+                ],
+                "hisValueList": [
+                    "0.55",
+                    "0.63",
+                    "0.48",
+                    "0.74",
+                    "0.73",
+                    "0.38",
+                    "0.36",
+                    "0.38"
+                ],
+                "key": "pass_CTR",
+                "realValue": "0",
+                "title": "有效CTR(点击\/曝光)",
+                "weekGrow": "-30.91",
+                "weekGrowValue": "0",
+                "yestValue": "0.38"
+            },
+            "ecpc": {
+                "dayGrow": "-12.93",
+                "dayGrowValue": "0",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": [
+                    "'11-17'",
+                    "'11-18'",
+                    "'11-19'",
+                    "'11-20'",
+                    "'11-21'",
+                    "'11-22'",
+                    "'11-23'",
+                    "'11-24'"
+                ],
+                "hisValueList": [
+                    "4.54",
+                    "3.66",
+                    "4.55",
+                    "3.10",
+                    "3.99",
+                    "7.46",
+                    "7.54",
+                    "6.57"
+                ],
+                "key": "ecpc",
+                "realValue": "0",
+                "title": "ECPC",
+                "weekGrow": "44.5",
+                "weekGrowValue": "0",
+                "yestValue": "6.57"
+            },
+            "ecpm": {
+                "dayGrow": "-7.55",
+                "dayGrowValue": "0",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": [
+                    "'11-17'",
+                    "'11-18'",
+                    "'11-19'",
+                    "'11-20'",
+                    "'11-21'",
+                    "'11-22'",
+                    "'11-23'",
+                    "'11-24'"
+                ],
+                "hisValueList": [
+                    "24.88",
+                    "23.23",
+                    "21.88",
+                    "22.78",
+                    "29.02",
+                    "28.32",
+                    "27.26",
+                    "25.20"
+                ],
+                "key": "ecpm",
+                "realValue": "0",
+                "title": "ECPM",
+                "weekGrow": "1.3",
+                "weekGrowValue": "0",
+                "yestValue": "25.20"
+            }
+        },
+        "topCashDate": "2016-09-22"
+    },
+    "queryDate": "2016-11-24"
+}

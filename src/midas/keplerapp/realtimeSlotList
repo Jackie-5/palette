@@ -1,0 +1,148 @@
+{
+    "code": 200,
+    "msg": {
+        "resList": [
+            {
+                "dictItemCode": "3",
+                "dictItemName": "点评_PC_搜索页右侧推荐"
+            },
+            {
+                "dictItemCode": "4",
+                "dictItemName": "点评_PC_商户页右侧推荐"
+            },
+            {
+                "dictItemCode": "5",
+                "dictItemName": "点评_PC_搜索结果位长尾词"
+            },
+            {
+                "dictItemCode": "10004",
+                "dictItemName": "点评_APP_商户详情页底部推荐"
+            },
+            {
+                "dictItemCode": "10007",
+                "dictItemName": "点评_APP_首页猜你喜欢"
+            },
+            {
+                "dictItemCode": "10014",
+                "dictItemName": "点评_APP_电影交易成功页推荐"
+            },
+            {
+                "dictItemCode": "10015",
+                "dictItemName": "点评_APP_闪惠交易成功页推荐"
+            },
+            {
+                "dictItemCode": "10016",
+                "dictItemName": "点评_APP_丽人预定成功页推荐"
+            },
+            {
+                "dictItemCode": "10017",
+                "dictItemName": "点评_APP_海葵广告聚合页"
+            },
+            {
+                "dictItemCode": "10018",
+                "dictItemName": "点评_M站_丽人预定成功页推荐"
+            },
+            {
+                "dictItemCode": "10020",
+                "dictItemName": "点评_APP_丽人_社区帖子商户推荐"
+            },
+            {
+                "dictItemCode": "11002",
+                "dictItemName": "点评_APP_结婚_频道首页推荐"
+            },
+            {
+                "dictItemCode": "11003",
+                "dictItemName": "点评_APP_结婚_套餐页底部推荐"
+            },
+            {
+                "dictItemCode": "11004",
+                "dictItemName": "点评_APP_结婚_商户详情页底部推荐"
+            },
+            {
+                "dictItemCode": "11005",
+                "dictItemName": "点评_APP_结婚_消息盒子推荐"
+            },
+            {
+                "dictItemCode": "12004",
+                "dictItemName": "点评_APP_酒店_商户详情页底部推荐"
+            },
+            {
+                "dictItemCode": "20004",
+                "dictItemName": "点评_M站_商户详情页底部推荐"
+            },
+            {
+                "dictItemCode": "20015",
+                "dictItemName": "点评_M站_闪惠交易成功页推荐"
+            },
+            {
+                "dictItemCode": "21002",
+                "dictItemName": "点评_M站_结婚_频道首页推荐"
+            },
+            {
+                "dictItemCode": "21003",
+                "dictItemName": "点评_M站_结婚_套餐页底部推荐"
+            },
+            {
+                "dictItemCode": "21004",
+                "dictItemName": "点评_M站_结婚_商户详情页底部推荐"
+            },
+            {
+                "dictItemCode": "30007",
+                "dictItemName": "点评_M站_结婚_外部引流广告聚合页"
+            },
+            {
+                "dictItemCode": "40001",
+                "dictItemName": "点评_APP_丽人_频道首页推荐"
+            },
+            {
+                "dictItemCode": "41001",
+                "dictItemName": "点评_M站_丽人_频道首页推荐"
+            },
+            {
+                "dictItemCode": "42001",
+                "dictItemName": "微信MM站丽人"
+            },
+            {
+                "dictItemCode": "42002",
+                "dictItemName": "手Q丽人"
+            },
+            {
+                "dictItemCode": "10037",
+                "dictItemName": "点评_APP_运营活动广告位推荐"
+            },
+            {
+                "dictItemCode": "10006",
+                "dictItemName": "点评_APP_美食_团单详情页底部推荐"
+            },
+            {
+                "dictItemCode": "10038",
+                "dictItemName": "点评_APP_美食_团单支付成功页推荐"
+            },
+            {
+                "dictItemCode": "9",
+                "dictItemName": "点评_PC_结婚_商户页右侧推荐"
+            },
+            {
+                "dictItemCode": "8",
+                "dictItemName": "点评_PC_结婚_搜索置顶广告"
+            },
+            {
+                "dictItemCode": "10046",
+                "dictItemName": "点评_APP_到综_团单详情页底部推荐"
+            },
+            {
+                "dictItemCode": "10039",
+                "dictItemName": "点评_APP_到综_团单支付成功页推荐"
+            },
+            {
+                "dictItemCode": "10045",
+                "dictItemName": "点评_APP_亲子_运营活动广告位推荐"
+            },
+            {
+                "dictItemCode": "19001",
+                "dictItemName": "点评_APP_丽人_运营活动广告位推荐"
+            }
+        ]
+    },
+    "slottype": "1"
+}

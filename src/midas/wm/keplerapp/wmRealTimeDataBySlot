@@ -1,0 +1,120 @@
+{
+    "code": 200,
+    "dataItem": null,
+    "msg": {
+        "newData": [
+            {
+                "dayGrow": "14250.0",
+                "dayGrowValue": "10",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": null,
+                "hisValueList": [
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "key": "charge",
+                "realValue": "1,435",
+                "title": "消耗",
+                "weekGrow": "NAN",
+                "weekGrowValue": "0",
+                "yestValue": "0"
+            },
+            {
+                "dayGrow": "8.33",
+                "dayGrowValue": "48",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": null,
+                "hisValueList": [
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "key": "imp",
+                "realValue": "52",
+                "title": "曝光",
+                "weekGrow": "NAN",
+                "weekGrowValue": "0",
+                "yestValue": "0"
+            },
+            {
+                "dayGrow": "3550.0",
+                "dayGrowValue": "2",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": null,
+                "hisValueList": [
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "key": "click",
+                "realValue": "73",
+                "title": "点击",
+                "weekGrow": "NAN",
+                "weekGrowValue": "0",
+                "yestValue": "0"
+            },
+            {
+                "dayGrow": "293.15",
+                "dayGrowValue": "5.00",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": null,
+                "hisValueList": [
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "key": "ecpc",
+                "realValue": "19.66",
+                "title": "ECPC",
+                "weekGrow": "NAN",
+                "weekGrowValue": "0.00",
+                "yestValue": "0"
+            },
+            {
+                "dayGrow": "3269.2",
+                "dayGrowValue": "4.17",
+                "dimKey": null,
+                "dimTitle": null,
+                "hisDateList": null,
+                "hisValueList": [
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0",
+                    "0"
+                ],
+                "key": "ctr",
+                "realValue": "140.38",
+                "title": "CTR",
+                "weekGrow": "NAN",
+                "weekGrowValue": "0.00",
+                "yestValue": "0"
+            }
+        ],
+        "time": "05:39:00"
+    },
+    "slotId": "1"
+}

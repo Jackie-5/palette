@@ -1,0 +1,1284 @@
+{
+    "bu": "-10001",
+    "code": 200,
+    "msg": {
+        "time": "08:00:00",
+        "resList": [
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "2",
+                    "dimTitle": "点评搜索",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "2",
+                    "dimTitle": "点评搜索",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "1",
+                    "dimTitle": "关键词前三",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "1",
+                    "dimTitle": "关键词前三",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "2",
+                    "dimTitle": "关键词首页",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "2",
+                    "dimTitle": "关键词首页",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "3",
+                    "dimTitle": "点评_PC_搜索页右侧推荐",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "3",
+                    "dimTitle": "点评_PC_搜索页右侧推荐",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "5",
+                    "dimTitle": "点评_PC_搜索结果位长尾词",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "5",
+                    "dimTitle": "点评_PC_搜索结果位长尾词",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "10005",
+                    "dimTitle": "点评_APP_搜索结果位长尾词",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "10005",
+                    "dimTitle": "点评_APP_搜索结果位长尾词",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "10008",
+                    "dimTitle": "点评_APP_少结果推荐",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "10008",
+                    "dimTitle": "点评_APP_少结果推荐",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "10009",
+                    "dimTitle": "点评_APP_搜索插入广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "10009",
+                    "dimTitle": "点评_APP_搜索插入广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "10010",
+                    "dimTitle": "点评_APP_搜索补余广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "10010",
+                    "dimTitle": "点评_APP_搜索补余广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "10011",
+                    "dimTitle": "点评_APP_搜索内容广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "10011",
+                    "dimTitle": "点评_APP_搜索内容广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "10012",
+                    "dimTitle": "点评_APP_热门搜索推荐",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "10012",
+                    "dimTitle": "点评_APP_热门搜索推荐",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "11001",
+                    "dimTitle": "点评_APP_结婚_搜索补余广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "11001",
+                    "dimTitle": "点评_APP_结婚_搜索补余广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "11009",
+                    "dimTitle": "点评_APP_搜索置顶广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "11009",
+                    "dimTitle": "点评_APP_搜索置顶广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "12001",
+                    "dimTitle": "点评_APP_酒店_搜索补余广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "12001",
+                    "dimTitle": "点评_APP_酒店_搜索补余广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "12002",
+                    "dimTitle": "点评_APP_酒店_搜索内容广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "12002",
+                    "dimTitle": "点评_APP_酒店_搜索内容广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "12003",
+                    "dimTitle": "点评_APP_酒店_搜索插入广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "12003",
+                    "dimTitle": "点评_APP_酒店_搜索插入广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "20010",
+                    "dimTitle": "点评_M站_搜索补余广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "20010",
+                    "dimTitle": "点评_M站_搜索补余广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "20011",
+                    "dimTitle": "点评_M站_搜索内容广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "20011",
+                    "dimTitle": "点评_M站_搜索内容广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "21005",
+                    "dimTitle": "点评_M站_结婚_搜索补余广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "21005",
+                    "dimTitle": "点评_M站_结婚_搜索补余广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "21009",
+                    "dimTitle": "点评_M站_搜索置顶广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "21009",
+                    "dimTitle": "点评_M站_搜索置顶广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "8",
+                    "dimTitle": "点评_PC_搜索置顶广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "8",
+                    "dimTitle": "点评_PC_搜索置顶广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "11010",
+                    "dimTitle": "点评_APP_结婚_团单搜索置顶广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "11010",
+                    "dimTitle": "点评_APP_结婚_团单搜索置顶广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "10",
+                    "dimTitle": "点评_PC_结婚_团单搜索置顶广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "10",
+                    "dimTitle": "点评_PC_结婚_团单搜索置顶广告",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "10040",
+                    "dimTitle": "点评_APP_搜索内容广告-频道首页",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "10040",
+                    "dimTitle": "点评_APP_搜索内容广告-频道首页",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "12009",
+                    "dimTitle": "点评－app－酒店插入广告（已弃用）",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "12009",
+                    "dimTitle": "点评－app－酒店插入广告（已弃用）",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ],
+            [
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "10053",
+                    "dimTitle": "点评_APP_亲子_直达区广告位",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_charge",
+                    "realValue": "0",
+                    "title": "消耗",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                },
+                {
+                    "dayGrow": "NAN",
+                    "dayGrowValue": "0",
+                    "dimKey": "10053",
+                    "dimTitle": "点评_APP_亲子_直达区广告位",
+                    "hisDateList": null,
+                    "hisValueList": [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ],
+                    "key": "real_reqnum",
+                    "realValue": "0",
+                    "title": "广告请求数",
+                    "weekGrow": "NAN",
+                    "weekGrowValue": "0",
+                    "yestValue": "0"
+                }
+            ]
+        ],
+        "buList": [
+            {
+                "dictItemCode": "-10001",
+                "dictItemName": "全部"
+            },
+            {
+                "dictItemCode": "-11030",
+                "dictItemName": "到店综合事业部群"
+            },
+            {
+                "dictItemCode": "17",
+                "dictItemName": "└ 教培BU"
+            },
+            {
+                "dictItemCode": "3",
+                "dictItemName": "└ 结婚BU"
+            },
+            {
+                "dictItemCode": "19",
+                "dictItemName": "└ 丽人BU"
+            },
+            {
+                "dictItemCode": "23",
+                "dictItemName": "└ 亲子BU"
+            },
+            {
+                "dictItemCode": "24",
+                "dictItemName": "└ 家装BU"
+            },
+            {
+                "dictItemCode": "25",
+                "dictItemName": "└ 休娱BU"
+            },
+            {
+                "dictItemCode": "20",
+                "dictItemName": "└ K歌BU"
+            },
+            {
+                "dictItemCode": "-11040",
+                "dictItemName": "到店餐饮事业群"
+            },
+            {
+                "dictItemCode": "18",
+                "dictItemName": "└ 营销品牌组"
+            },
+            {
+                "dictItemCode": "2",
+                "dictItemName": "└ 推广事业部"
+            },
+            {
+                "dictItemCode": "28",
+                "dictItemName": "└ MT到餐"
+            },
+            {
+                "dictItemCode": "-11005",
+                "dictItemName": "酒店旅游事业部群"
+            },
+            {
+                "dictItemCode": "15",
+                "dictItemName": "└ 海外业务"
+            },
+            {
+                "dictItemCode": "11",
+                "dictItemName": "└ 酒店旅游"
+            },
+            {
+                "dictItemCode": "33",
+                "dictItemName": "└ 酒店中小客户"
+            },
+            {
+                "dictItemCode": "-11020",
+                "dictItemName": "广告平台"
+            },
+            {
+                "dictItemCode": "22",
+                "dictItemName": "└ 在线签约广告"
+            }
+        ]
+    },
+    "slottype": "2"
+}

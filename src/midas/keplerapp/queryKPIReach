@@ -1,0 +1,13 @@
+{
+    "code": 200,
+    "msg": {
+        "cptKPIReach": "100.00",
+        "cptKPI": "0.00",
+        "cpcKPI": "2.78",
+        "cpcKPIReach": "100.26",
+        "allKPIReach": "225.86",
+        "allKPI": "2.78"
+    },
+    "queryStartDate": "2016-06-01",
+    "queryType": "0"
+}

@@ -1,0 +1,75 @@
+{
+    "bu": "-11040",
+    "code": 200,
+    "group": null,
+    "msg": {
+        "dataList": [
+            {
+                "cBudget": "0",
+                "cCharge": "0",
+                "cShop": "0",
+                "fdate": "2016-09-24",
+                "nBudget": "0",
+                "nCharge": "0",
+                "nShop": "0"
+            },
+            {
+                "cBudget": "0",
+                "cCharge": "0",
+                "cShop": "0",
+                "fdate": "2016-09-25",
+                "nBudget": "0",
+                "nCharge": "0",
+                "nShop": "0"
+            },
+            {
+                "cBudget": "0",
+                "cCharge": "0",
+                "cShop": "0",
+                "fdate": "2016-09-26",
+                "nBudget": "0",
+                "nCharge": "0",
+                "nShop": "0"
+            },
+            {
+                "cBudget": "0",
+                "cCharge": "0",
+                "cShop": "0",
+                "fdate": "2016-09-27",
+                "nBudget": "0",
+                "nCharge": "0",
+                "nShop": "0"
+            },
+            {
+                "cBudget": "0",
+                "cCharge": "0",
+                "cShop": "0",
+                "fdate": "2016-09-28",
+                "nBudget": "0",
+                "nCharge": "0",
+                "nShop": "0"
+            },
+            {
+                "cBudget": "0",
+                "cCharge": "0",
+                "cShop": "0",
+                "fdate": "2016-09-29",
+                "nBudget": "0",
+                "nCharge": "0",
+                "nShop": "0"
+            },
+            {
+                "cBudget": "0",
+                "cCharge": "0",
+                "cShop": "0",
+                "fdate": "2016-09-30",
+                "nBudget": "0",
+                "nCharge": "0",
+                "nShop": "0"
+            }
+        ],
+        "time": "00:00:00"
+    },
+    "queryDate": "2016-09-30",
+    "tag": null
+}
