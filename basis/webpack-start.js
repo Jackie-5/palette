@@ -72,7 +72,7 @@ if (ENV === 'dev') {
         }
     });
 
-    server.listen(3000, () => {
+    server.listen(8000, () => {
         console.log(`server start success, port 3000`);
     });
 

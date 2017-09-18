@@ -3,8 +3,6 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createForm } from 'rc-form';
-require('../../libs/preview')();
 
 import method from './method';
 import '../../less/main.less';
@@ -13,14 +11,15 @@ import nprogress from 'nprogress';
 
 nprogress.start();
 
-
-class Render extends method {
-  render() {
-    return (<div className="" >
-
-    </div>);
-  }
+class App extends method {
+    render() {
+        return (
+            <div className="" ref="test1">
+                <canvas ref="test" style={{width:320, height:300, background:'#0ff'}}></canvas>
+            </div>
+        );
+    }
 }
 
 
-ReactDOM.render(<Render />, document.getElementById('app-page'));
+ReactDOM.render(<App />, document.getElementById('app-page'));

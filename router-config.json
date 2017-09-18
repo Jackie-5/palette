@@ -1,3 +1,11 @@
 {
-
+    "/palette-page": {
+        "js": [
+            "/current-index.js"
+        ],
+        "point":{
+            "type": 5,
+            "name": "广告产品"
+        }
+    }
 }
