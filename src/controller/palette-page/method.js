@@ -19,19 +19,14 @@ function Handwriting(id, test1) {
     this.canvas.addEventListener('touchend', (e) => {
         _this.upEvent(e)
     });
-//        this.canvas.onmousedown = function (e) { _this.downEvent(e)};
-//        this.canvas.onmousemove = function (e) { _this.moveEvent(e)};
-//        this.canvas.onmouseup = function (e) { _this.upEvent(e)};
-//        this.canvas.onmouseout = function (e) { _this.upEvent(e)};
     this.moveFlag = false;
     this.upof = {};
     this.radius = 0;
     this.has = [];
-    this.lineMax = 30;
+    this.lineMax = 10;
     this.lineMin = 3;
     this.linePressure = 1;
     this.smoothness = 80;
-    this.test1 = test1;
 }
 
 Handwriting.prototype.clear = function () {
@@ -40,9 +35,11 @@ Handwriting.prototype.clear = function () {
 
 Handwriting.prototype.downEvent = function (e) {
     this.moveFlag = true;
-    this.has = [];
     this.upof = this.getXY(e);
-    console.log(this.upof)
+    this.has = [
+        { time: new Date().getTime(), dis: this.distance(this.upof, this.upof) }
+    ];
+
 }
 
 Handwriting.prototype.moveEvent = function (e) {
@@ -63,8 +60,6 @@ Handwriting.prototype.moveEvent = function (e) {
     var or = Math.min(time / dis * this.linePressure + this.lineMin, this.lineMax) / 2;
     this.radius = or;
     this.upof = of;
-    if (this.has.length <= 4)
-        return;
     var len = Math.round(this.has[0].dis / 2) + 1;
     for (var i = 0; i < len; i++) {
         var x = up.x + (of.x - up.x) / len * i;
@@ -81,10 +76,10 @@ Handwriting.prototype.upEvent = function (e) {
 }
 
 Handwriting.prototype.getXY = function (e) {
-
+    console.log(e.target);
     return {
-        x: e.targetTouches[0].pageX - this.canvas.offsetLeft + (document.body.scrollLeft || document.documentElement.scrollLeft),
-        y: e.targetTouches[0].pageY - this.canvas.offsetTop + (document.body.scrollTop || document.documentElement.scrollTop)
+        x: e.targetTouches[0].pageX,
+        y: e.targetTouches[0].pageY
     }
 }
 

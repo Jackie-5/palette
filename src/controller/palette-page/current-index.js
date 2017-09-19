@@ -15,7 +15,7 @@ class App extends method {
     render() {
         return (
             <div className="" ref="test1">
-                <canvas ref="test" style={{width:320, height:300, background:'#0ff'}}></canvas>
+                <canvas ref="test" width="320" height="200" style={{background:'#0ff'}}></canvas>
             </div>
         );
     }
