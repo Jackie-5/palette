@@ -46,7 +46,7 @@ module.exports = ()=>{
 
   if(ENV !== 'dev'){
     fileLoaderOptions.outputPath = '/images/';
-    fileLoaderOptions.publicPath = 'http://www.dpfile.com/app/kepler-app-peon'
+    fileLoaderOptions.publicPath = ''
   }
 
   const fileRule = {
