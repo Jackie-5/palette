@@ -9,13 +9,14 @@ import '../../less/main.less';
 import './page-less.less';
 import nprogress from 'nprogress';
 
-nprogress.start();
+//nprogress.start();
 
 class App extends method {
     render() {
         return (
-            <div className="" ref="test1">
-                <canvas ref="test" width="320" height="200" style={{background:'#0ff'}}></canvas>
+            <div className="" style={{width: 100 + '%', height:100 + '%'}}>
+                <canvas ref="test" className="canvasBg"></canvas>
+                <div className="" ref="test1" style={{width:100, height:30, background:'', color:'#fff'}} onClick={this.clear}> 点击清除</div>
             </div>
         );
     }

@@ -79,6 +79,21 @@ if (ENV === 'dev') {
 }
 
 if (ENV === 'build') {
+
+    webpackConfig.plugins.push(
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production'),
+            },
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                drop_console: false,
+            },
+        })
+    );
+
     const compiler = webpack(webpackConfig);
     compiler.run((err, stats) => {
         console.log(`compiler success`);
