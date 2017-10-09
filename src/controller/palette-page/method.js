@@ -7,8 +7,8 @@ import initState from './init-state';
 
 function Handwriting(id, test1) {
     this.canvas = id;
-  this.canvas.width = document.body.clientWidth;
-  this.canvas.height = document.body.clientHeight;
+    this.canvas.width = document.body.clientWidth;
+    this.canvas.height = document.body.clientHeight;
     this.ctx = this.canvas.getContext("2d");
     this.ctx.fillStyle = "rgba(0,0,0,0.25)";
     var _this = this;
@@ -17,28 +17,28 @@ function Handwriting(id, test1) {
         _this.downEvent(e)
     });
     this.canvas.addEventListener('touchmove', (e) => {
-      e.preventDefault();
+        e.preventDefault();
         _this.moveEvent(e)
     });
     this.canvas.addEventListener('touchend', (e) => {
-      e.preventDefault();
+        e.preventDefault();
         _this.upEvent(e)
     });
     this.moveFlag = false;
     this.upof = {};
     this.radius = 0;
     this.has = [];
-    this.lineMax = 20;
+    this.lineMax = 30;
     this.lineMin = 10;
     this.linePressure = 1;
-    this.smoothness = 80;
+    this.smoothness = 100;
 }
 
 Handwriting.prototype.clear = function () {
     var self = this;
-  return ()=>{
-    self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
-  }
+    return () => {
+        self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
+    }
 
 }
 
@@ -48,6 +48,7 @@ Handwriting.prototype.downEvent = function (e) {
     this.has = [
         { time: new Date().getTime(), dis: this.distance(this.upof, this.upof) }
     ];
+    this.moveUp = 5;
 
 }
 
@@ -66,16 +67,32 @@ Handwriting.prototype.moveEvent = function (e) {
         if (dis > this.smoothness)
             break;
     }
-    var or = Math.min(time / dis * this.linePressure + this.lineMin, this.lineMax) / 2;
+
+    if (this.moveUp < this.lineMax / 2) {
+        this.moveUp++;
+    }
+    //console.log((time / dis * this.linePressure + this.lineMin) / 2);
+    var or = (time / dis * this.linePressure + this.lineMin) / 2;
+    if(or > this.moveUp){
+        or = this.moveUp
+    }
+    //var or = Math.min(time / dis * this.linePressure + this.lineMin, this.lineMax) / 2;
+
     this.radius = or;
     this.upof = of;
-  //if (this.has.length<=2)
-  //  return;
+
+    if (this.has.length<=2)
+      return;
     var len = Math.round(this.has[0].dis / 2) + 1;
+
     for (var i = 0; i < len; i++) {
         var x = up.x + (of.x - up.x) / len * i;
         var y = up.y + (of.y - up.y) / len * i;
         var r = ur + (or - ur) / len * i;
+
+        //console.log(Math.round(this.moveUp / len * i ));
+        //var r = ur + (or - ur) / len * i;
+        //console.log(ur);
         this.ctx.beginPath();
         this.ctx.arc(x, y, r, 0, 2 * Math.PI, true);
         this.ctx.fill();
@@ -104,14 +121,14 @@ export default class method extends React.Component {
         this.state = initState;
     }
 
-    clear(){
+    clear() {
         //return this.hw.clear()
     }
 
     componentDidMount() {
         var hw = new Handwriting(this.refs.test);
 
-      this.refs.test1.onclick = hw.clear()
+        this.refs.test1.onclick = hw.clear()
         //hw.lineMax = 40;
         //hw.lineMin = 5;
         //hw.linePressure = 1;
