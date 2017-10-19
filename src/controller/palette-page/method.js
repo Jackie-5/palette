@@ -5,134 +5,154 @@
 import React from 'react';
 import initState from './init-state';
 
-function Handwriting(id, test1) {
-    this.canvas = id;
-    this.canvas.width = document.body.clientWidth;
-    this.canvas.height = document.body.clientHeight;
-    this.ctx = this.canvas.getContext("2d");
-    this.ctx.fillStyle = "rgba(0,0,0,0.25)";
-    var _this = this;
-    this.canvas.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        _this.downEvent(e)
-    });
-    this.canvas.addEventListener('touchmove', (e) => {
-        e.preventDefault();
-        _this.moveEvent(e)
-    });
-    this.canvas.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        _this.upEvent(e)
-    });
-    this.moveFlag = false;
-    this.upof = {};
-    this.radius = 0;
-    this.has = [];
-    this.lineMax = 30;
-    this.lineMin = 10;
-    this.linePressure = 1;
-    this.smoothness = 100;
-}
-
-Handwriting.prototype.clear = function () {
-    var self = this;
-    return () => {
-        self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
-    }
-
-}
-
-Handwriting.prototype.downEvent = function (e) {
-    this.moveFlag = true;
-    this.upof = this.getXY(e);
-    this.has = [
-        { time: new Date().getTime(), dis: this.distance(this.upof, this.upof) }
-    ];
-    this.moveUp = 5;
-
-}
-
-Handwriting.prototype.moveEvent = function (e) {
-    if (!this.moveFlag)
-        return;
-    var of = this.getXY(e);
-    var up = this.upof;
-    var ur = this.radius;
-    this.has.unshift({ time: new Date().getTime(), dis: this.distance(up, of) });
-    var dis = 0;
-    var time = 0;
-    for (var n = 0; n < this.has.length - 1; n++) {
-        dis += this.has[n].dis;
-        time += this.has[n].time - this.has[n + 1].time;
-        if (dis > this.smoothness)
-            break;
-    }
-
-    if (this.moveUp < this.lineMax / 2) {
-        this.moveUp++;
-    }
-    //console.log((time / dis * this.linePressure + this.lineMin) / 2);
-    var or = (time / dis * this.linePressure + this.lineMin) / 2;
-    if(or > this.moveUp){
-        or = this.moveUp
-    }
-    //var or = Math.min(time / dis * this.linePressure + this.lineMin, this.lineMax) / 2;
-
-    this.radius = or;
-    this.upof = of;
-
-    if (this.has.length<=2)
-      return;
-    var len = Math.round(this.has[0].dis / 2) + 1;
-
-    for (var i = 0; i < len; i++) {
-        var x = up.x + (of.x - up.x) / len * i;
-        var y = up.y + (of.y - up.y) / len * i;
-        var r = ur + (or - ur) / len * i;
-
-        //console.log(Math.round(this.moveUp / len * i ));
-        //var r = ur + (or - ur) / len * i;
-        //console.log(ur);
-        this.ctx.beginPath();
-        this.ctx.arc(x, y, r, 0, 2 * Math.PI, true);
-        this.ctx.fill();
-    }
-}
-
-Handwriting.prototype.upEvent = function (e) {
-    this.moveFlag = false;
-}
-
-Handwriting.prototype.getXY = function (e) {
-    return {
-        x: e.targetTouches[0].pageX,
-        y: e.targetTouches[0].pageY
-    }
-}
-
-Handwriting.prototype.distance = function (a, b) {
-    var x = b.x - a.x, y = b.y - a.y;
-    return Math.sqrt(x * x + y * y);
-}
-
 export default class method extends React.Component {
     constructor(props) {
         super(props);
         this.state = initState;
     }
 
-    clear() {
-        //return this.hw.clear()
+    componentDidMount() {
+        this.initCanvas();
     }
 
-    componentDidMount() {
-        var hw = new Handwriting(this.refs.test);
+    initCanvas() {
+        this.refs.writeCanvas.width = window.innerWidth;
+        this.refs.writeCanvas.height = window.innerHeight;
+        this.refs.bgCanvas.width = this.refs.writeCanvas.width;
+        this.refs.bgCanvas.height = this.refs.writeCanvas.height;
+        this.writeCtx = this.refs.writeCanvas.getContext("2d");
+        this.bgCtx = this.refs.bgCanvas.getContext("2d");
+        this.penSize = 10;
+        this.canvasColor = '#000';
+        this.fontWidth = 320;
+        this.moveSum = 0;
+        this.penmanship = [];
+    }
 
-        this.refs.test1.onclick = hw.clear()
-        //hw.lineMax = 40;
-        //hw.lineMin = 5;
-        //hw.linePressure = 1;
-        //hw.smoothness = 100;
+    canvasTouchStart(e) {
+        const self = this;
+        const x = e.touches[0].pageX;
+        const y = e.touches[0].pageY;
+        self.stroke = {
+            newDate: new Date,
+            d: [
+                {
+                    x: x,
+                    y: y,
+                    t: 0
+                }],
+            c: self.canvasColor,
+            p: self.penSize
+        };
+        this.canvasTouchMoveBegin(x, y);
+    }
+
+    canvasTouchMoveBegin(x, y) {
+        this.writeCtx.save();
+        this.writeCtx.moveTo(x, y);
+        this.preDot = null;
+        this.moveQueue = [];
+        this.firstMove = 0;
+        this.lineWidth = this.penSize / 2 * (this.fontWidth / 320);
+        this.canvasMoving(x, y)
+    }
+
+    canvasTouchMoveEnd(d) {
+        var e = this;
+        e.penmanship.length ? e.stroke.newDate -= e.penmanshipTime :
+            (e.penmanshipTime = e.stroke.newDate,
+                e.stroke.newDate = e.stroke.newDate.getTime()),
+            e.penmanship.push(e.stroke),
+            e._clearQueue = null,
+            e.repeatQueue = [],
+            e.stroke = null;
+        --this.writeCtx.lineWidth;
+        for (var b; this.moveQueue.length;)b = this.moveQueue.shift(), this.actionPaint(b, this.fontWidth / 320 * this.penSize / 8);
+        this.showToCanvas()
+    }
+
+    showToCanvas() {
+        this.bgCtx.clearRect(0, 0, this.refs.writeCanvas.width, this.refs.writeCanvas.height);
+        const b = this.writeCtx.getImageData(0, 0, this.refs.writeCanvas.width, this.refs.writeCanvas.height);
+        for (var c = 0; c < b.data.length; c += 4) 0 != b.data[c + 3] && (b.data[c] = 100, b.data[c + 1] = 30, b.data[c + 2] = 7, b.data[c + 3] = Math.round(.75 * b.data[c + 3]))
+        this.bgCtx.putImageData(b, -5 * 0.5, 5 * 0.5)
+    }
+
+    canvasTouchMove(e) {
+        const self = this;
+        const x = e.touches[0].pageX;
+        const y = e.touches[0].pageY;
+        this.stroke.d.push(
+            {
+                x: x,
+                y: y,
+                moveDate: new Date - self.stroke.newDate
+            });
+        this.canvasMoving(x, y);
+    }
+
+    canvasMoving(b, c) {
+        var d;
+        d = 0;
+        if (this.moveQueue.length && (d = this.moveQueue[this.moveQueue.length - 1], d = Math.sqrt((d.x - b) * (d.x - b) + (d.y - c) * (d.y - c)), 0 == d))return;
+        this.moveSum++;
+        !this.firstMove && 2 == this.moveQueue.length && 4 * d < this.moveQueue[1].c && (this.moveQueue[0].x -=
+            2 / 3 * (this.moveQueue[0].x - this.moveQueue[1].x), this.moveQueue[0].y -= 2 / 3 * (this.moveQueue[0].y - this.moveQueue[1].y), this.moveQueue[1].c /= 2 / 3 * this.moveQueue[1].c);
+        d = { x: b, y: c, c: d };
+        this.moveQueue.push(d);
+        3 <= this.moveQueue.length && (d = this.moveQueue.shift(), this.actionPaint(d))
+    }
+
+    actionPaint(b, c) {
+        var d = b.x, e = b.y, h = b.c;
+        if (!this.preDot || 0 !== h) {
+            this.nextDot = this.moveQueue.length ? this.moveQueue[0] : null;
+            if (h) {
+                this.writeCtx.moveTo(this.preDot.x, this.preDot.y);
+                var f = 0;
+                !this.firstMove && this.nextDot && h > 3 * this.nextDot.c &&
+                (h /= 4, f = 1);
+                this.firstMove = 1;
+                var bs = this.fontWidth / 320 * this.penSize;
+                c || (c = h < .003125 * this.fontWidth ? 1.625 * bs : h < .00625 * this.fontWidth ? 1.375 * bs : h < .009375 * this.fontWidth ? 1.25 * bs : h < .015625 * this.fontWidth ? 1.125 * bs : h < .021875 * this.fontWidth ? bs : h < .028125 * this.fontWidth ? .875 * bs : h < .034375 * this.fontWidth ? .75 * bs : h < .046875 * this.fontWidth ? .625 * bs : h < .0625 * this.fontWidth ? .5 * bs : .375 * bs);
+                this.toLW = c;
+                if (f)for (f = 1; 3 >= f; f++)this.paintDot(d + f / 3 * (this.preDot.x - d), e + f / 3 * (this.preDot.y - e), h)
+            }
+            this.paintDot(d, e, h);
+            this.preDot = b;
+        }
+    }
+
+    paintDot(b, c, d) {
+        var e = this.lineWidth, h = this.canvasColor;
+        this.writeCtx.fillStyle = h;
+        this.writeCtx.strokeStyle = h;
+        if (this.preDot) {
+            d = Math.floor(Math.abs(d) / (this.lineWidth / 3));
+            if (1 < d)for (var e = this.lineWidth,
+                               f = 0; f < d; f++)e -= (e - this.toLW) / (8 < d ? d : 8); else Math.abs(this.lineWidth - this.toLW) > this.fontWidth / 320 * this.penSize * .025 && (e = this.lineWidth - (this.lineWidth - this.toLW) / 8);
+            var g = this.lineWidth * Math.sin(Math.atan((c - this.preDot.y) / (b - this.preDot.x))),
+                k = this.lineWidth * Math.cos(Math.atan((c - this.preDot.y) / (b - this.preDot.x))),
+                l = e * Math.sin(Math.atan((c - this.preDot.y) / (b - this.preDot.x))),
+                m = e * Math.cos(Math.atan((c - this.preDot.y) / (b - this.preDot.x)));
+            d = this.preDot.x + g;
+            var f = this.preDot.y - k, g = this.preDot.x - g, k = this.preDot.y +
+                k, n = b + l, p = c - m, l = b - l, m = c + m;
+            this.writeCtx.beginPath();
+            this.writeCtx.moveTo(d, f);
+            this.writeCtx.lineTo(g, k);
+            this.writeCtx.lineTo(l, m);
+            this.writeCtx.lineTo(n, p);
+            this.writeCtx.fill();
+            this.writeCtx.closePath();
+            this.writeCtx.fillStyle = h;
+            this.writeCtx.lineWidth = this.lineWidth = e
+        }
+        this.writeCtx.beginPath();
+        this.writeCtx.lineWidth = this.lineWidth = e;
+        this.writeCtx.arc(b, c, this.lineWidth, 0, 2 * Math.PI);
+        this.writeCtx.fill();
+        this.writeCtx.closePath()
     }
 
 };
