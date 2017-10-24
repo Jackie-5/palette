@@ -17,7 +17,7 @@ webpackConfig.entry = {};
 
 for (let i in routerConfig) {
     routerConfig[i].js.forEach((item) => {
-        webpackConfig.entry[`./build${i + item.split('.js')[0]}`] = `./src/controller${i + item}`
+        webpackConfig.entry[`./build${i + item.split('.js')[0]}`] = `./src/controllers${i + item}`
     });
 }
 
@@ -32,17 +32,17 @@ if (ENV === 'dev') {
         template: './src/index.ejs',
         ejsObject: {}
     };
-    ['midas'].forEach((item) => {
-        webpackConfig.plugins.push(
-            new CopyWebpackPlugin([
-                {
-                    from: './src/' + item + '/',
-                    to: './' + item
-                }
-            ]),
-            new ProgressBarPlugin()
-        );
-    });
+    //['midas'].forEach((item) => {
+    //    webpackConfig.plugins.push(
+    //        new CopyWebpackPlugin([
+    //            {
+    //                from: './src/' + item + '/',
+    //                to: './' + item
+    //            }
+    //        ]),
+    //        new ProgressBarPlugin()
+    //    );
+    //});
 
     for (let i in routerConfig) {
         const arrJs = [];
