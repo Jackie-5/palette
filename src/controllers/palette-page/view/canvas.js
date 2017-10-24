@@ -20,12 +20,15 @@ export default class extends React.Component {
         this.fontWidth = 320;
         this.moveSum = 0;
         this.penmanship = [];
+        this.canvasPos = this.refs.writeCanvas.getBoundingClientRect();
+        console.log(this.canvasPos.left)
     }
 
     canvasTouchStart(e) {
         const self = this;
-        const x = e.touches[0].pageX;
-        const y = e.touches[0].pageY;
+        const x = e.touches[0].pageX - this.canvasPos.left;
+        const y = e.touches[0].pageY - this.canvasPos.top;
+
         self.stroke = {
             newDate: new Date,
             d: [
@@ -74,8 +77,8 @@ export default class extends React.Component {
 
     canvasTouchMove(e) {
         const self = this;
-        const x = e.touches[0].pageX;
-        const y = e.touches[0].pageY;
+        const x = e.touches[0].pageX - this.canvasPos.left;
+        const y = e.touches[0].pageY - this.canvasPos.top;
         this.stroke.d.push(
             {
                 x: x,
