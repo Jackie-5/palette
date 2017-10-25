@@ -4,8 +4,14 @@
 import React from 'react';
 
 export default class extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            music: true
+        };
+    }
     componentDidMount() {
-        this.initCanvas();
+        this.props.self.subCanvas(this);
     }
 
     initCanvas() {
@@ -21,7 +27,6 @@ export default class extends React.Component {
         this.moveSum = 0;
         this.penmanship = [];
         this.canvasPos = this.refs.writeCanvas.getBoundingClientRect();
-        console.log(this.canvasPos.left)
     }
 
     canvasTouchStart(e) {
@@ -151,21 +156,54 @@ export default class extends React.Component {
         this.writeCtx.fill();
         this.writeCtx.closePath()
     }
+    clearCanvas(){
+        this.writeCtx.clearRect(0, 0, this.refs.writeCanvas.width, this.refs.writeCanvas.height);
+        this.bgCtx.clearRect(0, 0, this.refs.writeCanvas.width, this.refs.writeCanvas.height);
+    }
+    stopAndPlayMusic(e){
+        e.stopPropagation();
+        this.setState({
+            music: !this.state.music
+        })
+    }
     render() {
+        const self = this.props.self;
         return <div className="canvas-index">
-            <div className="canvas-switch canvas-top">
-                <img src="" />
+            <div className="canvas-switch canvas-top" onClick={self.prevFont.bind(self)}>
+                <div className="canvas-text">
+                    <div>{self.state.indexState.pinyinTop}</div>
+                    <div>{self.state.indexState.fontTop}</div>
+                </div>
+                <div className="canvas-number">{self.state.indexState.currentNumber}/{self.state.indexState.allNumber}</div>
+                <div className="canvas-top-icon iconfont icon-TMS_yinlefuhao" onClick={this.stopAndPlayMusic.bind(this)} >
+                    <div className={this.state.music ? '' : 'canvas-top-icon-stop iconfont icon-jinzhi'} />
+                </div>
+                <div className="canvas-images">
+                    <img src={self.state.indexState.imgTop} alt="" />
+                </div>
             </div>
             <div className="canvas-box" ref="canvasBox">
+                <div className="canvas-text">
+                    <div>{self.state.indexState.pinyinMiddle}</div>
+                    <div>{self.state.indexState.fontMiddle}</div>
+                </div>
                 <canvas ref="writeCanvas"
                         onTouchStart={this.canvasTouchStart.bind(this)}
                         onTouchMove={this.canvasTouchMove.bind(this)}
                         onTouchEnd={this.canvasTouchMoveEnd.bind(this)}
                         style={{ position: 'absolute', top: 0, left: 0, zIndex: 9 }}/>
                 <canvas ref="bgCanvas" />
+                <img src={self.state.indexState.imgMiddle} alt="" className="canvas-images canvas-img-middle" />
             </div>
-            <div className="canvas-switch canvas-bottom">
-                <img src="" />
+            <div className="canvas-switch canvas-bottom" onClick={self.nextFont.bind(self)}>
+                <div className="canvas-text">
+                    <div>{self.state.indexState.pinyinBottom}</div>
+                    <div>{self.state.indexState.fontBottom}</div>
+                </div>
+                <div className="canvas-images">
+                    <img src={self.state.indexState.imgBottom} alt="" />
+                </div>
+                <div className="canvas-bottom-icon iconfont icon-i" onClick={self.pageLeftSwitch.bind(self, self.state.aboutCurrent)} />
             </div>
         </div>
     }

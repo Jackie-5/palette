@@ -1,6 +1,8 @@
 /**
  * Created by Jackie.Wu on 2017/2/14.
  */
+import index from './state/index-satate';
+
 export default {
     color: 'green',
     leftIcon: [
@@ -17,7 +19,7 @@ export default {
             link: 'music'
         },
         {
-            font: '色',
+            font: '笔',
             link: 'color'
         },
         {
@@ -37,6 +39,12 @@ export default {
             link: 'offline'
         }
     ],
+    logo: {
+        link: 'logo'
+    },
+    aboutCurrent: {
+        link: 'aboutCurrent'
+    },
     pageSwitch:{
         index: true,
         tie: false,
@@ -44,5 +52,9 @@ export default {
         color: false,
         review: false,
         offline: false,
-    }
+        logo: false,
+        aboutCurrent: false,
+    },
+
+    indexState: {...index}
 };
