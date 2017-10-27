@@ -1,0 +1,39 @@
+.tie-box{
+    margin: 2%;
+    border:1px solid @ccc;
+    height:98%;
+    .tie-body{
+        padding:10px;
+        &__row{
+            border-bottom: 2px solid @ccc;
+            margin-top: 10px;
+            .am-list-body{
+                background: transparent;
+                border:0;
+                &::after{
+                    border:0;
+                }
+            }
+            &__title{
+                background: @bgColor;
+                padding-left: 10px;
+                padding-top: 20px;
+                .am-list-line{
+                    padding: 0;
+                    .am-list-content{
+                        line-height: 40px;
+                        .am-list-brief{
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+            &__author{
+                font-size: 16px;
+                margin-top: 10px;
+            }
+        }
+    }
+
+
+}

@@ -58,16 +58,17 @@ export default {
         link: 'hope',
         title: '祈福信息',
     },
-    pageSwitch:{
-        index: true,
-        tie: false,
+    pageSwitch: {
+        index: false,
+        tie: true,
         music: false,
         color: false,
         review: false,
         offline: false,
         logo: false,
         aboutCurrent: false,
+        hope: false,
     },
 
-    indexState: {...index}
+    indexState: { ...index }
 };
