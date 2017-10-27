@@ -11,7 +11,8 @@ import PullLeft from './view/pull-left';
 import QueueAnim from 'rc-queue-anim';
 
 import CanvasIndex from './view/canvas';
-import Tie from './view/tie';
+import Tie from './view/tie-list';
+import Music from './view/music-list';
 
 //import nprogress from 'nprogress';
 
@@ -21,6 +22,7 @@ const pageSwitch = (pageSwitch, self) => {
     for (let i of Object.keys(pageSwitch)) {
         if (i === 'index' && pageSwitch[i]) return <CanvasIndex key="index" self={self}/>;
         if (i === 'tie' && pageSwitch[i]) return <Tie key="tie" self={self}/>;
+        if (i === 'music' && pageSwitch[i]) return <Music key="music" self={self}/>;
     }
 };
 
