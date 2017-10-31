@@ -14,19 +14,23 @@ export default class extends React.Component {
         this.props.self.subCanvas(this);
     }
 
-    initCanvas() {
-        this.refs.writeCanvas.width = this.refs.canvasBox.offsetWidth;
-        this.refs.writeCanvas.height = this.refs.canvasBox.offsetHeight;
-        this.refs.bgCanvas.width = this.refs.writeCanvas.width;
-        this.refs.bgCanvas.height = this.refs.writeCanvas.height;
-        this.writeCtx = this.refs.writeCanvas.getContext("2d");
-        this.bgCtx = this.refs.bgCanvas.getContext("2d");
-        this.penSize = 10;
-        this.canvasColor = '#000';
-        this.fontWidth = 320;
-        this.moveSum = 0;
-        this.penmanship = [];
-        this.canvasPos = this.refs.writeCanvas.getBoundingClientRect();
+    initCanvas(options = {}) {
+        try {
+            this.refs.writeCanvas.width = this.refs.canvasBox.offsetWidth;
+            this.refs.writeCanvas.height = this.refs.canvasBox.offsetHeight;
+            this.refs.bgCanvas.width = this.refs.writeCanvas.width;
+            this.refs.bgCanvas.height = this.refs.writeCanvas.height;
+            this.writeCtx = this.refs.writeCanvas.getContext("2d");
+            this.bgCtx = this.refs.bgCanvas.getContext("2d");
+            this.penSize = options.penSize || 10;
+            this.canvasColor = options.penColor || '#000';
+            this.fontWidth = 320;
+            this.moveSum = 0;
+            this.penmanship = [];
+            this.canvasPos = this.refs.writeCanvas.getBoundingClientRect();
+        } catch(e) {
+
+        }
     }
 
     canvasTouchStart(e) {

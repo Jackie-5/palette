@@ -1,0 +1,53 @@
+@reviewColor: #996633;
+.review-page-box{
+    .review-color-box{
+        height:80%;
+        border-bottom:1px solid @ccc;
+        .review-color-body{
+            height:100%;
+            &__color{
+                height:100%;
+                &__list-box{
+                    display: flex;
+                    justify-content:center;
+                    align-items:Center;
+                    height: 300px;
+                    &__li{
+                        width: 200px;
+                        height: 200px;
+                        border-radius: 100%;
+                        background:#000;
+                        margin:0 auto;
+                    }
+                }
+            }
+        }
+    }
+    &__review{
+        display: flex;
+        justify-content:center;
+        align-items:Center;
+        height:20%;
+        &__box{
+            font-size: 30px;
+            color:@reviewColor;
+            &__review-icon{
+                float:left;
+                font-size: 50px;
+            }
+            &__review-size{
+                float:left;
+                border:2px solid transparent;
+                margin-left: 30px;
+                &__border{
+                    padding: 10px;
+                    border:1px solid @reviewColor;
+                }
+            }
+            &__review-size-active{
+                border:2px solid @reviewColor;
+                font-weight: bold;
+            }
+        }
+    }
+}

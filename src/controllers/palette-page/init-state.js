@@ -2,6 +2,7 @@
  * Created by Jackie.Wu on 2017/2/14.
  */
 import index from './state/index-satate';
+import penColor from './state/pen-color';
 
 export default {
     color: 'green',
@@ -59,8 +60,8 @@ export default {
         title: '祈福信息',
     },
     pageSwitch: {
-        index: false,
-        tie: true,
+        index: true,
+        tie: false,
         music: false,
         color: false,
         review: false,
@@ -70,5 +71,6 @@ export default {
         hope: false,
     },
 
-    indexState: { ...index }
+    indexState: { ...index },
+    penColorState: {...penColor},
 };

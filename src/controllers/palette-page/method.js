@@ -17,7 +17,9 @@ export default class method extends React.Component {
         const state = self.state;
 
         if(item.link === 'rubber'){
-            self.clearCanvas();
+            if(state.pageSwitch['index']){
+                self.clearCanvas();
+            }
         } else {
             if (!state.pageSwitch[item.link]) {
                 document.title = item.title;
@@ -37,7 +39,18 @@ export default class method extends React.Component {
         this.canvasMethod = self;
         this.initCanvas();
     }
-    initCanvas(options = {}){
+    initCanvas(){
+        const options = {};
+        this.state.penColorState.color.map((item)=>{
+            if(item.active){
+                options.penColor = item.value
+            }
+        });
+        this.state.penColorState.penSize.map((item)=>{
+            if(item.active){
+                options.penSize = item.size
+            }
+        });
         this.canvasMethod.initCanvas(options)
     }
 
@@ -51,5 +64,20 @@ export default class method extends React.Component {
     nextFont(){
         console.log('next')
     }
-
+    changePenColor(index){
+        const state = this.state;
+        state.penColorState.color.map((item, i)=>{
+            item.active = index === i
+        });
+        this.setState(state);
+        this.initCanvas();
+    }
+    changePenSize(size, index){
+        const state = this.state;
+        state.penColorState.penSize.map((item, i)=>{
+            item.active = index === i
+        });
+        this.setState(state);
+        this.initCanvas();
+    }
 };

@@ -13,6 +13,8 @@ import QueueAnim from 'rc-queue-anim';
 import CanvasIndex from './view/canvas';
 import Tie from './view/tie-list';
 import Music from './view/music-list';
+import PenAndColor from './view/pen-color';
+import Review from './view/review-works';
 
 //import nprogress from 'nprogress';
 
@@ -23,6 +25,8 @@ const pageSwitch = (pageSwitch, self) => {
         if (i === 'index' && pageSwitch[i]) return <CanvasIndex key="index" self={self}/>;
         if (i === 'tie' && pageSwitch[i]) return <Tie key="tie" self={self}/>;
         if (i === 'music' && pageSwitch[i]) return <Music key="music" self={self}/>;
+        if (i === 'color' && pageSwitch[i]) return <PenAndColor key="color" self={self}/>;
+        if (i === 'review' && pageSwitch[i]) return <Review key="review" self={self}/>;
     }
 };
 
