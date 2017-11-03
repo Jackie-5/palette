@@ -1,0 +1,88 @@
+@hopeColor: #996633;
+.hope-page-box{
+    height:100%;
+    .hope-box{
+        height:100%;
+        .hope-body{
+            height:100%;
+            padding:0 5%;
+            &__list-box{
+                &__input{
+                    margin-top: 30px;
+                    .am-input-item{
+                        min-height: 50px;
+                        height:auto;
+                        background-color: #cccccc;
+                        border-radius: 10px;
+                        &::after{
+                            display: none;
+                        }
+                        input{
+                            text-align: center;
+                        }
+                    }
+                }
+                &__species-box{
+                    text-align: center;
+                    &__button{
+                        color:#333;
+                        border-color:#ccc;
+                        margin-left: 20px;
+                        margin-top: 20px;
+                    }
+                    .am-button-active{
+                        color:#996633;
+                        border-color:#996633;
+                        background:transparent;
+                    }
+                }
+
+                &__wish-title{
+                    font-size: 28px;
+                }
+                &__textarea{
+                    background:#cccccc;
+                    min-height: 80px;
+                    &::after{
+                        display: none;
+                    }
+                }
+                &__enter-box{
+                    text-align: center;
+                    &__btn{
+                        color:#fff;
+                        border-color:#996633;
+                        background: #996633;
+                    }
+                }
+            }
+        }
+    }
+    &__hope{
+        display: flex;
+        justify-content:center;
+        align-items:Center;
+        height:20%;
+        &__box{
+            font-size: 30px;
+            color:@hopeColor;
+            &__hope-icon{
+                float:left;
+                font-size: 50px;
+            }
+            &__hope-size{
+                float:left;
+                border:2px solid transparent;
+                margin-left: 30px;
+                &__border{
+                    padding: 10px;
+                    border:1px solid @hopeColor;
+                }
+            }
+            &__hope-size-active{
+                border:2px solid @hopeColor;
+                font-weight: bold;
+            }
+        }
+    }
+}

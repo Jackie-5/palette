@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createForm } from 'rc-form';
 
 import method from './method';
 import '../../less/main.less';
@@ -15,6 +16,7 @@ import Tie from './view/tie-list';
 import Music from './view/music-list';
 import PenAndColor from './view/pen-color';
 import Review from './view/review-works';
+import Hope from './view/hope';
 
 //import nprogress from 'nprogress';
 
@@ -27,6 +29,7 @@ const pageSwitch = (pageSwitch, self) => {
         if (i === 'music' && pageSwitch[i]) return <Music key="music" self={self}/>;
         if (i === 'color' && pageSwitch[i]) return <PenAndColor key="color" self={self}/>;
         if (i === 'review' && pageSwitch[i]) return <Review key="review" self={self}/>;
+        if (i === 'hope' && pageSwitch[i]) return <Hope key="hope" self={self}/>;
     }
 };
 
@@ -48,4 +51,5 @@ class App extends method {
     }
 }
 
-ReactDOM.render(<App />, document.getElementById('app-page'));
+const H5NumberInputExampleWrapper = createForm()(App);
+ReactDOM.render(<H5NumberInputExampleWrapper />, document.getElementById('app-page'));

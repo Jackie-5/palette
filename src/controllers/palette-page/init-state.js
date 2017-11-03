@@ -3,6 +3,7 @@
  */
 import index from './state/index-satate';
 import penColor from './state/pen-color';
+import hopeState from './state/hope-state';
 
 export default {
     color: 'green',
@@ -60,7 +61,7 @@ export default {
         title: '祈福信息',
     },
     pageSwitch: {
-        index: true,
+        index: false,
         tie: false,
         music: false,
         color: false,
@@ -68,9 +69,10 @@ export default {
         offline: false,
         logo: false,
         aboutCurrent: false,
-        hope: false,
+        hope: true,
     },
 
     indexState: { ...index },
     penColorState: {...penColor},
+    hopeState: {...hopeState},
 };
