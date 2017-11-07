@@ -62,8 +62,8 @@ export default class extends Component {
                 <div className="hope-body__list-box" key={rowID}>
                     <WhiteSpace size="xl" />
                     {
-                        self.state.hopeState.input.map((item)=>{
-                            return <div className="hope-body__list-box__input">
+                        self.state.hopeState.input.map((item, i)=>{
+                            return <div className="hope-body__list-box__input" key={i}>
                                 <InputItem
                                     placeholder={item.placeholder}
                                     clear
@@ -77,8 +77,9 @@ export default class extends Component {
                     <div className="hope-body__list-box__species-title">祈福种类</div>
                     <div className="hope-body__list-box__species-box">
                         {
-                            self.state.hopeState.species.map((item)=>{
+                            self.state.hopeState.species.map((item, i)=>{
                                 return <Button
+                                    key={i}
                                     className={item.active ? 'hope-body__list-box__species-box__button am-button-active' : 'hope-body__list-box__species-box__button'}
                                     type="ghost" size="small" inline>{item.value}</Button>
                             })

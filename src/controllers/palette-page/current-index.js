@@ -17,6 +17,8 @@ import Music from './view/music-list';
 import PenAndColor from './view/pen-color';
 import Review from './view/review-works';
 import Hope from './view/hope';
+import Logo from './view/logo';
+import About from './view/about';
 
 //import nprogress from 'nprogress';
 
@@ -29,6 +31,8 @@ const pageSwitch = (pageSwitch, self) => {
         if (i === 'music' && pageSwitch[i]) return <Music key="music" self={self}/>;
         if (i === 'color' && pageSwitch[i]) return <PenAndColor key="color" self={self}/>;
         if (i === 'review' && pageSwitch[i]) return <Review key="review" self={self}/>;
+        if (i === 'logo' && pageSwitch[i]) return <Logo key="logo" self={self}/>;
+        if (i === 'aboutCurrent' && pageSwitch[i]) return <About key="aboutCurrent" self={self}/>;
         if (i === 'hope' && pageSwitch[i]) return <Hope key="hope" self={self}/>;
     }
 };

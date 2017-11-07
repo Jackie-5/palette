@@ -4,6 +4,7 @@
 import index from './state/index-satate';
 import penColor from './state/pen-color';
 import hopeState from './state/hope-state';
+import logoState from './state/logo-state';
 
 export default {
     color: 'green',
@@ -68,11 +69,12 @@ export default {
         review: false,
         offline: false,
         logo: false,
-        aboutCurrent: false,
-        hope: true,
+        aboutCurrent: true,
+        hope: false,
     },
 
     indexState: { ...index },
     penColorState: {...penColor},
     hopeState: {...hopeState},
+    logoState: {...logoState},
 };
