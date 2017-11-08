@@ -5,6 +5,7 @@ import index from './state/index-satate';
 import penColor from './state/pen-color';
 import hopeState from './state/hope-state';
 import logoState from './state/logo-state';
+import aboutArticle from './state/about-article';
 
 export default {
     color: 'green',
@@ -61,15 +62,32 @@ export default {
         link: 'hope',
         title: '祈福信息',
     },
+    offlineMake: {
+        link: 'offlineMake',
+        title: '抄经预约',
+    },
     pageSwitch: {
+        // 写字
         index: false,
+        // 选帖子
         tie: false,
+        // 选音乐
         music: false,
+        // 颜色和笔大小
         color: false,
+        // 作品预览
         review: false,
+        // 个人中心
+        person: false,
+        // 线下抄经
         offline: false,
+        // 线下抄经预约
+        offlineMake: true,
+        // 点击logo
         logo: false,
-        aboutCurrent: true,
+        // 当前抄经的经文简介
+        aboutCurrent: false,
+        // 祈福
         hope: false,
     },
 
@@ -77,4 +95,5 @@ export default {
     penColorState: {...penColor},
     hopeState: {...hopeState},
     logoState: {...logoState},
+    aboutArticle: {...aboutArticle},
 };

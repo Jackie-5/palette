@@ -59,8 +59,12 @@ export default class extends Component {
         const row = (rowData, sectionID, rowID) => {
             return (
                 <div key={rowID} className="about__box__body__row">
-                    <div className="about__box__body__row__title">字帖简介</div>
-                    <div className="about__box__body__row__cont">字帖简介</div>
+                    <div className="about__box__body__row__title">{state.aboutArticle.title}</div>
+                    {
+                        state.aboutArticle.content.map((item, i) => <div key={i}
+                                                                         className="about__box__body__row__cont">{item}</div>)
+                    }
+
                 </div>
             );
         };

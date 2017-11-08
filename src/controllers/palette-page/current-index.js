@@ -19,6 +19,8 @@ import Review from './view/review-works';
 import Hope from './view/hope';
 import Logo from './view/logo';
 import About from './view/about';
+import Offline from './view/offline';
+import OfflineMake from './view/offline-make';
 
 //import nprogress from 'nprogress';
 
@@ -34,6 +36,8 @@ const pageSwitch = (pageSwitch, self) => {
         if (i === 'logo' && pageSwitch[i]) return <Logo key="logo" self={self}/>;
         if (i === 'aboutCurrent' && pageSwitch[i]) return <About key="aboutCurrent" self={self}/>;
         if (i === 'hope' && pageSwitch[i]) return <Hope key="hope" self={self}/>;
+        if (i === 'offline' && pageSwitch[i]) return <Offline key="offline" self={self}/>;
+        if (i === 'offlineMake' && pageSwitch[i]) return <OfflineMake key="offlineMake" self={self}/>;
     }
 };
 

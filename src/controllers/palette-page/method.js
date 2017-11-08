@@ -11,13 +11,13 @@ export default class method extends React.Component {
         this.state = initState;
     }
 
-    pageLeftSwitch(item,e) {
+    pageLeftSwitch(item, e) {
         e.stopPropagation();
         const self = this;
         const state = self.state;
 
-        if(item.link === 'rubber'){
-            if(state.pageSwitch['index']){
+        if (item.link === 'rubber') {
+            if (state.pageSwitch['index']) {
                 self.clearCanvas();
             }
         } else {
@@ -39,42 +39,46 @@ export default class method extends React.Component {
         this.canvasMethod = self;
         this.initCanvas();
     }
-    initCanvas(){
+
+    initCanvas() {
         const options = {};
-        this.state.penColorState.color.map((item)=>{
-            if(item.active){
+        this.state.penColorState.color.map((item) => {
+            if (item.active) {
                 options.penColor = item.value
             }
         });
-        this.state.penColorState.penSize.map((item)=>{
-            if(item.active){
+        this.state.penColorState.penSize.map((item) => {
+            if (item.active) {
                 options.penSize = item.size
             }
         });
         this.canvasMethod.initCanvas(options)
     }
 
-    clearCanvas(){
+    clearCanvas() {
         this.canvasMethod.clearCanvas();
     }
 
-    prevFont(){
+    prevFont() {
         console.log('prev')
     }
-    nextFont(){
+
+    nextFont() {
         console.log('next')
     }
-    changePenColor(index){
+
+    changePenColor(index) {
         const state = this.state;
-        state.penColorState.color.map((item, i)=>{
+        state.penColorState.color.map((item, i) => {
             item.active = index === i
         });
         this.setState(state);
         this.initCanvas();
     }
-    changePenSize(size, index){
+
+    changePenSize(size, index) {
         const state = this.state;
-        state.penColorState.penSize.map((item, i)=>{
+        state.penColorState.penSize.map((item, i) => {
             item.active = index === i
         });
         this.setState(state);
