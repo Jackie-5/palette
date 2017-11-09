@@ -6,6 +6,8 @@ import penColor from './state/pen-color';
 import hopeState from './state/hope-state';
 import logoState from './state/logo-state';
 import aboutArticle from './state/about-article';
+import offlineMake from './state/offline-make';
+import person from './state/person';
 
 export default {
     color: 'green',
@@ -78,11 +80,11 @@ export default {
         // 作品预览
         review: false,
         // 个人中心
-        person: false,
+        person: true,
         // 线下抄经
         offline: false,
         // 线下抄经预约
-        offlineMake: true,
+        offlineMake: false,
         // 点击logo
         logo: false,
         // 当前抄经的经文简介
@@ -96,4 +98,6 @@ export default {
     hopeState: {...hopeState},
     logoState: {...logoState},
     aboutArticle: {...aboutArticle},
+    offlineMakeState: {...offlineMake},
+    personState: {...person},
 };

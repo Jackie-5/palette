@@ -3,11 +3,11 @@
  */
 
 import React, { Component } from 'react'
-import { ListView, InputItem, WhiteSpace, Button,TextareaItem } from 'antd-mobile';
+import { ListView, InputItem, WhiteSpace, Button, TextareaItem } from 'antd-mobile';
 
 
 const MyBody = (props) => {
-    return <div className="hope-body">
+    return <div className="offline-make-body">
         {props.children}
     </div>
 };
@@ -59,56 +59,61 @@ export default class extends Component {
         const { getFieldProps } = self.props.form;
         const row = (rowData, sectionID, rowID) => {
             return (
-                <div className="hope-body__list-box" key={rowID}>
-                    <WhiteSpace size="xl" />
+                <div className="offline-make-body__list-box" key={rowID}>
+                    <div className="offline-make-body__list-box__title">{self.state.offlineMakeState.title}</div>
+                    <div>意向时间:</div>
                     {
-                        self.state.hopeState.input.map((item, i)=>{
-                            return <div className="hope-body__list-box__input" key={i}>
-                                <InputItem
-                                    placeholder={item.placeholder}
-                                    clear
-                                    onChange={(v) => { console.log('onChange', v); }}
-                                    onBlur={(v) => { console.log('onBlur', v); }}
-                                />
+                        self.state.offlineMakeState.timeSelect.map((item, i)=>{
+                            return <div className="offline-make-body__list-box__select" key={i}>
+                                <div>{item.title}</div>
+                                <div>
+                                    {
+                                        item.select.map((it, k)=>{
+                                            return <Button
+                                                key={k}
+                                                className={it.active ? 'offline-make-body__list-box__select__btn am-button-active' : 'offline-make-body__list-box__select__btn'}
+                                                type="ghost" size="small" inline>{it.value}</Button>
+                                        })
+                                    }
+                                </div>
                             </div>
                         })
                     }
-                    <WhiteSpace size="xl" />
-                    <div className="hope-body__list-box__species-title">祈福种类</div>
-                    <div className="hope-body__list-box__species-box">
-                        {
-                            self.state.hopeState.species.map((item, i)=>{
-                                return <Button
-                                    key={i}
-                                    className={item.active ? 'hope-body__list-box__species-box__button am-button-active' : 'hope-body__list-box__species-box__button'}
-                                    type="ghost" size="small" inline>{item.value}</Button>
-                            })
-                        }
+                    <div className="offline-make-body__list-box__contact">
+                        <div className="offline-make-body__list-box__contact__title">{self.state.offlineMakeState.name.title}</div>
+                        <div className="offline-make-body__list-box__contact__input">
+                            <InputItem
+                                clear
+                                onChange={(v) => { console.log('onChange', v); }}
+                                onBlur={(v) => { console.log('onBlur', v); }}
+                            />
+                        </div>
                     </div>
-                    <WhiteSpace size="xl" />
-                    <div className="hope-body__list-box__wish-title">心愿(可选填)</div>
-                    <WhiteSpace size="lg" />
-                    <TextareaItem
-                        className="hope-body__list-box__textarea"
-                        {...getFieldProps('note3')}
-                        autoHeight
-                        labelNumber={10}
-                        rows={4}
-                    />
-                    <WhiteSpace size="xl" />
-                    <div className="hope-body__list-box__enter-box">
-                        <Button type="primary" size="small" className="hope-body__list-box__enter-box__btn" inline>开始抄经</Button>
+                    <div className="offline-make-body__list-box__contact">
+                        <div className="offline-make-body__list-box__contact__title">{self.state.offlineMakeState.mobile.title}</div>
+                        <div className="offline-make-body__list-box__contact__input">
+                            <InputItem
+                                clear
+                                onChange={(v) => { console.log('onChange', v); }}
+                                onBlur={(v) => { console.log('onBlur', v); }}
+                            />
+                        </div>
                     </div>
+                    <div className="offline-make-body__list-box__tips">{self.state.offlineMakeState.tips}</div>
+                    <div className="offline-make-body__list-box__enter">
+                        <Button className="offline-make-body__list-box__enter__btn" type="ghost" size="small" inline>提交</Button>
+                    </div>
+                    <div className="iconfont icon-jiantou offline-make-body__list-box__return" onClick={self.pageLeftSwitch.bind(self, self.state.leftIcon[self.state.leftIcon.length-1])} />
                 </div>
             );
         };
         return (
-            <div className="hope-page-box">
+            <div className="offline-make-page-box">
                 <ListView ref="lv"
                           dataSource={this.state.dataSource}
                           renderBodyComponent={() => <MyBody />}
                           renderRow={row}
-                          className="hope-box"
+                          className="offline-make-box"
                           contentContainerStyle={{ height: '100%' }}
                 />
             </div>

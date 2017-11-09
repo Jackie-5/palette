@@ -21,6 +21,7 @@ import Logo from './view/logo';
 import About from './view/about';
 import Offline from './view/offline';
 import OfflineMake from './view/offline-make';
+import Person from './view/person';
 
 //import nprogress from 'nprogress';
 
@@ -38,6 +39,7 @@ const pageSwitch = (pageSwitch, self) => {
         if (i === 'hope' && pageSwitch[i]) return <Hope key="hope" self={self}/>;
         if (i === 'offline' && pageSwitch[i]) return <Offline key="offline" self={self}/>;
         if (i === 'offlineMake' && pageSwitch[i]) return <OfflineMake key="offlineMake" self={self}/>;
+        if (i === 'person' && pageSwitch[i]) return <Person key="person" self={self}/>;
     }
 };
 

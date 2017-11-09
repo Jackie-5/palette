@@ -1,60 +1,131 @@
-.hope-page-box{
+.offline-make-page-box{
     height:100%;
-    .hope-box{
+    .offline-make-box{
         height:100%;
-        .hope-body{
+        .offline-make-body{
             height:100%;
             padding:0 5%;
             &__list-box{
-                &__input{
-                    margin-top: 30px;
-                    .am-input-item{
-                        min-height: 50px;
-                        height:auto;
-                        background-color: #cccccc;
-                        border-radius: 10px;
-                        &::after{
-                            display: none;
-                        }
-                        input{
-                            text-align: center;
-                        }
-                    }
+                font-size: 28px;
+                &__title{
+                    font-weight: bold;
+                    font-size: 35px;
+                    padding-bottom: 40px;
+                    padding-top: 70px;
                 }
-                &__species-box{
-                    text-align: center;
-                    &__button{
-                        color:#333;
-                        border-color:#ccc;
+                &__select{
+                    margin-top: 20px;
+                    &__btn{
+                        color: #333;
+                        border-color: @penColor;
                         margin-left: 20px;
                         margin-top: 20px;
                     }
-                    .am-button-active{
-                        color:#996633;
-                        border-color:#996633;
-                        background:transparent;
+                    .am-button-active {
+                        color: #fff;
+                        background: @penColor;
                     }
                 }
-
-                &__wish-title{
-                    font-size: 28px;
-                }
-                &__textarea{
-                    background:#cccccc;
-                    min-height: 80px;
-                    &::after{
-                        display: none;
+                &__contact{
+                    overflow: hidden;
+                    margin-top:30px;
+                    &__title{
+                        float:left;
+                        margin-top:18px;
+                    }
+                    &__input {
+                        .am-input-item {
+                            min-height: 50px;
+                            height: auto;
+                            background-color: transparent;
+                            border-radius: 10px;
+                            input {
+                                font-size: 28px;
+                                text-align: left;
+                            }
+                        }
                     }
                 }
-                &__enter-box{
+                &__tips{
+                    font-size: 25px;
+                    margin-top: 30px;
+                    color:#999;
+                }
+                &__enter{
                     text-align: center;
+                    margin-top: 50px;
                     &__btn{
-                        color:#fff;
-                        border-color:#996633;
-                        background: #996633;
+                        width: 180px;
+                        color: #fff;
+                        border-color: transparent;
+                        background: @penColor;
                     }
+                    .am-button-active {
+                        color: #fff;
+                        background: @penColor;
+                    }
+                }
+                &__return{
+                    position:fixed;
+                    bottom:50px;
+                    right: 40px;
+                    color:@penColor;
+                    font-weight: bold;
+                    border-radius: 100%;
+                    font-size: 80px;
+                    transform:rotate(180deg);
+                    -webkit-transform:rotate(180deg); /* Safari 和 Chrome */
                 }
             }
+            //    &__input{
+            //        margin-top: 30px;
+            //        .am-input-item{
+            //            min-height: 50px;
+            //            height:auto;
+            //            background-color: #cccccc;
+            //            border-radius: 10px;
+            //            &::after{
+            //                display: none;
+            //            }
+            //            input{
+            //                text-align: center;
+            //            }
+            //        }
+            //    }
+            //    &__species-box{
+            //        text-align: center;
+            //        &__button{
+            //            color:#333;
+            //            border-color:#ccc;
+            //            margin-left: 20px;
+            //            margin-top: 20px;
+            //        }
+            //        .am-button-active{
+            //            color:#996633;
+            //            border-color:#996633;
+            //            background:transparent;
+            //        }
+            //    }
+            //
+            //    &__wish-title{
+            //        font-size: 28px;
+            //    }
+            //    &__textarea{
+            //        background:#cccccc;
+            //        min-height: 80px;
+            //        &::after{
+            //            display: none;
+            //        }
+            //    }
+            //    &__enter-box{
+            //        text-align: center;
+            //        &__btn{
+            //            color:#fff;
+            //            border-color:#996633;
+            //            background: #996633;
+            //        }
+            //    }
+            //}
         }
     }
     &__hope{
@@ -65,11 +136,11 @@
         &__box{
             font-size: 30px;
             color:@hopeColor;
-            &__hope-icon{
+            &__offline-make-icon{
                 float:left;
                 font-size: 50px;
             }
-            &__hope-size{
+            &__offline-make-size{
                 float:left;
                 border:2px solid transparent;
                 margin-left: 30px;
@@ -78,7 +149,7 @@
                     border:1px solid @hopeColor;
                 }
             }
-            &__hope-size-active{
+            &__offline-make-size-active{
                 border:2px solid @hopeColor;
                 font-weight: bold;
             }
