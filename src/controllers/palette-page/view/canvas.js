@@ -2,6 +2,8 @@
  * Created by Jackie.Wu on 2017/10/24.
  */
 import React from 'react';
+import axios from '../../../libs/axios';
+import pageAjax from '../../../libs/pageAjax';
 
 export default class extends React.Component {
     constructor(props) {
@@ -10,11 +12,13 @@ export default class extends React.Component {
             music: true
         };
     }
+
     componentDidMount() {
         this.props.self.subCanvas(this);
     }
 
     initCanvas(options = {}) {
+        const self = this.props.self;
         try {
             this.refs.writeCanvas.width = this.refs.canvasBox.offsetWidth;
             this.refs.writeCanvas.height = this.refs.canvasBox.offsetHeight;
@@ -22,20 +26,21 @@ export default class extends React.Component {
             this.refs.bgCanvas.height = this.refs.writeCanvas.height;
             this.writeCtx = this.refs.writeCanvas.getContext("2d");
             this.bgCtx = this.refs.bgCanvas.getContext("2d");
-            this.penSize = options.penSize || 10;
-            this.canvasColor = options.penColor || '#000';
+            this.penSize = self.state.defaultPage.fontsize || 10;
+            this.canvasColor = self.state.defaultPage.color || '#000';
             this.fontWidth = 320;
             this.moveSum = 0;
             this.penmanship = [];
             this.canvasPos = this.refs.writeCanvas.getBoundingClientRect();
-        } catch(e) {
+        } catch (e) {
 
         }
     }
 
     canvasTouchStart(e) {
         const self = this;
-        const x = e.touches[0].pageX - this.canvasPos.left;
+        console.log();
+        const x = e.touches[0].pageX - this.canvasPos.left + (document.querySelector('.page-left-function').offsetWidth / 2);
         const y = e.touches[0].pageY - this.canvasPos.top;
 
         self.stroke = {
@@ -86,7 +91,7 @@ export default class extends React.Component {
 
     canvasTouchMove(e) {
         const self = this;
-        const x = e.touches[0].pageX - this.canvasPos.left;
+        const x = e.touches[0].pageX - this.canvasPos.left + (document.querySelector('.page-left-function').offsetWidth / 2);
         const y = e.touches[0].pageY - this.canvasPos.top;
         this.stroke.d.push(
             {
@@ -160,16 +165,19 @@ export default class extends React.Component {
         this.writeCtx.fill();
         this.writeCtx.closePath()
     }
-    clearCanvas(){
+
+    clearCanvas() {
         this.writeCtx.clearRect(0, 0, this.refs.writeCanvas.width, this.refs.writeCanvas.height);
         this.bgCtx.clearRect(0, 0, this.refs.writeCanvas.width, this.refs.writeCanvas.height);
     }
-    stopAndPlayMusic(e){
+
+    stopAndPlayMusic(e) {
         e.stopPropagation();
         this.setState({
             music: !this.state.music
         })
     }
+
     render() {
         const self = this.props.self;
         return <div className="canvas-index">
@@ -178,12 +186,14 @@ export default class extends React.Component {
                     <div>{self.state.indexState.pinyinTop}</div>
                     <div>{self.state.indexState.fontTop}</div>
                 </div>
-                <div className="canvas-number">{self.state.indexState.currentNumber}/{self.state.indexState.allNumber}</div>
-                <div className="canvas-top-icon iconfont icon-TMS_yinlefuhao" onClick={this.stopAndPlayMusic.bind(this)} >
-                    <div className={this.state.music ? '' : 'canvas-top-icon-stop iconfont icon-jinzhi'} />
+                <div
+                    className="canvas-number">{self.state.defaultPage.position}/{self.state.indexState.allNumber}</div>
+                <div className="canvas-top-icon iconfont icon-TMS_yinlefuhao"
+                     onClick={this.stopAndPlayMusic.bind(this)}>
+                    <div className={this.state.music ? '' : 'canvas-top-icon-stop iconfont icon-jinzhi'}/>
                 </div>
                 <div className="canvas-images">
-                    <img src={self.state.indexState.imgTop} alt="" />
+                    <img src={self.state.indexState.imgTop} alt=""/>
                 </div>
             </div>
             <div className="canvas-box" ref="canvasBox">
@@ -196,8 +206,8 @@ export default class extends React.Component {
                         onTouchMove={this.canvasTouchMove.bind(this)}
                         onTouchEnd={this.canvasTouchMoveEnd.bind(this)}
                         style={{ position: 'absolute', top: 0, left: 0, zIndex: 9 }}/>
-                <canvas ref="bgCanvas" />
-                <img src={self.state.indexState.imgMiddle} alt="" className="canvas-images canvas-img-middle" />
+                <canvas ref="bgCanvas"/>
+                <img src={self.state.indexState.imgMiddle} alt="" className="canvas-images canvas-img-middle"/>
             </div>
             <div className="canvas-switch canvas-bottom" onClick={self.nextFont.bind(self)}>
                 <div className="canvas-text">
@@ -205,10 +215,12 @@ export default class extends React.Component {
                     <div>{self.state.indexState.fontBottom}</div>
                 </div>
                 <div className="canvas-images">
-                    <img src={self.state.indexState.imgBottom} alt="" />
+                    <img src={self.state.indexState.imgBottom} alt=""/>
                 </div>
-                <div className="canvas-bottom-icon about-current iconfont icon-i1" onClick={self.pageLeftSwitch.bind(self, self.state.aboutCurrent)} />
-                <div className="canvas-bottom-icon hope-icon iconfont icon-wodeqifu" onClick={self.pageLeftSwitch.bind(self, self.state.hope)} />
+                <div className="canvas-bottom-icon about-current iconfont icon-i1"
+                     onClick={self.pageLeftSwitch.bind(self, self.state.aboutCurrent)}/>
+                <div className="canvas-bottom-icon hope-icon iconfont icon-wodeqifu"
+                     onClick={self.pageLeftSwitch.bind(self, self.state.hope)}/>
             </div>
         </div>
     }

@@ -4,6 +4,8 @@
 
 import React from 'react';
 import initState from './init-state';
+import axios from '../../libs/axios';
+import pageAjax from '../../libs/pageAjax';
 
 export default class method extends React.Component {
     constructor(props) {
@@ -11,10 +13,27 @@ export default class method extends React.Component {
         this.state = initState;
     }
 
-    pageLeftSwitch(item, e) {
+    componentDidMount() {
+        const self = this;
+        const state = this.state;
+        // 进入页面 set 默认值
+        axios(pageAjax.userLectionMyDetail)
+            .then((data) => {
+                state.defaultPage = data.data;
+                self.setState(state);
+                this.canvasMethod.initCanvas()
+            })
+    }
+
+    pageLeftSwitch(item, options = {}, e) {
         e.stopPropagation();
         const self = this;
         const state = self.state;
+
+        if (options.music) {
+            state.currentMusic = options.music.musicurl;
+        }
+
 
         if (item.link === 'rubber') {
             if (state.pageSwitch['index']) {
@@ -37,21 +56,11 @@ export default class method extends React.Component {
 
     subCanvas(self) {
         this.canvasMethod = self;
-        this.initCanvas();
+        //this.initCanvas();
     }
 
     initCanvas() {
         const options = {};
-        this.state.penColorState.color.map((item) => {
-            if (item.active) {
-                options.penColor = item.value
-            }
-        });
-        this.state.penColorState.penSize.map((item) => {
-            if (item.active) {
-                options.penSize = item.size
-            }
-        });
         this.canvasMethod.initCanvas(options)
     }
 

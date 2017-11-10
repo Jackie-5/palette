@@ -32,17 +32,17 @@ if (ENV === 'dev') {
         template: './src/index.ejs',
         ejsObject: {}
     };
-    //['midas'].forEach((item) => {
-    //    webpackConfig.plugins.push(
-    //        new CopyWebpackPlugin([
-    //            {
-    //                from: './src/' + item + '/',
-    //                to: './' + item
-    //            }
-    //        ]),
-    //        new ProgressBarPlugin()
-    //    );
-    //});
+    ['Api'].forEach((item) => {
+        webpackConfig.plugins.push(
+            new CopyWebpackPlugin([
+                {
+                    from: './src/' + item + '/',
+                    to: './' + item
+                }
+            ]),
+            new ProgressBarPlugin()
+        );
+    });
 
     for (let i in routerConfig) {
         const arrJs = [];

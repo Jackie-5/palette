@@ -3,7 +3,6 @@
  */
 
 export default {
-    currentNumber: 1,
     allNumber: 100,
     fontTop:'是',
     fontMiddle: '罗',

@@ -10,7 +10,7 @@ import offlineMake from './state/offline-make';
 import person from './state/person';
 
 export default {
-    color: 'green',
+    defaultPage: {},
     leftIcon: [
         {
             icon: 'icon-maobi',
@@ -70,7 +70,7 @@ export default {
     },
     pageSwitch: {
         // 写字
-        index: false,
+        index: true,
         // 选帖子
         tie: false,
         // 选音乐
@@ -80,7 +80,7 @@ export default {
         // 作品预览
         review: false,
         // 个人中心
-        person: true,
+        person: false,
         // 线下抄经
         offline: false,
         // 线下抄经预约
@@ -100,4 +100,5 @@ export default {
     aboutArticle: {...aboutArticle},
     offlineMakeState: {...offlineMake},
     personState: {...person},
+    musicList: [],
 };

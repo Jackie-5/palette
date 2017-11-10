@@ -1,0 +1,15 @@
+{
+    "data": {
+        "total": 264,
+        "position": 3,
+        "musicurl": "http://ydadmin.pooyoo.net/Upload/files/music/formal/00C5CDD94981B2B305EAA4B35E3DF48A.mp3",
+        "lectionname": "心经",
+        "fontsize": 10,
+        "color": "#e94139",
+        "w_id": 2115,
+        "m_id": 9,
+        "b_id": 3
+    },
+    "code": 0,
+    "msg": "成功"
+}
