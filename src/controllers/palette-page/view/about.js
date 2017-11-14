@@ -3,6 +3,9 @@
  */
 import React, { Component } from 'react'
 import { ListView } from 'antd-mobile';
+import axios from '../../../libs/axios';
+import pageAjax from '../../../libs/pageAjax';
+import ReactHtmlParser from 'react-html-parser';
 
 
 const MyBody = (props) => <div className="about__box__body">
@@ -46,25 +49,31 @@ export default class extends Component {
 
     componentDidMount() {
         // simulate initial Ajax
-        this.genData();
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRowsAndSections(this.dataBlob, this.sectionIDs, this.rowIDs),
-            isLoading: false,
-        });
-    }
+        const self = this.props.self;
+        const state = self.state;
+        axios(pageAjax.lectionDetail, {
+            B_id: state.defaultPage.b_id
+        })
+            .then((data) => {
+                state.aboutArticle = data.data;
+                this.genData();
+                this.setState({
+                    dataSource: this.state.dataSource.cloneWithRowsAndSections(this.dataBlob, this.sectionIDs, this.rowIDs),
+                    isLoading: false,
+                });
+                self.setState(state);
+            });
 
+    }
 
     render() {
         const state = this.props.self.state;
         const row = (rowData, sectionID, rowID) => {
             return (
                 <div key={rowID} className="about__box__body__row">
-                    <div className="about__box__body__row__title">{state.aboutArticle.title}</div>
-                    {
-                        state.aboutArticle.content.map((item, i) => <div key={i}
-                                                                         className="about__box__body__row__cont">{item}</div>)
-                    }
-
+                    <div className="about__box__body__row__title">{state.aboutArticle.lectionname}</div>
+                    <div className="about__box__body__row__author">{state.aboutArticle.b_author}</div>
+                    <div className="about__box__body__row__cont">{ReactHtmlParser(state.aboutArticle.b_summary)}</div>
                 </div>
             );
         };

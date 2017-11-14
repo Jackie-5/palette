@@ -3,7 +3,10 @@
  */
 
 import React, { Component } from 'react'
-import { ListView , List} from 'antd-mobile';
+import { ListView, List } from 'antd-mobile';
+import axiosAll from 'axios';
+import axios from '../../../libs/axios';
+import pageAjax from '../../../libs/pageAjax';
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -30,7 +33,7 @@ export default class extends Component {
         this.dataBlob = {};
         this.sectionIDs = [];
         this.rowIDs = [];
-        this.genData = (length = 40) => {
+        this.genData = (length = 1) => {
             this.rowIDs['0'] = [];
             for (let jj = 0; jj < length; jj++) {
                 const rowName = jj;
@@ -49,36 +52,51 @@ export default class extends Component {
     }
 
     componentDidMount() {
+        const self = this.props.self;
+        const state = self.state;
         // simulate initial Ajax
-        this.genData();
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRowsAndSections(this.dataBlob, this.sectionIDs, this.rowIDs),
-            isLoading: false,
-        });
+        axiosAll.all([axios(pageAjax.UserBasic), axios(pageAjax.UserLectionMyWorks)])
+            .then((data) => {
+                state.personState = {...data[0].data, list: data[1].data};
+                this.genData();
+                this.setState({
+                    dataSource: this.state.dataSource.cloneWithRowsAndSections(this.dataBlob, this.sectionIDs, this.rowIDs),
+                    isLoading: false,
+                });
+                self.setState(state);
+            })
+
     }
 
     render() {
         const self = this.props.self;
+        const { personState } = self.state;
         const row = (rowData, sectionID, rowID) => {
             return (
                 <List key={rowID} className="person-color-body__row">
-                    <Item onClick={() => {}} className="person-color-body__row__title" multipleLine>
-                        <span>静夜思地方</span>
-                        <Brief className="person-color-body__row__title__sub-title">萨芬的</Brief>
-                    </Item>
+                    {
+                        personState.list.map((item)=>{
+                            return <Item onClick={() => {
+                            }} className="person-color-body__row__title" multipleLine>
+                                <span>{item.lectionname}</span>
+                                <Brief>{item.lectiontime}</Brief>
+                                <i className="iconfont icon-yan person-color-body__row__title__icon" />
+                            </Item>
+                        })
+                    }
                 </List>
             );
         };
         return (
-            <div style={{height:'100%'}} className="person-page-box">
+            <div style={{ height: '100%' }} className="person-page-box">
                 <div className="person-page-box__person">
                     <div className="person-page-box__person__img">
                         <img
-                             src="//p0.meituan.net/dpmerchantimage/8a34efd3-481d-4292-8b14-6ef6d465e91b.jpg%40800w_600h_0e_1l%7Cwatermark%3D1%26%26r%3D1%26p%3D9%26x%3D2%26y%3D2%26relative%3D1%26o%3D20" />
+                            src={personState.headimg}/>
                     </div>
-                    <div className="person-page-box__person__name">啥浪蝶狂蜂静安寺</div>
+                    <div className="person-page-box__person__name">{personState.nickname}</div>
                     <div className="person-page-box__person__title">
-                        <i className="iconfont icon-jingshu" />
+                        <i className="iconfont icon-jingshu"/>
                         <span>我的作品</span>
                     </div>
                 </div>

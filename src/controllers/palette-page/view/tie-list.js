@@ -3,31 +3,17 @@
  */
 import React, {Component} from 'react'
 import { ListView, List } from 'antd-mobile';
+import axios from '../../../libs/axios';
+import pageAjax from '../../../libs/pageAjax';
 
 const Item = List.Item;
 const Brief = Item.Brief;
+const NUM_SECTIONS = 1;
+const NUM_ROWS_PER_SECTION = 1;
 
 const MyBody = (props)=><div className="tie-body">
     {props.children}
 </div>;
-
-const data = [
-    {
-        img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
-        title: 'Meet hotel',
-        des: '不是所有的兼职汪都需要风吹日晒',
-    },
-    {
-        img: 'https://zos.alipayobjects.com/rmsportal/XmwCzSeJiqpkuMB.png',
-        title: 'McDonald\'s invites you',
-        des: '不是所有的兼职汪都需要风吹日晒',
-    },
-    {
-        img: 'https://zos.alipayobjects.com/rmsportal/hfVtzEhPzTUewPm.png',
-        title: 'Eat the week',
-        des: '不是所有的兼职汪都需要风吹日晒',
-    },
-];
 
 export default class extends Component {
 
@@ -46,15 +32,22 @@ export default class extends Component {
         this.dataBlob = {};
         this.sectionIDs = [];
         this.rowIDs = [];
-        this.genData = (length = 5) => {
-            this.rowIDs['0'] = [];
-            for (let jj = 0; jj < length; jj++) {
-                const rowName = `S${jj}, R${jj}`;
-                this.rowIDs['0'].push(rowName);
-                this.dataBlob[rowName] = rowName;
+        this.genData = (pIndex = 0) => {
+            for (let i = 0; i < NUM_SECTIONS; i++) {
+                const ii = (pIndex * NUM_SECTIONS) + i;
+                const sectionName = `Section ${ii}`;
+                this.sectionIDs.push(sectionName);
+                this.dataBlob[sectionName] = sectionName;
+                this.rowIDs[ii] = [];
+
+                for (let jj = 0; jj < NUM_ROWS_PER_SECTION; jj++) {
+                    const rowName = `S${ii}, R${jj}`;
+                    this.rowIDs[ii].push(rowName);
+                    this.dataBlob[rowName] = rowName;
+                }
             }
             // new object ref
-            this.sectionIDs = ['Section 0'] ;
+            this.sectionIDs = [].concat(this.sectionIDs);
             this.rowIDs = [].concat(this.rowIDs);
         };
 
@@ -65,26 +58,41 @@ export default class extends Component {
     }
 
     componentDidMount() {
+        const self = this.props.self;
+        const state = self.state;
         // simulate initial Ajax
-        setTimeout(() => {
-            this.genData();
-            this.setState({
-                dataSource: this.state.dataSource.cloneWithRowsAndSections(this.dataBlob, this.sectionIDs, this.rowIDs),
-                isLoading: false,
+        axios(pageAjax.lectionGetList)
+            .then((data) => {
+                state.tieList = data.data;
+                this.genData();
+                this.setState({
+                    dataSource: this.state.dataSource.cloneWithRowsAndSections(this.dataBlob, this.sectionIDs, this.rowIDs),
+                    isLoading: false,
+                });
+                self.setState(state);
             });
-        }, 600);
     }
 
 
     render(){
-
+        const self = this.props.self;
+        const state = self.state;
         const row = (rowData, sectionID, rowID) => {
             return (
                 <List key={rowID} className="tie-body__row">
-                    <Item onClick={() => {}} className="tie-body__row__title" multipleLine>
-                        <span>静夜思地方</span>
-                        <Brief className="tie-body__row__title__sub-title">萨芬的</Brief>
-                    </Item>
+                    {
+                        state.tieList.map((item, i) => {
+                            return <Item
+                                key={i}
+                                onClick={self.pageLeftSwitch.bind(self, self.state.leftIcon[1], {tie: item})}
+                                className="tie-body__row__title"
+                                multipleLine>
+                                <span>{item.lectionname}</span>
+                                <Brief className="tie-body__row__title__sub-title">{item.b_author}</Brief>
+                            </Item>
+                        })
+                    }
+
                 </List>
             );
         };

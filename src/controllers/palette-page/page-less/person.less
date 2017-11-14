@@ -24,10 +24,20 @@
                         padding: 0;
                         .am-list-content{
                             line-height: 40px;
+                            position:relative;
                             .am-list-brief{
                                 font-size: 16px;
+                                text-align: right;
+                                width:97%;
+                                margin-top:0;
                             }
                         }
+                    }
+                    &__icon{
+                        position:absolute;
+                        right: 10px;
+                        top:0;
+                        font-size: 45px;
                     }
                 }
                 &__author{
@@ -45,6 +55,7 @@
             height: 200px;
             margin:0 auto;
             padding-top:80px;
+            overflow: hidden;
             img{
                 width:100%;
             }

@@ -63,6 +63,7 @@
     "rc-tween-one": "^1.5.3",
     "react": "15.4.2",
     "react-dom": "15.4.2",
+    "react-html-parser": "^2.0.1",
     "react-router-dom": "^4.1.1",
     "react-router-page-transition": "^3.0.2",
     "urijs": "^1.18.10"

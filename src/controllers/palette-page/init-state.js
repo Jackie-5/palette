@@ -5,9 +5,7 @@ import index from './state/index-satate';
 import penColor from './state/pen-color';
 import hopeState from './state/hope-state';
 import logoState from './state/logo-state';
-import aboutArticle from './state/about-article';
 import offlineMake from './state/offline-make';
-import person from './state/person';
 
 export default {
     defaultPage: {},
@@ -96,9 +94,11 @@ export default {
     indexState: { ...index },
     penColorState: {...penColor},
     hopeState: {...hopeState},
-    logoState: {...logoState},
-    aboutArticle: {...aboutArticle},
+    logoState: {},
+    aboutArticle: {},
     offlineMakeState: {...offlineMake},
-    personState: {...person},
+    personState: {},
     musicList: [],
+    tieList: [],
+    offlineState: []
 };

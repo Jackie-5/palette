@@ -3,31 +3,14 @@
  */
 import React, { Component } from 'react'
 import { ListView, List } from 'antd-mobile';
-
-const Item = List.Item;
-const Brief = Item.Brief;
+import axios from '../../../libs/axios';
+import pageAjax from '../../../libs/pageAjax';
+import ReactHtmlParser from 'react-html-parser';
 
 const MyBody = (props) => <div className="logo-about__box__body">
     {props.children}
 </div>;
 
-const data = [
-    {
-        img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
-        title: 'Meet hotel',
-        des: '不是所有的兼职汪都需要风吹日晒',
-    },
-    {
-        img: 'https://zos.alipayobjects.com/rmsportal/XmwCzSeJiqpkuMB.png',
-        title: 'McDonald\'s invites you',
-        des: '不是所有的兼职汪都需要风吹日晒',
-    },
-    {
-        img: 'https://zos.alipayobjects.com/rmsportal/hfVtzEhPzTUewPm.png',
-        title: 'Eat the week',
-        des: '不是所有的兼职汪都需要风吹日晒',
-    },
-];
 
 export default class extends Component {
 
@@ -65,12 +48,18 @@ export default class extends Component {
     }
 
     componentDidMount() {
-        // simulate initial Ajax
-        this.genData();
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRowsAndSections(this.dataBlob, this.sectionIDs, this.rowIDs),
-            isLoading: false,
-        });
+        const self = this.props.self;
+        const state  = self.state;
+        axios(pageAjax.InfoAbout)
+            .then((data)=>{
+                state.logoState = data.data;
+                this.genData();
+                this.setState({
+                    dataSource: this.state.dataSource.cloneWithRowsAndSections(this.dataBlob, this.sectionIDs, this.rowIDs),
+                    isLoading: false,
+                });
+                self.setState(state)
+            });
     }
 
 
@@ -79,19 +68,7 @@ export default class extends Component {
         const row = (rowData, sectionID, rowID) => {
             return (
                 <div key={rowID} className="logo-about__box__body__row">
-                    <div className="logo-about__box__body__row__title">{state.logoState.title}</div>
-                    {
-                        state.logoState.logoAbout.map((item, i) => {
-                            return <div className="logo-about__box__body__row__content" key={i}>
-                                <div className="logo-about__box__body__row__content__title">{item.title}</div>
-                                {
-                                    item.content.map((it, i)=>{
-                                        return <div className="logo-about__box__body__row__content__cont" key={i}>{it}</div>
-                                    })
-                                }
-                            </div>
-                        })
-                    }
+                    {ReactHtmlParser(state.logoState.context)}
                 </div>
             );
         };
@@ -104,7 +81,6 @@ export default class extends Component {
                       className="logo-about__box"
                       contentContainerStyle={{ height: '100%' }}
             />
-            <div className="logo-about__img"/>
         </div>
     }
 }

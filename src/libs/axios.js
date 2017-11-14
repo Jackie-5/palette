@@ -6,7 +6,7 @@ import { Toast } from 'antd-mobile';
 import URI from 'urijs';
 
 
-export default (url, method = 'get', params = {}) =>
+export default (url, params = {}, method = 'get' ) =>
     new Promise((resolve, reject) => {
         const hostname = new URI(location.href).hostname();
         // 当在本地的时候 默认全部等于get请求，方便本地调试
