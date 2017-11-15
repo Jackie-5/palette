@@ -3,14 +3,15 @@
  */
 
 export default {
-    allNumber: 100,
-    fontTop:'是',
-    fontMiddle: '罗',
-    fontBottom: '的',
-    pinyinTop: 'shi',
-    pinyinMiddle: 'shi',
-    pinyinBottom: 'shi',
-    imgTop: 'http://67.demopooyoo.net:90/yd_test/S001Z001.png',
-    imgMiddle: 'http://67.demopooyoo.net:90/yd_test/S001Z002.png',
-    imgBottom: 'http://67.demopooyoo.net:90/yd_test/S001Z003.png',
+    allNumber: 0,
+    currentNumber: 0,
+    indexData: [{
+        w_id: '',
+        imgurl: '',
+        position: '',
+        chinese: '',
+        pinyin: ''
+    },],
+    prevToast: '已经是第一个字了',
+    nextToast: '已经是第最后一个字了',
 }

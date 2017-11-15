@@ -39,7 +39,6 @@ export default class extends React.Component {
 
     canvasTouchStart(e) {
         const self = this;
-        console.log();
         const x = e.touches[0].pageX - this.canvasPos.left + (document.querySelector('.page-left-function').offsetWidth / 2);
         const y = e.touches[0].pageY - this.canvasPos.top;
 
@@ -180,26 +179,27 @@ export default class extends React.Component {
 
     render() {
         const self = this.props.self;
+        const { indexData, allNumber, currentNumber } = self.state.indexState;
         return <div className="canvas-index">
             <div className="canvas-switch canvas-top" onClick={self.prevFont.bind(self)}>
                 <div className="canvas-text">
-                    <div>{self.state.indexState.pinyinTop}</div>
-                    <div>{self.state.indexState.fontTop}</div>
+                    <div>{currentNumber === 0 ? '' : indexData[currentNumber - 1].pinyin}</div>
+                    <div>{currentNumber === 0 ? '' : indexData[currentNumber - 1].chinese}</div>
                 </div>
                 <div
-                    className="canvas-number">{self.state.defaultPage.position}/{self.state.indexState.allNumber}</div>
+                    className="canvas-number">{ currentNumber }/{ allNumber }</div>
                 <div className="canvas-top-icon iconfont icon-TMS_yinlefuhao"
                      onClick={this.stopAndPlayMusic.bind(this)}>
                     <div className={this.state.music ? '' : 'canvas-top-icon-stop iconfont icon-jinzhi'}/>
                 </div>
                 <div className="canvas-images">
-                    <img src={self.state.indexState.imgTop} alt=""/>
+                    <img src={currentNumber === 0 ? '' : indexData[currentNumber - 1].imgurl} alt=""/>
                 </div>
             </div>
             <div className="canvas-box" ref="canvasBox">
                 <div className="canvas-text">
-                    <div>{self.state.indexState.pinyinMiddle}</div>
-                    <div>{self.state.indexState.fontMiddle}</div>
+                    <div>{indexData[currentNumber].pinyin}</div>
+                    <div>{indexData[currentNumber].chinese}</div>
                 </div>
                 <canvas ref="writeCanvas"
                         onTouchStart={this.canvasTouchStart.bind(this)}
@@ -207,15 +207,15 @@ export default class extends React.Component {
                         onTouchEnd={this.canvasTouchMoveEnd.bind(this)}
                         style={{ position: 'absolute', top: 0, left: 0, zIndex: 9 }}/>
                 <canvas ref="bgCanvas"/>
-                <img src={self.state.indexState.imgMiddle} alt="" className="canvas-images canvas-img-middle"/>
+                <img src={indexData[currentNumber].imgurl} alt="" className="canvas-images canvas-img-middle"/>
             </div>
             <div className="canvas-switch canvas-bottom" onClick={self.nextFont.bind(self)}>
                 <div className="canvas-text">
-                    <div>{self.state.indexState.pinyinBottom}</div>
-                    <div>{self.state.indexState.fontBottom}</div>
+                    <div>{currentNumber === allNumber ? '' : indexData[currentNumber + 1].pinyin}</div>
+                    <div>{currentNumber === allNumber ? '' : indexData[currentNumber + 1].chinese}</div>
                 </div>
                 <div className="canvas-images">
-                    <img src={self.state.indexState.imgBottom} alt=""/>
+                    <img src={currentNumber === allNumber ? '' : indexData[currentNumber + 1].imgurl} alt=""/>
                 </div>
                 <div className="canvas-bottom-icon about-current iconfont icon-i1"
                      onClick={self.pageLeftSwitch.bind(self, self.state.aboutCurrent)}/>

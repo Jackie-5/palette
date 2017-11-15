@@ -2,6 +2,7 @@
  * Created by Jackie.Wu on 2017/11/10.
  */
 export default {
+    LoginPower: '/Api/Login/Power',
     userLectionMyDetail: '/Api/UserLection/MyDetail',
     musicGetList: '/Api/Music/GetList',
     lectionGetList: '/Api/Lection/GetList',
@@ -10,4 +11,5 @@ export default {
     UserLectionMyWorks: '/Api/UserLection/MyWorks',
     BespeakGetList: '/Api/Bespeak/GetList',
     InfoAbout: '/Api/Info/About',
+    LectionGetWordList: '/Api/Lection/GetWordList',
 }

@@ -20,6 +20,7 @@ export default (url, params = {}, method = 'get' ) =>
             } else {
                 if(data.data.code === 100){
                     location.href = data.data.msg;
+                    reject(data.data.code);
                     return;
                 }
                 Toast.fail(data.data.msg, 1);
