@@ -61,7 +61,7 @@ export default class method extends React.Component {
 
         state.defaultPage = data[0].data;
         state.indexState.currentNumber = data[0].data.position - 1;
-        state.indexState.allNumber = data[1].data.length;
+        state.indexState.allNumber = data[1].data.length - 1;
         state.indexState.indexData = data[1].data;
         self.setState(state);
 
@@ -80,14 +80,21 @@ export default class method extends React.Component {
             this.clearCanvas();
             self.setState(state);
         } else {
-            Toast.info(state.indexState.prevToast, 200)
+            Toast.info(state.indexState.prevToast, 2)
         }
-
-        console.log('prev')
     }
 
     nextFont() {
-        console.log('next')
+        const self = this;
+        const state = this.state;
+        console.log(state.indexState.currentNumber < state.indexState.allNumber);
+        if (state.indexState.currentNumber < state.indexState.allNumber) {
+            state.indexState.currentNumber += 1;
+            this.clearCanvas();
+            self.setState(state);
+        } else {
+            Toast.info(state.indexState.nextToast, 2);
+        }
     }
 
     changePenColor(index) {

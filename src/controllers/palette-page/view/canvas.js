@@ -183,17 +183,17 @@ export default class extends React.Component {
         return <div className="canvas-index">
             <div className="canvas-switch canvas-top" onClick={self.prevFont.bind(self)}>
                 <div className="canvas-text">
-                    <div>{currentNumber === 0 ? '' : indexData[currentNumber - 1].pinyin}</div>
-                    <div>{currentNumber === 0 ? '' : indexData[currentNumber - 1].chinese}</div>
+                    <div>{currentNumber <= 0 ? '' : indexData[currentNumber - 1].pinyin}</div>
+                    <div>{currentNumber <= 0 ? '' : indexData[currentNumber - 1].chinese}</div>
                 </div>
                 <div
-                    className="canvas-number">{ currentNumber }/{ allNumber }</div>
+                    className="canvas-number">{ currentNumber + 1 }/{ allNumber + 1 }</div>
                 <div className="canvas-top-icon iconfont icon-TMS_yinlefuhao"
                      onClick={this.stopAndPlayMusic.bind(this)}>
                     <div className={this.state.music ? '' : 'canvas-top-icon-stop iconfont icon-jinzhi'}/>
                 </div>
                 <div className="canvas-images">
-                    <img src={currentNumber === 0 ? '' : indexData[currentNumber - 1].imgurl} alt=""/>
+                    <img src={currentNumber <= 0 ? '' : indexData[currentNumber - 1].imgurl} alt=""/>
                 </div>
             </div>
             <div className="canvas-box" ref="canvasBox">
@@ -211,11 +211,11 @@ export default class extends React.Component {
             </div>
             <div className="canvas-switch canvas-bottom" onClick={self.nextFont.bind(self)}>
                 <div className="canvas-text">
-                    <div>{currentNumber === allNumber ? '' : indexData[currentNumber + 1].pinyin}</div>
-                    <div>{currentNumber === allNumber ? '' : indexData[currentNumber + 1].chinese}</div>
+                    <div>{currentNumber >= allNumber ? '' : indexData[currentNumber + 1].pinyin}</div>
+                    <div>{currentNumber >= allNumber ? '' : indexData[currentNumber + 1].chinese}</div>
                 </div>
                 <div className="canvas-images">
-                    <img src={currentNumber === allNumber ? '' : indexData[currentNumber + 1].imgurl} alt=""/>
+                    <img src={currentNumber >= allNumber ? '' : indexData[currentNumber + 1].imgurl} alt=""/>
                 </div>
                 <div className="canvas-bottom-icon about-current iconfont icon-i1"
                      onClick={self.pageLeftSwitch.bind(self, self.state.aboutCurrent)}/>
