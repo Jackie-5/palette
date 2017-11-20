@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react'
-import { ListView } from 'antd-mobile';
+import { ListView, Button } from 'antd-mobile';
 
 const MyBody = (props) => {
     return <div className="pen-color-body">
@@ -60,7 +60,7 @@ export default class extends Component {
         const row = (rowData, sectionID, rowID) => {
             return (
                 <div className="pen-color-body__color__list-box" key={rowID}>
-                    <div onClick={self.changePenColor.bind(self, rowID)} className="pen-color-body__color__list-box__li" style={{backgroundColor: self.state.penColorState.color[rowID].value}} />
+                    <div onClick={self.changePenColor.bind(self, rowID, 'color')} className="pen-color-body__color__list-box__li" style={{backgroundColor: self.state.penColorState.color[rowID].value}} />
                 </div>
             );
         };
@@ -80,12 +80,18 @@ export default class extends Component {
                         self.state.penColorState.penSize.map((item, i)=><div
                             key={i}
                             className={item.active ? 'pen-page-box__pen__box__pen-size pen-page-box__pen__box__pen-size-active': 'pen-page-box__pen__box__pen-size'}
-                            onClick={self.changePenSize.bind(self, item.size, i)}>
+                            onClick={self.changePenColor.bind(self, i, 'pen')}>
                             <div className="pen-page-box__pen__box__pen-size__border">
                                 {item.value}
                             </div>
                         </div>)
                     }
+                    <div className="pen-page-box__pen__box__enter">
+                        <Button className="pen-page-box__pen__box__enter__btn" type="ghost" size="small"
+                                onClick={self.pageLeftSwitch.bind(self, self.state.leftIcon[0], {pen: {}})}
+                                inline
+                        >提交</Button>
+                    </div>
 
                 </div>
             </div>

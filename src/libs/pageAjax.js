@@ -12,4 +12,7 @@ export default {
     BespeakGetList: '/Api/Bespeak/GetList',
     InfoAbout: '/Api/Info/About',
     LectionGetWordList: '/Api/Lection/GetWordList',
+    UserLectionWorksIsOver: '/Api/UserLection/WorksIsOver',
+    UserLectionAddWorks: '/Api/UserLection/AddWorks',
+    UserUpdateState: '/Api/User/UpdateState',
 }

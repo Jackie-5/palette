@@ -1,7 +1,7 @@
 @penColor: #996633;
 .pen-page-box{
     .pen-color-box{
-        height:80%;
+        height:75%;
         border-bottom:1px solid @ccc;
         .pen-color-body{
             height:100%;
@@ -27,7 +27,7 @@
         display: flex;
         justify-content:center;
         align-items:Center;
-        height:20%;
+        height:25%;
         &__box{
             font-size: 30px;
             color:@penColor;
@@ -47,6 +47,20 @@
             &__pen-size-active{
                 border:2px solid @penColor;
                 font-weight: bold;
+            }
+            &__enter{
+                margin-top: 100px;
+                text-align: center;
+                .am-button-ghost{
+                    width: 180px;
+                    color: @penColor;
+                    border: 1px solid @penColor;
+                }
+                .am-button-active {
+                    color: #fff;
+                    background: @penColor!important;
+                    border: 1px solid @penColor!important;
+                }
             }
         }
     }

@@ -6,17 +6,25 @@ import { Toast } from 'antd-mobile';
 import URI from 'urijs';
 
 
-export default (url, params = {}, method = 'get' ) =>
+export default (options = {
+    loading: true,
+}) =>
     new Promise((resolve, reject) => {
         const hostname = new URI(location.href).hostname();
+        if(options.loading){
+            Toast.loading('数据加载中',1000);
+        }
         // 当在本地的时候 默认全部等于get请求，方便本地调试
         if (hostname === 'localhost') {
-            method = 'get';
+            options.method = 'get';
         }
-        const getAndPost = method === 'get' ? axios.get(url, { params: params }) : axios.post(url, params);
+        const getAndPost = options.method === 'get' ? axios.get(options.url, { params: options.params }) : axios.post(options.url, params);
         getAndPost.then((data) => {
             if(data.data.code === 0){
                 resolve(data.data);
+                if(options.loading){
+                    Toast.hide();
+                }
             } else {
                 if(data.data.code === 100){
                     location.href = data.data.msg;

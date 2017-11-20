@@ -63,7 +63,9 @@ export default class extends Component {
         const self = this.props.self;
         const state = self.state;
         // simulate initial Ajax
-        axios(pageAjax.musicGetList)
+        axios({
+            url: pageAjax.musicGetList,
+        })
             .then((data) => {
                 state.musicList = data.data;
                 this.genData();

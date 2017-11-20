@@ -2,7 +2,7 @@
  * Created by Jackie.Wu on 2017/10/25.
  */
 import React, {Component} from 'react'
-import { ListView, List } from 'antd-mobile';
+import { ListView, List, Toast } from 'antd-mobile';
 import axios from '../../../libs/axios';
 import pageAjax from '../../../libs/pageAjax';
 
@@ -61,7 +61,7 @@ export default class extends Component {
         const self = this.props.self;
         const state = self.state;
         // simulate initial Ajax
-        axios(pageAjax.lectionGetList)
+        axios({url : pageAjax.lectionGetList})
             .then((data) => {
                 state.tieList = data.data;
                 this.genData();
@@ -84,7 +84,7 @@ export default class extends Component {
                         state.tieList.map((item, i) => {
                             return <Item
                                 key={i}
-                                onClick={self.pageLeftSwitch.bind(self, self.state.leftIcon[1], {tie: item})}
+                                onClick={self.pageLeftSwitch.bind(self, self.state.leftIcon[0], {tie: item})}
                                 className="tie-body__row__title"
                                 multipleLine>
                                 <span>{item.lectionname}</span>
