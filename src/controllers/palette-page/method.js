@@ -57,9 +57,7 @@ export default class method extends React.Component {
         e.stopPropagation();
         e.preventDefault();
         const self = this;
-        const state = copy(self.state);
-
-        console.log(item);
+        const state = self.state;
 
         if (item.link === 'rubber') {
             if (state.pageSwitch['index']) {
@@ -119,7 +117,6 @@ export default class method extends React.Component {
     }
 
     onAnimateEnd({ key, type }) {
-        console.log(key, type);
         if (key === 'index' && type === 'enter') {
             this.canvasMethod.initCanvas();
         }
@@ -163,7 +160,7 @@ export default class method extends React.Component {
 
     nextFont() {
         const self = this;
-        const state = this.state;
+        const state = copy(this.state);
         if (state.indexState.currentNumber < state.indexState.allNumber) {
             state.indexState.currentNumber += 1;
             this.clearCanvas();
@@ -174,7 +171,7 @@ export default class method extends React.Component {
     }
 
     changePenColor(index, type) {
-        const state = this.state;
+        const state = copy(this.state);
         if (type === 'pen') {
             state.penColorState.penSize.map((item, i) => {
                 item.active = index === i;
