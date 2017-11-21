@@ -60,42 +60,47 @@ export default class extends Component {
         const row = (rowData, sectionID, rowID) => {
             return (
                 <div className="pen-color-body__color__list-box" key={rowID}>
-                    <div onClick={self.changePenColor.bind(self, rowID, 'color')} className="pen-color-body__color__list-box__li" style={{backgroundColor: self.state.penColorState.color[rowID].value}} />
+                    <div style={{ border: self.state.penColorState.color[rowID].active ? '1px solid ' + self.state.penColorState.color[rowID].value : '1px solid transparent' }}>
+                        <div onClick={self.changePenColor.bind(self, rowID, 'color')}
+                             className="pen-color-body__color__list-box__li"
+                             style={{ backgroundColor: self.state.penColorState.color[rowID].value }}/>
+                    </div>
                 </div>
+
             );
         };
         return (
-        <div style={{height:'100%'}} className="pen-page-box">
-            <ListView ref="lv"
-                      dataSource={this.state.dataSource}
-                      renderBodyComponent={() => <MyBody />}
-                      renderRow={row}
-                      className="pen-color-box"
-                      contentContainerStyle={{ height: '100%' }}
-            />
-            <div className="pen-page-box__pen">
-                <div className="pen-page-box__pen__box">
-                    <div className="iconfont pen-page-box__pen__box__pen-icon icon-maobi" />
-                    {
-                        self.state.penColorState.penSize.map((item, i)=><div
-                            key={i}
-                            className={item.active ? 'pen-page-box__pen__box__pen-size pen-page-box__pen__box__pen-size-active': 'pen-page-box__pen__box__pen-size'}
-                            onClick={self.changePenColor.bind(self, i, 'pen')}>
-                            <div className="pen-page-box__pen__box__pen-size__border">
-                                {item.value}
-                            </div>
-                        </div>)
-                    }
-                    <div className="pen-page-box__pen__box__enter">
-                        <Button className="pen-page-box__pen__box__enter__btn" type="ghost" size="small"
-                                onClick={self.pageLeftSwitch.bind(self, self.state.leftIcon[0], {pen: {}})}
-                                inline
-                        >提交</Button>
-                    </div>
+            <div style={{ height: '100%' }} className="pen-page-box">
+                <ListView ref="lv"
+                          dataSource={this.state.dataSource}
+                          renderBodyComponent={() => <MyBody />}
+                          renderRow={row}
+                          className="pen-color-box"
+                          contentContainerStyle={{ height: '100%' }}
+                />
+                <div className="pen-page-box__pen">
+                    <div className="pen-page-box__pen__box">
+                        <div className="iconfont pen-page-box__pen__box__pen-icon icon-maobi"/>
+                        {
+                            self.state.penColorState.penSize.map((item, i) => <div
+                                key={i}
+                                className={item.active ? 'pen-page-box__pen__box__pen-size pen-page-box__pen__box__pen-size-active' : 'pen-page-box__pen__box__pen-size'}
+                                onClick={self.changePenColor.bind(self, i, 'pen')}>
+                                <div className="pen-page-box__pen__box__pen-size__border">
+                                    {item.value}
+                                </div>
+                            </div>)
+                        }
+                        <div className="pen-page-box__pen__box__enter">
+                            <Button className="pen-page-box__pen__box__enter__btn" type="ghost" size="small"
+                                    onClick={self.pageLeftSwitch.bind(self, self.state.leftIcon[0], { pen: {} })}
+                                    inline
+                            >提交</Button>
+                        </div>
 
+                    </div>
                 </div>
             </div>
-        </div>
         );
     }
 }

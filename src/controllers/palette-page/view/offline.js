@@ -50,7 +50,9 @@ export default class extends Component {
     componentDidMount() {
         const self = this.props.self;
         const state = self.state;
-        axios(pageAjax.BespeakGetList)
+        axios({
+            url: pageAjax.BespeakGetList,
+        })
             .then((data) => {
                 state.offlineState = data.data;
                 this.genData();

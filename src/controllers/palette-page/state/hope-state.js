@@ -4,37 +4,14 @@
 export default {
     input: [
         {
-            placeholder: '您的姓名'
+            placeholder: '您的姓名',
+            key: 'bh_prayman',
         },
         {
-            placeholder: '为谁祈福'
+            placeholder: '为谁祈福',
+            key: 'bh_prayother',
         },
     ],
-    species:[
-        {
-            value: '金榜题名',
-            key: '',
-            active: true,
-        },{
-            value: '金榜题名',
-            key: '',
-            active: false,
-        },{
-            value: '金榜题名',
-            key: '',
-            active: false,
-        },{
-            value: '金榜题名',
-            key: '',
-            active: false,
-        },{
-            value: '金榜题名',
-            key: '',
-            active: false,
-        },{
-            value: '金榜题名',
-            key: '',
-            active: false,
-        },
-    ]
+    species: [],
+    param: {}
 }

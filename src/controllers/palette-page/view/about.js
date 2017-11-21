@@ -51,8 +51,11 @@ export default class extends Component {
         // simulate initial Ajax
         const self = this.props.self;
         const state = self.state;
-        axios(pageAjax.lectionDetail, {
-            B_id: state.defaultPage.b_id
+        axios({
+            url:pageAjax.lectionDetail,
+            param: {
+                B_id: state.defaultPage.b_id
+            }
         })
             .then((data) => {
                 state.aboutArticle = data.data;
