@@ -184,8 +184,7 @@ export default class method extends React.Component {
                 item.active = index === i
             });
         }
-
-        //this.setState(state);
+        this.setState(state);
         //this.initCanvas();
     }
 };
