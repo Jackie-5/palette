@@ -49,7 +49,7 @@ class App extends method {
             <div className="palette-page-box">
                 <PullLeft self={this}/>
                 <div className="page-content">
-                    <QueueAnim duration={300} appear={false} className="queue-simple"
+                    <QueueAnim appear={false} className="queue-simple"
                                onEnd={this.onAnimateEnd.bind(this)}>
                         {
                             pageSwitch(this.state.pageSwitch, this)

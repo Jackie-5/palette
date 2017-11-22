@@ -16,6 +16,7 @@ export default class method extends React.Component {
     constructor(props) {
         super(props);
         this.state = initState;
+        this.isInitCanvas = true;
     }
 
     async componentDidMount() {
@@ -57,7 +58,7 @@ export default class method extends React.Component {
         e.stopPropagation();
         e.preventDefault();
         const self = this;
-        const state = self.state;
+        const state = copy(self.state);
 
         if (item.link === 'rubber') {
             if (state.pageSwitch['index']) {
@@ -117,8 +118,8 @@ export default class method extends React.Component {
     }
 
     onAnimateEnd({ key, type }) {
-        if (key === 'index' && type === 'enter') {
-            this.canvasMethod.initCanvas();
+        if (key === 'index' && type === 'enter' && this.isInitCanvas) {
+            this.initCanvas();
         }
     }
 
@@ -128,11 +129,16 @@ export default class method extends React.Component {
 
     async initCanvas(options) {
         const self = this;
-        const state = this.state;
+        const state = copy(this.state);
+        this.isInitCanvas = false;
         const data = await axiosAll.all([
             axios({ url: pageAjax.userLectionMyDetail }),
             axios({ url: pageAjax.LectionGetWordList })
         ]);
+
+        setTimeout(()=>{
+            this.isInitCanvas = true;
+        },500)
 
         state.defaultPage = data[0].data;
 
@@ -140,6 +146,7 @@ export default class method extends React.Component {
         state.indexState.allNumber = data[1].data.length - 1;
         state.indexState.indexData = data[1].data;
         self.setState(state);
+        this.canvasMethod.initCanvas();
     }
 
     clearCanvas() {
@@ -148,11 +155,13 @@ export default class method extends React.Component {
 
     prevFont() {
         const self = this;
-        const state = this.state;
+        const state = copy(this.state);
         if (state.indexState.currentNumber > 0) {
             state.indexState.currentNumber -= 1;
             this.clearCanvas();
-            self.setState(state);
+            self.setState({
+                indexState : state.indexState
+            });
         } else {
             Toast.info(state.indexState.prevToast, 2)
         }
@@ -164,7 +173,9 @@ export default class method extends React.Component {
         if (state.indexState.currentNumber < state.indexState.allNumber) {
             state.indexState.currentNumber += 1;
             this.clearCanvas();
-            self.setState(state);
+            self.setState({
+                indexState : state.indexState
+            });
         } else {
             Toast.info(state.indexState.nextToast, 2);
         }
