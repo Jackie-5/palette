@@ -55,7 +55,11 @@ export default class extends Component {
         const self = this.props.self;
         const state = self.state;
         // simulate initial Ajax
-        axiosAll.all([axios(pageAjax.UserBasic), axios(pageAjax.UserLectionMyWorks)])
+        axiosAll.all([axios({
+            url: pageAjax.UserBasic,
+        }), axios({
+            url:pageAjax.UserLectionMyWorks,
+        })])
             .then((data) => {
                 state.personState = {...data[0].data, list: data[1].data};
                 this.genData();
@@ -75,14 +79,19 @@ export default class extends Component {
             return (
                 <List key={rowID} className="person-color-body__row">
                     {
-                        personState.list.map((item)=>{
-                            return <Item onClick={() => {
-                            }} className="person-color-body__row__title" multipleLine>
+                        personState.list.length > 0 ? personState.list.map((item, i)=>{
+                            return <Item
+                                key={i}
+                                onClick={self.pageLeftSwitch.bind(self, self.state.leftIcon[5], {person: item})}
+                                className="person-color-body__row__title" multipleLine>
                                 <span>{item.lectionname}</span>
                                 <Brief>{item.lectiontime}</Brief>
                                 <i className="iconfont icon-yan person-color-body__row__title__icon" />
                             </Item>
-                        })
+                        }) : <Item
+                            className="person-color-body__row__notList" multipleLine>
+                            <span>您暂无作品哦~</span>
+                        </Item>
                     }
                 </List>
             );

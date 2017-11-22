@@ -3,7 +3,10 @@
  */
 
 import React, { Component } from 'react'
-import { ListView, InputItem, WhiteSpace, Button,TextareaItem } from 'antd-mobile';
+import { ListView, InputItem, WhiteSpace, Button, TextareaItem, Toast } from 'antd-mobile';
+import axios from '../../../libs/axios';
+import pageAjax from '../../../libs/pageAjax';
+import copy from 'clone';
 
 
 const MyBody = (props) => {
@@ -47,11 +50,65 @@ export default class extends Component {
 
     componentDidMount() {
         // simulate initial Ajax
-        this.genData();
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRowsAndSections(this.dataBlob, this.sectionIDs, this.rowIDs),
-            isLoading: false,
+        const self = this.props.self;
+        const state = self.state;
+        axios({
+            url: pageAjax.PrayTypeGetList,
+        }).then((data) => {
+            data.data.map((item, i) => {
+                item.active = i === 0;
+            });
+            state.hopeState.species = data.data;
+            this.genData();
+            this.setState({
+                dataSource: this.state.dataSource.cloneWithRowsAndSections(this.dataBlob, this.sectionIDs, this.rowIDs),
+                isLoading: false,
+            });
+            self.setState(state);
         });
+
+    }
+
+    speciesClick(item) {
+        const state = copy(this.state);
+        state.hopeState.species.map((it) => {
+            it.active = item.pt_id === it.pt_id;
+            if (it.active) {
+                state.hopeState.param.pt_id = it.pt_id;
+            }
+        });
+        this.setState(state);
+    }
+
+    inputBlur(key, v) {
+        const state = copy(this.state);
+        // 祈福人
+        state.hopeState.param[key] = v;
+        this.setState(state);
+    }
+
+    async enter() {
+        const state = copy(this.state);
+        console.log(state.hopeState.param.bh_wish);
+        state.hopeState.param.bh_id = state.defaultPage.bh_id;
+        if(!/^[A-Za-z0-9\u4e00-\u9fa5]+$/.test(state.hopeState.param.bh_prayman)
+            || !/^[A-Za-z0-9\u4e00-\u9fa5]+$/.test(state.hopeState.param.bh_prayother)
+            || !state.hopeState.param.bh_wish
+        ){
+            Toast.offline('请填写完整信息哦~');
+            return;
+        }
+
+        const data = await axios({
+            url: pageAjax.UserLectionUpdateWorks,
+            param: state.hopeState.param,
+        });
+        if(data.code === 0){
+            for (let i in state.pageSwitch) {
+                state.pageSwitch[i] = state.leftIcon[0].link === i;
+            }
+            this.setState(state);
+        }
     }
 
     render() {
@@ -60,44 +117,51 @@ export default class extends Component {
         const row = (rowData, sectionID, rowID) => {
             return (
                 <div className="hope-body__list-box" key={rowID}>
-                    <WhiteSpace size="xl" />
+                    <WhiteSpace size="xl"/>
                     {
-                        self.state.hopeState.input.map((item, i)=>{
+                        self.state.hopeState.input.map((item, i) => {
                             return <div className="hope-body__list-box__input" key={i}>
                                 <InputItem
                                     placeholder={item.placeholder}
                                     clear
-                                    onChange={(v) => { console.log('onChange', v); }}
-                                    onBlur={(v) => { console.log('onBlur', v); }}
+                                    onBlur={this.inputBlur.bind(self, item.key)}
                                 />
                             </div>
                         })
                     }
-                    <WhiteSpace size="xl" />
+                    <WhiteSpace size="xl"/>
                     <div className="hope-body__list-box__species-title">祈福种类</div>
                     <div className="hope-body__list-box__species-box">
                         {
-                            self.state.hopeState.species.map((item, i)=>{
+                            self.state.hopeState.species.map((item, i) => {
                                 return <Button
+                                    onClick={this.speciesClick.bind(self, item)}
                                     key={i}
                                     className={item.active ? 'hope-body__list-box__species-box__button am-button-active' : 'hope-body__list-box__species-box__button'}
-                                    type="ghost" size="small" inline>{item.value}</Button>
+                                    type="ghost" size="small" inline>{item.pt_name}</Button>
                             })
                         }
                     </div>
-                    <WhiteSpace size="xl" />
+                    <WhiteSpace size="xl"/>
                     <div className="hope-body__list-box__wish-title">心愿(可选填)</div>
-                    <WhiteSpace size="lg" />
+                    <WhiteSpace size="lg"/>
                     <TextareaItem
                         className="hope-body__list-box__textarea"
                         {...getFieldProps('note3')}
                         autoHeight
                         labelNumber={10}
                         rows={4}
+                        onBlur={this.inputBlur.bind(self, 'bh_wish')}
                     />
-                    <WhiteSpace size="xl" />
+                    <WhiteSpace size="xl"/>
                     <div className="hope-body__list-box__enter-box">
-                        <Button type="primary" size="small" className="hope-body__list-box__enter-box__btn" inline>开始抄经</Button>
+                        <Button type="primary" size="small" className="hope-body__list-box__enter-box__btn"
+                                style={{marginRight: '10px'}}
+                                onClick={self.pageLeftSwitch.bind(self, self.state.leftIcon[0])}
+                                inline>返回抄经</Button>
+                        <Button type="primary" size="small" className="hope-body__list-box__enter-box__btn"
+                                onClick={this.enter.bind(self)}
+                                inline>提交祈福</Button>
                     </div>
                 </div>
             );

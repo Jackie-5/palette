@@ -33,9 +33,8 @@ export default class method extends React.Component {
                 params: options
             });
             if (save.code === 0) {
-                Toast.info(save.msg, 1);
+                Toast.success(save.msg, 1);
                 this.setState(state);
-                this.initCanvas();
             }
         } else {
             const save = await axios({
@@ -43,13 +42,12 @@ export default class method extends React.Component {
                 method: 'post',
                 params: options
             });
-            if(save.code === 0){
-                Toast.info(save.msg, 1);
-                for (let i in options){
+            if (save.code === 0) {
+                Toast.success(save.msg, 1);
+                for (let i in options) {
                     state.defaultPage[i] = options[i]
                 }
                 this.setState(state);
-                this.initCanvas();
             }
         }
     }
@@ -57,16 +55,15 @@ export default class method extends React.Component {
 
     async pageLeftSwitch(item, options = {}, e) {
         e.stopPropagation();
+        e.preventDefault();
         const self = this;
-        const state = copy(self.state);
-
+        const state = self.state;
 
         if (item.link === 'rubber') {
             if (state.pageSwitch['index']) {
                 self.clearCanvas();
             }
         } else {
-            let isTrue = false;
             if (!state.pageSwitch[item.link]) {
                 document.title = item.title;
                 for (let i in state.pageSwitch) {
@@ -97,13 +94,22 @@ export default class method extends React.Component {
                         }, state);
                     }
                 } else if (options.music) {
-                    self.saveUpdate('update',{
+                    self.saveUpdate('update', {
                         m_id: options.music.m_id,
                     }, state);
                 } else if (options.pen) {
-                    console.log('asdfa');
+                    self.saveUpdate('update', {
+                        fontsize: state.defaultPage.fontsize,
+                        color: state.defaultPage.color,
+                    }, state);
+                } else if (options.person) {
+
+                } else if (options.offline) {
+                    state.offlineMakeState.param.bs_id = options.offline.bs_id;
+                    state.offlineMakeState.title = options.offline.bs_name;
+                    self.setState(state);
                 } else {
-                    this.setState(state)
+                    self.setState(state)
                 }
 
             }
@@ -111,7 +117,9 @@ export default class method extends React.Component {
     }
 
     onAnimateEnd({ key, type }) {
-        //console.log(key, type)
+        if (key === 'index' && type === 'enter') {
+            this.canvasMethod.initCanvas();
+        }
     }
 
     subCanvas(self) {
@@ -127,21 +135,11 @@ export default class method extends React.Component {
         ]);
 
         state.defaultPage = data[0].data;
-        // 字的颜色
-        state.penColorState.penSize.map((item, i) => {
-            item.active = state.defaultPage.color === item;
-        });
-        // 字体大小
-        state.penColorState.color.map((item, i) => {
-            item.active = index === i
-        });
 
         state.indexState.currentNumber = data[0].data.position - 1;
         state.indexState.allNumber = data[1].data.length - 1;
         state.indexState.indexData = data[1].data;
         self.setState(state);
-
-        this.canvasMethod.initCanvas();
     }
 
     clearCanvas() {
@@ -162,8 +160,7 @@ export default class method extends React.Component {
 
     nextFont() {
         const self = this;
-        const state = this.state;
-        console.log(state.indexState.currentNumber < state.indexState.allNumber);
+        const state = copy(this.state);
         if (state.indexState.currentNumber < state.indexState.allNumber) {
             state.indexState.currentNumber += 1;
             this.clearCanvas();
@@ -174,17 +171,19 @@ export default class method extends React.Component {
     }
 
     changePenColor(index, type) {
-        const state = this.state;
-        if(type === 'pen'){
+        const state = copy(this.state);
+        if (type === 'pen') {
             state.penColorState.penSize.map((item, i) => {
                 item.active = index === i;
+                if (item.active) (state.defaultPage.fontsize = item.size)
             });
+
         } else {
             state.penColorState.color.map((item, i) => {
-                item.active = index === i
+                item.active = index === i;
+                if (item.active) (state.defaultPage.color = item.value)
             });
         }
         this.setState(state);
-        //this.initCanvas();
     }
 };

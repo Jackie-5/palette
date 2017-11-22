@@ -15,4 +15,7 @@ export default {
     UserLectionWorksIsOver: '/Api/UserLection/WorksIsOver',
     UserLectionAddWorks: '/Api/UserLection/AddWorks',
     UserUpdateState: '/Api/User/UpdateState',
+    BespeakEnrol: '/Api/Bespeak/Enrol',
+    PrayTypeGetList: '/Api/PrayType/GetList',
+    UserLectionUpdateWorks: '/Api/UserLection/UpdateWorks',
 }

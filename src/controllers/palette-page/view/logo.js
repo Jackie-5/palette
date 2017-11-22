@@ -50,7 +50,9 @@ export default class extends Component {
     componentDidMount() {
         const self = this.props.self;
         const state  = self.state;
-        axios(pageAjax.InfoAbout)
+        axios({
+            url: pageAjax.InfoAbout,
+        })
             .then((data)=>{
                 state.logoState = data.data;
                 this.genData();

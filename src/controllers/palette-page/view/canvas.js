@@ -39,7 +39,8 @@ export default class extends React.Component {
 
     canvasTouchStart(e) {
         const self = this;
-        const x = e.touches[0].pageX - this.canvasPos.left + (document.querySelector('.page-left-function').offsetWidth / 2);
+        //const x = e.touches[0].pageX - this.canvasPos.left + (document.querySelector('.page-left-function').offsetWidth / 2);
+        const x = e.touches[0].pageX - this.canvasPos.left;
         const y = e.touches[0].pageY - this.canvasPos.top;
 
         self.stroke = {
@@ -90,7 +91,8 @@ export default class extends React.Component {
 
     canvasTouchMove(e) {
         const self = this;
-        const x = e.touches[0].pageX - this.canvasPos.left + (document.querySelector('.page-left-function').offsetWidth / 2);
+        //const x = e.touches[0].pageX - this.canvasPos.left + (document.querySelector('.page-left-function').offsetWidth / 2);
+        const x = e.touches[0].pageX - this.canvasPos.left;
         const y = e.touches[0].pageY - this.canvasPos.top;
         this.stroke.d.push(
             {
@@ -217,11 +219,11 @@ export default class extends React.Component {
                 <div className="canvas-images">
                     <img src={currentNumber >= allNumber ? '' : indexData[currentNumber + 1].imgurl} alt=""/>
                 </div>
-                <div className="canvas-bottom-icon about-current iconfont icon-i1"
-                     onClick={self.pageLeftSwitch.bind(self, self.state.aboutCurrent)}/>
-                <div className="canvas-bottom-icon hope-icon iconfont icon-wodeqifu"
-                     onClick={self.pageLeftSwitch.bind(self, self.state.hope)}/>
             </div>
+            <div className="canvas-bottom-icon about-current iconfont icon-i1"
+                 onClick={self.pageLeftSwitch.bind(self, self.state.aboutCurrent)}/>
+            <div className="canvas-bottom-icon hope-icon iconfont icon-wodeqifu"
+                 onClick={self.pageLeftSwitch.bind(self, self.state.hope)}/>
         </div>
     }
 }
