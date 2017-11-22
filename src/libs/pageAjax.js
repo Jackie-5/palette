@@ -18,4 +18,5 @@ export default {
     BespeakEnrol: '/Api/Bespeak/Enrol',
     PrayTypeGetList: '/Api/PrayType/GetList',
     UserLectionUpdateWorks: '/Api/UserLection/UpdateWorks',
+    UserLectionUploadImg: '/Api/UserLection/UploadImg',
 }

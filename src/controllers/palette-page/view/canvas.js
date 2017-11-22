@@ -11,6 +11,7 @@ export default class extends React.Component {
         this.state = {
             music: true
         };
+        this.beginWrite = false;
     }
 
     componentDidMount() {
@@ -19,6 +20,7 @@ export default class extends React.Component {
 
     initCanvas(options = {}) {
         const self = this.props.self;
+        this.beginWrite = false;
         try {
             this.refs.writeCanvas.width = this.refs.canvasBox.offsetWidth;
             this.refs.writeCanvas.height = this.refs.canvasBox.offsetHeight;
@@ -59,6 +61,7 @@ export default class extends React.Component {
     }
 
     canvasTouchMoveBegin(x, y) {
+        this.beginWrite = true;
         this.writeCtx.save();
         this.writeCtx.moveTo(x, y);
         this.preDot = null;
@@ -172,7 +175,7 @@ export default class extends React.Component {
         this.bgCtx.clearRect(0, 0, this.refs.writeCanvas.width, this.refs.writeCanvas.height);
     }
 
-    stopAndPlayMusic(e) {
+    stopAndPlayMusic(self,e) {
         e.stopPropagation();
         this.setState({
             music: !this.state.music
@@ -191,7 +194,7 @@ export default class extends React.Component {
                 <div
                     className="canvas-number">{ currentNumber + 1 }/{ allNumber + 1 }</div>
                 <div className="canvas-top-icon iconfont icon-TMS_yinlefuhao"
-                     onClick={this.stopAndPlayMusic.bind(this)}>
+                     onClick={this.stopAndPlayMusic.bind(this, self)}>
                     <div className={this.state.music ? '' : 'canvas-top-icon-stop iconfont icon-jinzhi'}/>
                 </div>
                 <div className="canvas-images">

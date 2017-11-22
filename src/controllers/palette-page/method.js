@@ -59,6 +59,7 @@ export default class method extends React.Component {
         e.preventDefault();
         const self = this;
         const state = copy(self.state);
+        this.isInitCanvas = false;
 
         if (item.link === 'rubber') {
             if (state.pageSwitch['index']) {
@@ -112,14 +113,17 @@ export default class method extends React.Component {
                 } else {
                     self.setState(state)
                 }
-
             }
         }
     }
 
     onAnimateEnd({ key, type }) {
-        if (key === 'index' && type === 'enter' && this.isInitCanvas) {
-            this.initCanvas();
+        if (key === 'index' && type === 'enter') {
+            if(this.isInitCanvas){
+                this.canvasMethod.initCanvas();
+            } else {
+                this.initCanvas()
+            }
         }
     }
 
@@ -127,18 +131,16 @@ export default class method extends React.Component {
         this.canvasMethod = self;
     }
 
-    async initCanvas(options) {
+    async initCanvas() {
         const self = this;
         const state = copy(this.state);
-        this.isInitCanvas = false;
         const data = await axiosAll.all([
             axios({ url: pageAjax.userLectionMyDetail }),
             axios({ url: pageAjax.LectionGetWordList })
         ]);
-
-        setTimeout(()=>{
-            this.isInitCanvas = true;
-        },500)
+        //setTimeout(()=>{
+        //    this.isInitCanvas = true;
+        //},500);
 
         state.defaultPage = data[0].data;
 
@@ -159,9 +161,7 @@ export default class method extends React.Component {
         if (state.indexState.currentNumber > 0) {
             state.indexState.currentNumber -= 1;
             this.clearCanvas();
-            self.setState({
-                indexState : state.indexState
-            });
+            self.setState(state);
         } else {
             Toast.info(state.indexState.prevToast, 2)
         }
@@ -170,12 +170,11 @@ export default class method extends React.Component {
     nextFont() {
         const self = this;
         const state = copy(this.state);
+        console.log(this.canvasMethod.beginWrite);
         if (state.indexState.currentNumber < state.indexState.allNumber) {
             state.indexState.currentNumber += 1;
             this.clearCanvas();
-            self.setState({
-                indexState : state.indexState
-            });
+            self.setState(state);
         } else {
             Toast.info(state.indexState.nextToast, 2);
         }
@@ -195,7 +194,6 @@ export default class method extends React.Component {
                 if (item.active) (state.defaultPage.color = item.value)
             });
         }
-
         this.setState(state);
     }
 };
