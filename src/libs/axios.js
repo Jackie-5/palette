@@ -11,7 +11,7 @@ export default (options = {
 }) =>
     new Promise((resolve, reject) => {
         const hostname = new URI(location.href).hostname();
-        if(options.loading){
+        if(!options.loading){
             Toast.loading('数据加载中',1000);
         }
         // 当在本地的时候 默认全部等于get请求，方便本地调试
@@ -22,7 +22,7 @@ export default (options = {
         getAndPost.then((data) => {
             if(data.data.code === 0){
                 resolve(data.data);
-                if(options.loading){
+                if(!options.loading){
                     Toast.hide();
                 }
             } else {

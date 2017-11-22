@@ -118,7 +118,7 @@ export default class method extends React.Component {
 
     onAnimateEnd({ key, type }) {
         if (key === 'index' && type === 'enter') {
-            this.canvasMethod.initCanvas();
+            this.initCanvas();
         }
     }
 
@@ -140,6 +140,7 @@ export default class method extends React.Component {
         state.indexState.allNumber = data[1].data.length - 1;
         state.indexState.indexData = data[1].data;
         self.setState(state);
+        this.canvasMethod.initCanvas();
     }
 
     clearCanvas() {
