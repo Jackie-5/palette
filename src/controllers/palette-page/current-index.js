@@ -10,7 +10,6 @@ import '../../less/main.less';
 import './page-less.less';
 import PullLeft from './view/pull-left';
 import QueueAnim from 'rc-queue-anim';
-import { Media, Player } from 'react-media-player';
 
 import CanvasIndex from './view/canvas';
 import Tie from './view/tie-list';
@@ -57,14 +56,6 @@ class App extends method {
                         }
                     </QueueAnim>
                 </div>
-                <Media>
-                    <Player
-                        ref={c => this._player = c}
-                        src={this.state.defaultPage.musicurl}
-                        autoPlay
-                        onPause={()=>{}}
-                    />
-                </Media>
             </div>
         );
     }

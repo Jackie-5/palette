@@ -175,8 +175,14 @@ export default class extends React.Component {
         this.bgCtx.clearRect(0, 0, this.refs.writeCanvas.width, this.refs.writeCanvas.height);
     }
 
-    stopAndPlayMusic(self,e) {
-        e.stopPropagation();
+
+    stopAndPlayMusic(self, e) {
+        e && e.stopPropagation();
+        if (!this.state.music) {
+            this.refs.audio.play()
+        } else {
+
+        }
         this.setState({
             music: !this.state.music
         })
@@ -227,6 +233,12 @@ export default class extends React.Component {
                  onClick={self.pageLeftSwitch.bind(self, self.state.aboutCurrent)}/>
             <div className="canvas-bottom-icon hope-icon iconfont icon-wodeqifu"
                  onClick={self.pageLeftSwitch.bind(self, self.state.hope)}/>
+
+            <audio
+                ref="audio"
+                src={self.state.defaultPage.musicurl}
+                onCanPlay={() => this.state.music && this.refs.audio.play()}
+            />
         </div>
     }
 }
