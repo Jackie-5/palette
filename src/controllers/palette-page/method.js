@@ -17,12 +17,46 @@ export default class method extends React.Component {
         super(props);
         this.state = initState;
         this.isInitCanvas = true;
+        this.canvasNextArr = [];
     }
 
     async componentDidMount() {
         // 进入页面 set 默认值
         await axios({ url: pageAjax.LoginPower });
-        this.initCanvas();
+        const wxConfig = await axios({ url: pageAjax.ShareGetParm });
+        wx.config({
+            debug: true,
+            appId: wxConfig.data.appId,
+            timestamp: wxConfig.data.timestamp,
+            nonceStr: wxConfig.data.nonceStr,
+            signature: wxConfig.data.signature,
+            jsApiList: [
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareWeibo',
+                'onMenuShareQZone',
+                'startRecord',
+                'stopRecord',
+                'onVoiceRecordEnd',
+                'chooseImage',
+                'previewImage',
+                'uploadImage',
+                'downloadImage',
+                'openLocation',
+                'getLocation',
+                'hideOptionMenu',
+                'showOptionMenu',
+                'hideMenuItems',
+                'showMenuItems',
+                'closeWindow',
+                'scanQRCode',
+            ],
+        });
+
+        wx.ready(()=>{
+            this.initCanvas();
+        });
     }
 
     async saveUpdate(type, options = {}, state) {
@@ -119,10 +153,10 @@ export default class method extends React.Component {
 
     onAnimateEnd({ key, type }) {
         if (key === 'index' && type === 'enter') {
-            if(this.isInitCanvas){
+            if (this.isInitCanvas) {
                 this.canvasMethod.initCanvas();
             } else {
-                this.initCanvas()
+                this.initCanvas();
             }
         }
     }
@@ -170,14 +204,40 @@ export default class method extends React.Component {
     nextFont() {
         const self = this;
         const state = copy(this.state);
-        console.log(this.canvasMethod.beginWrite);
-        if (state.indexState.currentNumber < state.indexState.allNumber) {
-            state.indexState.currentNumber += 1;
-            this.clearCanvas();
-            self.setState(state);
+        //console.log(this.canvasMethod.canvasToBase());
+        if (this.canvasMethod.beginWrite) {
+            if (state.indexState.currentNumber < state.indexState.allNumber) {
+                setTimeout(() => {
+                    state.indexState.currentNumber += 1;
+                    //console.log(state.indexState.indexData[state.indexState.currentNumber - 1]);
+                    self.clearCanvas();
+                    if (self.canvasNextArr.length < state.nextNumberAjax) {
+                        self.canvasNextArr.push({
+                            w_id: state.indexState.indexData[state.indexState.currentNumber - 1].w_id,
+                            baseImg: this.canvasMethod.canvasToBase()
+                        })
+                    }
+                    if (self.canvasNextArr.length >= state.nextNumberAjax) {
+                        axios({
+                            url: pageAjax.UserLectionUploadImg,
+                            method: 'post',
+                            params: {
+                                bh_id: state.defaultPage.bh_id,
+                                imgdata: self.canvasNextArr
+                            },
+
+                        });
+                        self.canvasNextArr = [];
+                    }
+                    self.setState(state);
+                }, 200);
+            } else {
+                Toast.info(state.indexState.nextToast, 2);
+            }
         } else {
-            Toast.info(state.indexState.nextToast, 2);
+            Toast.info('请把字写好', 2);
         }
+
     }
 
     changePenColor(index, type) {

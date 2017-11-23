@@ -2,15 +2,11 @@
  * Created by Jackie.Wu on 2017/10/24.
  */
 import React from 'react';
-import axios from '../../../libs/axios';
-import pageAjax from '../../../libs/pageAjax';
+import copy from 'clone';
 
 export default class extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            music: true
-        };
         this.beginWrite = false;
     }
 
@@ -171,21 +167,28 @@ export default class extends React.Component {
     }
 
     clearCanvas() {
+        this.beginWrite = false;
         this.writeCtx.clearRect(0, 0, this.refs.writeCanvas.width, this.refs.writeCanvas.height);
         this.bgCtx.clearRect(0, 0, this.refs.writeCanvas.width, this.refs.writeCanvas.height);
     }
 
+    canvasToBase() {
+        var image = new Image();
+        this.writeCtx.drawImage(image, 0, 0, this.refs.writeCanvas.width, this.refs.writeCanvas.height);
+        return this.refs.writeCanvas.toDataURL("image/png");
+    }
 
-    stopAndPlayMusic(self, e) {
+
+    stopAndPlayMusic(e) {
         e && e.stopPropagation();
-        if (!this.state.music) {
+        const state = copy(this.state);
+        state.isMusic = !state.isMusic;
+        if (state.isMusic) {
             this.refs.audio.play()
         } else {
-
+            this.refs.audio.pause()
         }
-        this.setState({
-            music: !this.state.music
-        })
+        this.setState(state)
     }
 
     render() {
@@ -200,8 +203,8 @@ export default class extends React.Component {
                 <div
                     className="canvas-number">{ currentNumber + 1 }/{ allNumber + 1 }</div>
                 <div className="canvas-top-icon iconfont icon-TMS_yinlefuhao"
-                     onClick={this.stopAndPlayMusic.bind(this, self)}>
-                    <div className={this.state.music ? '' : 'canvas-top-icon-stop iconfont icon-jinzhi'}/>
+                     onClick={this.stopAndPlayMusic.bind(self)}>
+                    <div className={self.state.isMusic ? '' : 'canvas-top-icon-stop iconfont icon-jinzhi'}/>
                 </div>
                 <div className="canvas-images">
                     <img src={currentNumber <= 0 ? '' : indexData[currentNumber - 1].imgurl} alt=""/>
@@ -233,12 +236,6 @@ export default class extends React.Component {
                  onClick={self.pageLeftSwitch.bind(self, self.state.aboutCurrent)}/>
             <div className="canvas-bottom-icon hope-icon iconfont icon-wodeqifu"
                  onClick={self.pageLeftSwitch.bind(self, self.state.hope)}/>
-
-            <audio
-                ref="audio"
-                src={self.state.defaultPage.musicurl}
-                onCanPlay={() => this.state.music && this.refs.audio.play()}
-            />
         </div>
     }
 }

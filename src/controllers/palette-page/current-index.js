@@ -56,6 +56,11 @@ class App extends method {
                         }
                     </QueueAnim>
                 </div>
+                <audio
+                    ref="audio"
+                    src={this.state.defaultPage.musicurl}
+                    onCanPlay={() => this.state.isMusic && this.refs.audio.play()}
+                />
             </div>
         );
     }

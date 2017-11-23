@@ -9,6 +9,8 @@ import offlineMake from './state/offline-make';
 
 export default {
     defaultPage: {},
+    isMusic: false,
+    nextNumberAjax: 3,
     leftIcon: [
         {
             icon: 'icon-maobi',

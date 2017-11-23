@@ -1,0 +1,10 @@
+{
+    "data": {
+        "appId": "wx808edacc432ba51d",
+        "timestamp": "1511340280",
+        "nonceStr": "gemmy933W",
+        "signature": "1eec7e05f40e811e688b7f23255aeb87f5c72284"
+    },
+    "code": 0,
+    "msg": null
+}

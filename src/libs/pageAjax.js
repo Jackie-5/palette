@@ -19,4 +19,5 @@ export default {
     PrayTypeGetList: '/Api/PrayType/GetList',
     UserLectionUpdateWorks: '/Api/UserLection/UpdateWorks',
     UserLectionUploadImg: '/Api/UserLection/UploadImg',
+    ShareGetParm: '/Api/Share/GetParm',
 }
