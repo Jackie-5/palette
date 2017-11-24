@@ -33,9 +33,6 @@ export default class method extends React.Component {
             jsApiList: [
                 'onMenuShareTimeline',
                 'onMenuShareAppMessage',
-                'onMenuShareQQ',
-                'onMenuShareWeibo',
-                'onMenuShareQZone',
                 'startRecord',
                 'stopRecord',
                 'onVoiceRecordEnd',
@@ -108,6 +105,7 @@ export default class method extends React.Component {
                 // 如果是从各个页面点回到首页的那么做页面处理
                 if (options.tie) {
                     // 先查看用户是否可以保存作品
+                    // TODO 这里逻辑 看一下
                     const isSave = await axiosAll.get(pageAjax.UserLectionWorksIsOver);
                     if (isSave.data.code !== 0) {
                         alert('提示', isSave.data.msg, [
@@ -139,11 +137,67 @@ export default class method extends React.Component {
                         color: state.defaultPage.color,
                     }, state);
                 } else if (options.person) {
-
+                    state.reviewImgIsPerson = true;
+                    self.setState(state);
                 } else if (options.offline) {
                     state.offlineMakeState.param.bs_id = options.offline.bs_id;
                     state.offlineMakeState.title = options.offline.bs_name;
                     self.setState(state);
+                } else if(options.review){
+                    if(options.review === 'return'){
+                        self.setState(state);
+                    } else if(options.review === 'save'){
+                        // TODO 这里逻辑看一下
+                        axios({
+                            url: pageAjax.UserLectionSaveWorks,
+                            params: {
+                                bh_id: state.defaultPage.bh_id
+                            }
+                        }).then((data)=>{
+                            if (data.code === 0) {
+                                Toast.success(save.msg, 1);
+                                this.setState(state);
+                            }
+                        });
+                    } else if(options.review === 'delete'){
+                        axios({
+                            url: pageAjax.UserLectionDelWorks,
+                            params: {
+                                bh_id: state.defaultPage.bh_id
+                            }
+                        }).then((data)=>{
+                            if (data.code === 0) {
+                                Toast.success(data.msg, 1);
+                                this.setState(state);
+                            }
+                        });
+                    } else if(options.review === 'share'){
+                        wx.onMenuShareTimeline({
+                            title: '', // 分享标题
+                            link: '', // 分享链接
+                            imgUrl: '', // 分享图标
+                            success: function () {
+                                // 用户确认分享后执行的回调函数
+                            },
+                            cancel: function () {
+                                // 用户取消分享后执行的回调函数
+                            }
+                        });
+                        wx.onMenuShareAppMessage({
+                            title: '', // 分享标题
+                            desc: '', // 分享描述
+                            link: '', // 分享链接
+                            imgUrl: '', // 分享图标
+                            type: '', // 分享类型,music、video或link，不填默认为link
+                            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                            success: function () {
+                                // 用户确认分享后执行的回调函数
+                            },
+                            cancel: function () {
+                                // 用户取消分享后执行的回调函数
+                            }
+                        });
+                    }
                 } else {
                     self.setState(state)
                 }
@@ -168,13 +222,11 @@ export default class method extends React.Component {
     async initCanvas() {
         const self = this;
         const state = copy(this.state);
+        state.reviewImgIsPerson = false;
         const data = await axiosAll.all([
             axios({ url: pageAjax.userLectionMyDetail }),
             axios({ url: pageAjax.LectionGetWordList })
         ]);
-        //setTimeout(()=>{
-        //    this.isInitCanvas = true;
-        //},500);
 
         state.defaultPage = data[0].data;
 
@@ -204,12 +256,10 @@ export default class method extends React.Component {
     nextFont() {
         const self = this;
         const state = copy(this.state);
-        //console.log(this.canvasMethod.canvasToBase());
         if (this.canvasMethod.beginWrite) {
             if (state.indexState.currentNumber < state.indexState.allNumber) {
                 setTimeout(() => {
                     state.indexState.currentNumber += 1;
-                    //console.log(state.indexState.indexData[state.indexState.currentNumber - 1]);
                     self.clearCanvas();
                     if (self.canvasNextArr.length < state.nextNumberAjax) {
                         self.canvasNextArr.push({
@@ -232,10 +282,18 @@ export default class method extends React.Component {
                     self.setState(state);
                 }, 200);
             } else {
-                Toast.info(state.indexState.nextToast, 2);
+                // 当写完最后一字的时候自动保存作品
+                axios({
+                    url: pageAjax.UserLectionSaveWorks,
+                    params: {
+                        bh_id: state.defaultPage.bh_id
+                    }
+                }).then(()=>{
+                    Toast.info(state.indexState.nextToast, 2);
+                });
             }
         } else {
-            Toast.info('请把字写好', 2);
+            Toast.info(state.indexState.tips, 2);
         }
 
     }

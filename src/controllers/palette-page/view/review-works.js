@@ -3,14 +3,44 @@
  */
 
 import React, { Component } from 'react'
-import { ListView } from 'antd-mobile';
-
+import { ListView, Button } from 'antd-mobile';
+import axios from '../../../libs/axios';
+import pageAjax from '../../../libs/pageAjax';
 
 const MyBody = (props) => {
     return <div className="review-color-body">
-        <div className="review-color-body__color">
-            {props.children}
-        </div>
+        {props.children}
+    </div>
+};
+
+const isBtnShow = async (propsSelf, self) => {
+    const { currentNumber, allNumber } = propsSelf.state.indexState;
+    const { reviewImgIsPerson } = propsSelf.state;
+    let saveBtn = false;
+    if (currentNumber >= allNumber) {
+        // 如果查出来当前作品没有保存 那么查看一下 当前是不是最后一个字， 如果是 显示保存按钮
+        const data = await axios({
+            url: pageAjax.UserLectionWorksIsOver,
+        });
+        saveBtn = data.code !== 0;
+    }
+    return <div>
+        {
+            propsSelf.state.reviewBtn[
+                reviewImgIsPerson ? 2 :
+                    saveBtn ? 0 :
+                    (currentNumber >= allNumber) ? 1 : 0
+                ].map((item, i) => {
+                return <Button key={i}
+                               type="ghost" size="small"
+                               onClick={propsSelf.pageLeftSwitch.bind(propsSelf, propsSelf.state.leftIcon[0], { review: item.key })}
+                               inline
+                >
+                    <span>{item.value}</span>
+                    <span className={item.icon + ' iconfont'}/>
+                </Button>
+            })
+        }
     </div>
 };
 
@@ -47,12 +77,32 @@ export default class extends Component {
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         // simulate initial Ajax
+        const self = this.props.self;
+        const state = self.state;
+        const data = await axios({
+            url: pageAjax.UserLectionGetMyWorksByID,
+            params: {
+                bh_id: state.defaultPage.bh_id
+            }
+        });
+        state.currentReviewImgSrc = data.msg;
+
         this.genData();
         this.setState({
             dataSource: this.state.dataSource.cloneWithRowsAndSections(this.dataBlob, this.sectionIDs, this.rowIDs),
             isLoading: false,
+        });
+
+        self.setState(state);
+    }
+    showImg(){
+        wx.previewImage({
+            current: this.state.currentReviewImgSrc, // 当前显示图片的http链接
+            urls: [
+                this.state.currentReviewImgSrc
+            ]
         });
     }
 
@@ -60,13 +110,13 @@ export default class extends Component {
         const self = this.props.self;
         const row = (rowData, sectionID, rowID) => {
             return (
-                <div className="review-color-body__color__list-box" key={rowID}>
-
+                <div className="review-color-body__color" key={rowID}>
+                    <img src={self.state.currentReviewImgSrc} onClick={this.showImg.bind(self)} />
                 </div>
             );
         };
         return (
-            <div style={{height:'100%'}} className="review-page-box">
+            <div style={{ height: '100%' }} className="review-page-box">
                 <ListView ref="lv"
                           dataSource={this.state.dataSource}
                           renderBodyComponent={() => <MyBody />}
@@ -75,10 +125,9 @@ export default class extends Component {
                           contentContainerStyle={{ height: '100%' }}
                 />
                 <div className="review-page-box__review">
-                    <div className="review-page-box__review__box">
-                        <div className="">保存到我的作品</div>
-                        <div className="">分享</div>
-                    </div>
+                    {
+                        isBtnShow(self)
+                    }
                 </div>
             </div>
         );

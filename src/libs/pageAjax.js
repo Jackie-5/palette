@@ -20,4 +20,7 @@ export default {
     UserLectionUpdateWorks: '/Api/UserLection/UpdateWorks',
     UserLectionUploadImg: '/Api/UserLection/UploadImg',
     ShareGetParm: '/Api/Share/GetParm',
+    UserLectionGetMyWorksByID: '/Api/UserLection/GetMyWorksByID',
+    UserLectionSaveWorks: '/Api/UserLection/SaveWorks',
+    UserLectionDelWorks: '/Api/UserLection/DelWorks',
 }

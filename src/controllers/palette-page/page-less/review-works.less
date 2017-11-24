@@ -3,22 +3,22 @@
     .review-color-box{
         height:80%;
         border-bottom:1px solid @ccc;
+        .am-list-view-scrollview-content{
+            width:100%;
+        }
         .review-color-body{
             height:100%;
+            width:95%;
+            margin-left:2.5%;
+            overflow-y: hidden;
+            .list-view-section-body{
+                height: 95%;
+                padding-top: 5%;
+            }
             &__color{
                 height:100%;
-                &__list-box{
-                    display: flex;
-                    justify-content:center;
-                    align-items:Center;
-                    height: 300px;
-                    &__li{
-                        width: 200px;
-                        height: 200px;
-                        border-radius: 100%;
-                        background:#000;
-                        margin:0 auto;
-                    }
+                img{
+                    height:100%;
                 }
             }
         }
@@ -28,6 +28,20 @@
         justify-content:center;
         align-items:Center;
         height:20%;
+        &__btn{
+            color: #333;
+
+        }
+        .am-button-ghost{
+            color: @penColor;
+            background-color: transparent;
+            border-color: @penColor;
+        }
+        .am-button-active {
+            color: #fff;
+            background: @penColor!important;
+            border-color: @penColor!important;
+        }
         &__box{
             font-size: 30px;
             color:@reviewColor;
@@ -48,6 +62,7 @@
                 border:2px solid @reviewColor;
                 font-weight: bold;
             }
+
         }
     }
 }

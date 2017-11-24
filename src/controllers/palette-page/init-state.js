@@ -102,5 +102,40 @@ export default {
     personState: {},
     musicList: [],
     tieList: [],
-    offlineState: []
+    offlineState: [],
+    currentReviewImgSrc: '',
+    reviewImgIsPerson: false,
+    reviewBtn: [
+        [
+            {
+                value: '返回主页',
+                icon: '',
+                key: 'return',
+            },
+        ],
+        [
+            {
+                value: '保存到我的作品',
+                icon: '',
+                key: 'save',
+            },
+            {
+                value: '返回主页',
+                icon: '',
+                key: 'return',
+            },
+        ],
+        [
+            {
+                value: '分享作品',
+                icon: '',
+                key: 'share',
+            },
+            {
+                value: '删除作品',
+                icon: '',
+                key: 'delete',
+            },
+        ]
+    ]
 };

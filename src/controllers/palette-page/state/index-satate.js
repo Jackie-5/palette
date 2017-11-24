@@ -13,5 +13,6 @@ export default {
         pinyin: ''
     },],
     prevToast: '已经是第一个字了',
-    nextToast: '已经是第最后一个字了',
+    nextToast: '恭喜您,已抄完,作品已经保存在个人主页下',
+    tips: '您还没有写字哦~'
 }
