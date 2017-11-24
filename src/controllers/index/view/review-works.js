@@ -13,32 +13,25 @@ const MyBody = (props) => {
     </div>
 };
 
-const isBtnShow = async (propsSelf, self) => {
+const isBtnShow = (propsSelf, self) => {
     const { currentNumber, allNumber } = propsSelf.state.indexState;
     const { reviewImgIsPerson } = propsSelf.state;
-    let saveBtn = false;
-    if (currentNumber >= allNumber) {
-        // 如果查出来当前作品没有保存 那么查看一下 当前是不是最后一个字， 如果是 显示保存按钮
-        const data = await axios({
-            url: pageAjax.UserLectionWorksIsOver,
-        });
-        saveBtn = data.code !== 0;
-    }
     return <div>
         {
             propsSelf.state.reviewBtn[
                 reviewImgIsPerson ? 2 :
-                    saveBtn ? 0 :
                     (currentNumber >= allNumber) ? 1 : 0
                 ].map((item, i) => {
-                return <Button key={i}
-                               type="ghost" size="small"
-                               onClick={propsSelf.pageLeftSwitch.bind(propsSelf, propsSelf.state.leftIcon[0], { review: item.key })}
-                               inline
-                >
-                    <span>{item.value}</span>
-                    <span className={item.icon + ' iconfont'}/>
-                </Button>
+                return <div key={i}>
+                    <Button
+                            type="ghost" size="small"
+                            onClick={propsSelf.pageLeftSwitch.bind(propsSelf, propsSelf.state.leftIcon[0], { review: item.key })}
+                            inline
+                    >
+                        <span>{item.value}</span>
+                        <span className={item.icon + ' iconfont font-size'}/>
+                    </Button>
+                </div>
             })
         }
     </div>

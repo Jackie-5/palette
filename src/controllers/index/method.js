@@ -9,6 +9,7 @@ import axiosAll from 'axios';
 import pageAjax from '../../libs/pageAjax';
 import { Toast, Modal } from 'antd-mobile';
 import copy from 'clone';
+import { wxShareConfig } from '../../libs/wx-share-config';
 
 const alert = Modal.alert;
 
@@ -57,7 +58,8 @@ export default class method extends React.Component {
     }
 
     async saveUpdate(type, options = {}, state) {
-        if (type === 'saveWork') {
+        // 更换经文
+        if (type === 'addWork') {
             // 保存作品用到的接口
             const save = await axios({
                 url: pageAjax.UserLectionAddWorks,
@@ -91,6 +93,7 @@ export default class method extends React.Component {
         const self = this;
         const state = copy(self.state);
         this.isInitCanvas = false;
+        state.reviewImgIsPerson = false;
 
         if (item.link === 'rubber') {
             if (state.pageSwitch['index']) {
@@ -116,14 +119,14 @@ export default class method extends React.Component {
                             },
                             {
                                 text: '确定', onPress: () => {
-                                self.saveUpdate('saveWork', {
+                                self.saveUpdate('addWork', {
                                     bh_id: options.tie.b_id,
                                 }, state);
                             }
                             },
                         ]);
                     } else {
-                        self.saveUpdate('saveWork', {
+                        self.saveUpdate('addWork', {
                             bh_id: options.tie.b_id,
                         }, state);
                     }
@@ -144,10 +147,10 @@ export default class method extends React.Component {
                     state.offlineMakeState.title = options.offline.bs_name;
                     self.setState(state);
                 } else if(options.review){
+                    // 当在预览时的操作
                     if(options.review === 'return'){
                         self.setState(state);
                     } else if(options.review === 'save'){
-                        // TODO 这里逻辑看一下
                         axios({
                             url: pageAjax.UserLectionSaveWorks,
                             params: {
@@ -155,7 +158,7 @@ export default class method extends React.Component {
                             }
                         }).then((data)=>{
                             if (data.code === 0) {
-                                Toast.success(save.msg, 1);
+                                Toast.success(data.msg, 1);
                                 this.setState(state);
                             }
                         });
@@ -172,31 +175,13 @@ export default class method extends React.Component {
                             }
                         });
                     } else if(options.review === 'share'){
-                        wx.onMenuShareTimeline({
-                            title: '', // 分享标题
-                            link: '', // 分享链接
-                            imgUrl: '', // 分享图标
-                            success: function () {
-                                // 用户确认分享后执行的回调函数
-                            },
-                            cancel: function () {
-                                // 用户取消分享后执行的回调函数
-                            }
-                        });
-                        wx.onMenuShareAppMessage({
-                            title: '', // 分享标题
-                            desc: '', // 分享描述
-                            link: '', // 分享链接
-                            imgUrl: '', // 分享图标
-                            type: '', // 分享类型,music、video或link，不填默认为link
-                            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-                            success: function () {
-                                // 用户确认分享后执行的回调函数
-                            },
-                            cancel: function () {
-                                // 用户取消分享后执行的回调函数
-                            }
-                        });
+                        wxShareConfig({
+                            wx,
+                            title: '',
+                            desc: '',
+                            link: '',
+                            imgUrl:''
+                        })
                     }
                 } else {
                     self.setState(state)
@@ -248,6 +233,9 @@ export default class method extends React.Component {
             state.indexState.currentNumber -= 1;
             this.clearCanvas();
             self.setState(state);
+            if(self.canvasNextArr.length > 0){
+                self.canvasNextArr.pop()
+            }
         } else {
             Toast.info(state.indexState.prevToast, 2)
         }

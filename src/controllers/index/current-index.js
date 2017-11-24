@@ -7,7 +7,7 @@ import { createForm } from 'rc-form';
 
 import method from './method';
 import '../../less/main.less';
-import './page-less.less';
+import './index.less';
 import PullLeft from './view/pull-left';
 import QueueAnim from 'rc-queue-anim';
 

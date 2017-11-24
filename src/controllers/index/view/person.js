@@ -99,11 +99,14 @@ export default class extends Component {
         return (
             <div style={{ height: '100%' }} className="person-page-box">
                 <div className="person-page-box__person">
-                    <div className="person-page-box__person__img">
-                        <img
-                            src={personState.headimg}/>
+                    <div className="person-page-box__person__top-box">
+                        <div className="person-page-box__person__top-box__img">
+                            <img
+                                src={personState.headimg}/>
+                        </div>
+                        <div className="person-page-box__person__top-box__name">{personState.nickname}</div>
                     </div>
-                    <div className="person-page-box__person__name">{personState.nickname}</div>
+
                     <div className="person-page-box__person__title">
                         <i className="iconfont icon-jingshu"/>
                         <span>我的作品</span>

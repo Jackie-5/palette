@@ -2,17 +2,7 @@
  * Created by Jackie.Wu on 2017/11/9.
  */
 export default {
-    param: {
-        bs_id: '',
-        w_m: '0',
-        w_a: '0',
-        w_n: '0',
-        h_m: '0',
-        h_a: '0',
-        h_n: '0',
-        man: '',
-        tel: ''
-    },
+    param: {},
     timeSelect: [
         {
             title: '工作日:',

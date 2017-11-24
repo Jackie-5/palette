@@ -84,12 +84,11 @@ export default class extends Component {
             return;
         }
 
-        if(!/^[A-Za-z0-9\u4e00-\u9fa5]+$/.test(state.offlineMakeState.param.man)){
+        if(state.offlineMakeState.param.man === undefined || !/^[A-Za-z0-9\u4e00-\u9fa5]+$/.test(state.offlineMakeState.param.man)){
             Toast.offline('请填写您的名字~', 1);
             return;
         }
-
-        if(state.offlineMakeState.param.tel.length !== 13 && !/0?(13|14|15|17|18)[0-9]{9}/.test(state.offlineMakeState.param.tel)){
+        if(state.offlineMakeState.param.tel === undefined || state.offlineMakeState.param.tel.length !== 13 && !/0?(13|14|15|17|18)[0-9]{9}/.test(state.offlineMakeState.param.tel)){
             Toast.offline('请填写正确的手机号~', 1);
             return;
         }
@@ -105,6 +104,12 @@ export default class extends Component {
             for (let i in state.pageSwitch) {
                 state.pageSwitch[i] = state.leftIcon[state.leftIcon.length - 1].link === i;
             }
+            state.offlineMakeState.param = {};
+            state.offlineMakeState.timeSelect.map((item, i)=>{
+                item.select.map((it, k)=>{
+                    it.active = i === 0 && k === 0;
+                });
+            });
             this.setState(state);
         }
     }

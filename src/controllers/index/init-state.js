@@ -109,31 +109,31 @@ export default {
         [
             {
                 value: '返回主页',
-                icon: '',
+                icon: 'icon-fanhui',
                 key: 'return',
             },
         ],
         [
             {
-                value: '保存到我的作品',
-                icon: '',
+                value: '保存作品',
+                icon: 'icon-baocun',
                 key: 'save',
             },
             {
                 value: '返回主页',
-                icon: '',
+                icon: 'icon-fanhui',
                 key: 'return',
             },
         ],
         [
             {
                 value: '分享作品',
-                icon: '',
+                icon: 'icon-fenxiang',
                 key: 'share',
             },
             {
                 value: '删除作品',
-                icon: '',
+                icon: 'icon-delete',
                 key: 'delete',
             },
         ]

@@ -89,7 +89,6 @@ export default class extends Component {
 
     async enter() {
         const state = copy(this.state);
-        console.log(state.hopeState.param.bh_wish);
         state.hopeState.param.bh_id = state.defaultPage.bh_id;
         if(!/^[A-Za-z0-9\u4e00-\u9fa5]+$/.test(state.hopeState.param.bh_prayman)
             || !/^[A-Za-z0-9\u4e00-\u9fa5]+$/.test(state.hopeState.param.bh_prayother)
@@ -101,12 +100,14 @@ export default class extends Component {
 
         const data = await axios({
             url: pageAjax.UserLectionUpdateWorks,
-            param: state.hopeState.param,
+            params: state.hopeState.param,
+            method: 'post',
         });
         if(data.code === 0){
             for (let i in state.pageSwitch) {
                 state.pageSwitch[i] = state.leftIcon[0].link === i;
             }
+            Toast.success(data.msg, 1);
             this.setState(state);
         }
     }

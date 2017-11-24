@@ -53,7 +53,7 @@ export default class extends Component {
         const state = self.state;
         axios({
             url:pageAjax.lectionDetail,
-            param: {
+            params: {
                 B_id: state.defaultPage.b_id
             }
         })

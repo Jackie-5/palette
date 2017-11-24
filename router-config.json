@@ -1,11 +1,12 @@
 {
-    "/palette-page": {
+    "/index": {
         "js": [
             "/current-index.js"
-        ],
-        "point":{
-            "type": 5,
-            "name": "广告产品"
-        }
+        ]
+    },
+    "/share": {
+        "js": [
+            "/current-index.js"
+        ]
     }
 }

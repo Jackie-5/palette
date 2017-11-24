@@ -1,0 +1,70 @@
+@ccc: #ccc;
+@bgColor: #f7f6ea;
+@color: #996633;
+body{
+    background: @bgColor;
+}
+.palette-share-box{
+    font-size: 28px;
+    padding: 20px;
+    &__hope{
+        margin-bottom: 30px;
+        margin-top: 20px;
+        &__title{
+            margin-bottom: 30px;
+            &__name{
+                border-radius: 10px;
+                background:@color;
+                color:#fff;
+                padding: 10px;
+                float:left;
+            }
+        }
+        &__box{
+            &__content{
+                margin-top: 20px;
+                padding-bottom:5px;
+                border-bottom:1px solid #ccc;
+                &:last-child{
+                    border-bottom:1px solid transparent;
+                }
+            }
+        }
+    }
+    &__page-view{
+        &__title{
+            &__name{
+                border-radius: 10px;
+                background:@color;
+                color:#fff;
+                padding: 10px;
+                float:left;
+            }
+        }
+        &__box{
+            overflow-y: hidden;
+            height: 700px;
+            margin-top: 20px;
+            &__img{
+                height:100%;
+                .ov{
+                    height:100%;
+                }
+                img{
+                    height:100%;
+                }
+            }
+        }
+    }
+    &__praise{
+        margin-top: 20px;
+        &__icon{
+            float:right;
+            margin-right: 10px;
+            margin-top: -2px;
+        }
+        &__font{
+            float:right;
+        }
+    }
+}
