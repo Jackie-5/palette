@@ -23,4 +23,7 @@ export default {
     UserLectionGetMyWorksByID: '/Api/UserLection/GetMyWorksByID',
     UserLectionSaveWorks: '/Api/UserLection/SaveWorks',
     UserLectionDelWorks: '/Api/UserLection/DelWorks',
+    UserLectionGetShareKey: '/Api/UserLection/GetShareKey',
+    ShareGetShareDetails: '/Api/Share/GetShareDetails',
+    ShareZan: '/Api/Share/Zan',
 }

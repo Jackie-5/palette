@@ -1,0 +1,15 @@
+{
+    "data": {
+        "bh_prayman": null,
+        "bh_prayother": null,
+        "pt_name": null,
+        "bh_wish": null,
+        "bh_imgurl": "http://wechat.eastdoing.com/UserImg/CE3486A8B070283C0747CFB57E05569077CE7B7EC38A6BF9FD3805ABFE3B8344/F449DF292A1C1DA9/8B75858D10DB9985BB4B90E8E3596353.png",
+        "praiseNum": 2,
+        "ispraise": 1,
+        "wxImg": "http://admin.eastdoing.com/img/983EA1841F855771D89897AB04C6D48C.jpg",
+        "versesImg": "http://admin.eastdoing.com/img/7B7205FB7AC54D66ADB5AC2800B2CE98.jpg"
+    },
+    "code": 0,
+    "msg": "成功"
+}

@@ -153,6 +153,7 @@ export default class method extends React.Component {
                     } else if(options.review === 'save'){
                         axios({
                             url: pageAjax.UserLectionSaveWorks,
+                            method:'post',
                             params: {
                                 bh_id: state.defaultPage.bh_id
                             }
@@ -175,13 +176,23 @@ export default class method extends React.Component {
                             }
                         });
                     } else if(options.review === 'share'){
-                        wxShareConfig({
-                            wx,
-                            title: '',
-                            desc: '',
-                            link: '',
-                            imgUrl:''
-                        })
+                        axios({
+                            url: pageAjax.UserLectionGetShareKey,
+                            params: {
+                                bh_id: state.defaultPage.bh_id
+                            }
+                        }).then((data)=>{
+                            if (data.code === 0) {
+                                wxShareConfig({
+                                    wx,
+                                    title: '',
+                                    desc: '',
+                                    link: '',
+                                    imgUrl:''
+                                })
+                            }
+                        });
+
                     }
                 } else {
                     self.setState(state)

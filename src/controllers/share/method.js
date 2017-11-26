@@ -3,31 +3,24 @@
  */
 
 import React from 'react';
-import initState from './init-state';
 import axios from '../../libs/axios';
 import pageAjax from '../../libs/pageAjax';
-import { Toast, Modal } from 'antd-mobile';
-import copy from 'clone';
-import { wxShareConfig } from '../../libs/wx-share-config';
-
-const alert = Modal.alert;
+import URI from 'urijs'
 
 export default class method extends React.Component {
     constructor(props) {
         super(props);
-        this.state = initState;
+        this.state = {
+            param: {}
+        };
     }
 
     async componentDidMount() {
         // 进入页面 set 默认值
+        const self = this;
+        this.urlSearch = new URI(location.href).query(true);
         await axios({ url: pageAjax.LoginPower });
         const wxConfig = await axios({ url: pageAjax.ShareGetParm });
-        const data = await axios({
-            url: pageAjax.UserLectionGetMyWorksByID,
-            params: {
-                bh_id: 1
-            }
-        });
         wx.config({
             debug: true,
             appId: wxConfig.data.appId,
@@ -55,8 +48,48 @@ export default class method extends React.Component {
             ],
         });
 
-        wx.ready(()=>{
-
+        wx.ready(() => {
+            self.initShare();
         });
+    }
+
+    async initShare() {
+        const data = await axios({
+            url: pageAjax.ShareGetShareDetails,
+            params: {
+                bh_id: this.urlSearch.shareId
+            }
+        });
+        this.setState(
+            {
+                param: data.data,
+            }
+        );
+    }
+
+    imgClick() {
+        wx.previewImage({
+            current: this.state.param.bh_imgurl, // 当前显示图片的http链接
+            urls: [
+                this.state.param.bh_imgurl
+            ]
+        });
+    }
+
+    async praise(){
+        const self = this;
+        const state = self.state;
+        const data = await axios({
+            url: pageAjax.ShareZan,
+            params: {
+                bh_id: self.urlSearch.shareId,
+                method: 'post'
+            }
+        });
+
+        if(data.code === 0){
+            state.param.ispraise = state.param.ispraise === 1 ? 0 : 1;
+            self.setState(state);
+        }
     }
 };
