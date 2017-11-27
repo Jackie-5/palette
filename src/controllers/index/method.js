@@ -58,6 +58,9 @@ export default class method extends React.Component {
                 this.initCanvas();
             });
         }
+        document.addEventListener('body', (e)=>{
+            e.preventDefault()
+        })
     }
 
     async saveUpdate(type, options = {}, state) {
@@ -189,11 +192,11 @@ export default class method extends React.Component {
                             if (data.code === 0) {
                                 wxShareConfig({
                                     wx,
-                                    title: '',
-                                    desc: '',
-                                    link: '',
+                                    title: `[乙度抄经] ${state.defaultPage.Lectionname}`,
+                                    desc: '『乙东方 · 度千处』点亮一盏心灯，送出一份祝福。',
+                                    link: `http://wechat.eastdoing.com/chaojing/share.html?shareId=${data.msg}`,
                                     imgUrl: ''
-                                })
+                                });
                             }
                         });
 
@@ -225,6 +228,7 @@ export default class method extends React.Component {
         state.reviewImgIsPerson = false;
         const detailData = await axios({ url: pageAjax.userLectionMyDetail });
         const data = await axios({ url: pageAjax.LectionGetWordList , params:{ b_id : detailData.data.b_id}});
+        document.title = detailData.data.Lectionname;
         state.defaultPage = detailData.data;
 
         state.indexState.currentNumber = detailData.data.position - 1;

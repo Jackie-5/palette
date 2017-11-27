@@ -15,7 +15,7 @@ export default {
         {
             icon: 'icon-maobi',
             link: 'index',
-            title: '已度抄经'
+            title: ''
         },
         {
             font: '帖',
