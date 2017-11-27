@@ -14,6 +14,7 @@ export default {
     LectionGetWordList: '/Api/Lection/GetWordList',
     UserLectionWorksIsOver: '/Api/UserLection/WorksIsOver',
     UserLectionAddWorks: '/Api/UserLection/AddWorks',
+    UserLectionPreviewWorks: '/Api/UserLection/PreviewWorks',
     UserUpdateState: '/Api/User/UpdateState',
     BespeakEnrol: '/Api/Bespeak/Enrol',
     PrayTypeGetList: '/Api/PrayType/GetList',

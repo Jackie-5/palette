@@ -173,8 +173,6 @@ export default class extends React.Component {
     }
 
     canvasToBase() {
-        var image = new Image();
-        this.writeCtx.drawImage(image, 0, 0, this.refs.writeCanvas.width, this.refs.writeCanvas.height);
         return this.refs.writeCanvas.toDataURL("image/png");
     }
 

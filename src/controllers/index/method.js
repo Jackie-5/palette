@@ -52,7 +52,7 @@ export default class method extends React.Component {
             ],
         });
 
-        wx.ready(()=>{
+        wx.ready(() => {
             this.initCanvas();
         });
     }
@@ -146,49 +146,49 @@ export default class method extends React.Component {
                     state.offlineMakeState.param.bs_id = options.offline.bs_id;
                     state.offlineMakeState.title = options.offline.bs_name;
                     self.setState(state);
-                } else if(options.review){
+                } else if (options.review) {
                     // 当在预览时的操作
-                    if(options.review === 'return'){
+                    if (options.review === 'return') {
                         self.setState(state);
-                    } else if(options.review === 'save'){
+                    } else if (options.review === 'save') {
                         axios({
                             url: pageAjax.UserLectionSaveWorks,
-                            method:'post',
+                            method: 'post',
                             params: {
                                 bh_id: state.defaultPage.bh_id
                             }
-                        }).then((data)=>{
+                        }).then((data) => {
                             if (data.code === 0) {
                                 Toast.success(data.msg, 1);
                                 this.setState(state);
                             }
                         });
-                    } else if(options.review === 'delete'){
+                    } else if (options.review === 'delete') {
                         axios({
                             url: pageAjax.UserLectionDelWorks,
                             params: {
                                 bh_id: state.defaultPage.bh_id
                             }
-                        }).then((data)=>{
+                        }).then((data) => {
                             if (data.code === 0) {
                                 Toast.success(data.msg, 1);
                                 this.setState(state);
                             }
                         });
-                    } else if(options.review === 'share'){
+                    } else if (options.review === 'share') {
                         axios({
                             url: pageAjax.UserLectionGetShareKey,
                             params: {
                                 bh_id: state.defaultPage.bh_id
                             }
-                        }).then((data)=>{
+                        }).then((data) => {
                             if (data.code === 0) {
                                 wxShareConfig({
                                     wx,
                                     title: '',
                                     desc: '',
                                     link: '',
-                                    imgUrl:''
+                                    imgUrl: ''
                                 })
                             }
                         });
@@ -219,16 +219,13 @@ export default class method extends React.Component {
         const self = this;
         const state = copy(this.state);
         state.reviewImgIsPerson = false;
-        const data = await axiosAll.all([
-            axios({ url: pageAjax.userLectionMyDetail }),
-            axios({ url: pageAjax.LectionGetWordList })
-        ]);
+        const detailData = await axios({ url: pageAjax.userLectionMyDetail });
+        const data = await axios({ url: pageAjax.LectionGetWordList , params:{ b_id : detailData.data.b_id}});
+        state.defaultPage = detailData.data;
 
-        state.defaultPage = data[0].data;
-
-        state.indexState.currentNumber = data[0].data.position - 1;
-        state.indexState.allNumber = data[1].data.length - 1;
-        state.indexState.indexData = data[1].data;
+        state.indexState.currentNumber = detailData.data.position - 1;
+        state.indexState.allNumber = data.data.length - 1;
+        state.indexState.indexData = data.data;
         self.setState(state);
         this.canvasMethod.initCanvas();
     }
@@ -244,7 +241,7 @@ export default class method extends React.Component {
             state.indexState.currentNumber -= 1;
             this.clearCanvas();
             self.setState(state);
-            if(self.canvasNextArr.length > 0){
+            if (self.canvasNextArr.length > 0) {
                 self.canvasNextArr.pop()
             }
         } else {
@@ -259,7 +256,6 @@ export default class method extends React.Component {
             if (state.indexState.currentNumber < state.indexState.allNumber) {
                 setTimeout(() => {
                     state.indexState.currentNumber += 1;
-                    self.clearCanvas();
                     if (self.canvasNextArr.length < state.nextNumberAjax) {
                         self.canvasNextArr.push({
                             w_id: state.indexState.indexData[state.indexState.currentNumber - 1].w_id,
@@ -278,6 +274,7 @@ export default class method extends React.Component {
                         });
                         self.canvasNextArr = [];
                     }
+                    self.clearCanvas();
                     self.setState(state);
                 }, 200);
             } else {
@@ -287,7 +284,7 @@ export default class method extends React.Component {
                     params: {
                         bh_id: state.defaultPage.bh_id
                     }
-                }).then(()=>{
+                }).then(() => {
                     Toast.info(state.indexState.nextToast, 2);
                 });
             }
