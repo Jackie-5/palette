@@ -75,7 +75,7 @@ export default class extends Component {
                         offlineState.map((item, i)=>{
                             return <Item
                                 key={i}
-                                onClick={self.pageLeftSwitch.bind(self, self.state.offlineMake, {offline: item})}
+                                onClick={self.pageLeftSwitch.bind(self,  {item: self.state.offlineMake,offline: item})}
                                          className="offline-body__row__title" multipleLine>
                                 <div className="offline-list-title clearfix">
                                     <div className="offline-list-title__name">{item.bs_name}</div>

@@ -25,7 +25,7 @@ const isBtnShow = (propsSelf, self) => {
                 return <div key={i}>
                     <Button
                             type="ghost" size="small"
-                            onClick={propsSelf.pageLeftSwitch.bind(propsSelf, propsSelf.state.leftIcon[0], { review: item.key })}
+                            onClick={propsSelf.pageLeftSwitch.bind(propsSelf, { item: propsSelf.state.leftIcon[0], review: item.key })}
                             inline
                     >
                         <span>{item.value}</span>

@@ -158,7 +158,7 @@ export default class extends Component {
                     <div className="hope-body__list-box__enter-box">
                         <Button type="primary" size="small" className="hope-body__list-box__enter-box__btn"
                                 style={{marginRight: '10px'}}
-                                onClick={self.pageLeftSwitch.bind(self, self.state.leftIcon[0])}
+                                onClick={self.pageLeftSwitch.bind(self, {item: self.state.leftIcon[0]})}
                                 inline>返回抄经</Button>
                         <Button type="primary" size="small" className="hope-body__list-box__enter-box__btn"
                                 onClick={this.enter.bind(self)}

@@ -82,7 +82,7 @@ export default class extends Component {
                         personState.list.length > 0 ? personState.list.map((item, i)=>{
                             return <Item
                                 key={i}
-                                onClick={self.pageLeftSwitch.bind(self, self.state.leftIcon[5], {person: item})}
+                                onClick={self.pageLeftSwitch.bind(self,  {item: self.state.leftIcon[5], person: item})}
                                 className="person-color-body__row__title" multipleLine>
                                 <span>{item.lectionname}</span>
                                 <Brief>{item.lectiontime}</Brief>

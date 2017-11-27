@@ -93,7 +93,7 @@ export default class extends Component {
                         }
                         <div className="pen-page-box__pen__box__enter">
                             <Button className="pen-page-box__pen__box__enter__btn" type="ghost" size="small"
-                                    onClick={self.pageLeftSwitch.bind(self, self.state.leftIcon[0], { pen: {} })}
+                                    onClick={self.pageLeftSwitch.bind(self,  {item: self.state.leftIcon[0], pen: {} })}
                                     inline
                             >提交</Button>
                         </div>

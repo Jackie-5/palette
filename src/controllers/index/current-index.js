@@ -4,6 +4,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createForm } from 'rc-form';
+import { Result, Icon } from 'antd-mobile';
 
 import method from './method';
 import '../../less/main.less';
@@ -22,6 +23,7 @@ import About from './view/about';
 import Offline from './view/offline';
 import OfflineMake from './view/offline-make';
 import Person from './view/person';
+import userAgent from '../../libs/user-agent';
 
 //import nprogress from 'nprogress';
 
@@ -45,24 +47,30 @@ const pageSwitch = (pageSwitch, self) => {
 
 class App extends method {
     render() {
-        return (
-            <div className="palette-page-box">
-                <PullLeft self={this}/>
-                <div className="page-content">
-                    <QueueAnim appear={false} className="queue-simple"
-                               onEnd={this.onAnimateEnd.bind(this)}>
-                        {
-                            pageSwitch(this.state.pageSwitch, this)
-                        }
-                    </QueueAnim>
-                </div>
-                <audio
-                    ref="audio"
-                    src={this.state.defaultPage.musicurl}
-                    onCanPlay={() => this.state.isMusic && this.refs.audio.play()}
+        return <div className="palette-page-box">
+            {
+                userAgent() ?  <div>
+                    <PullLeft self={this}/>
+                    <div className="page-content">
+                        <QueueAnim appear={false} className="queue-simple"
+                                   onEnd={this.onAnimateEnd.bind(this)}>
+                            {
+                                pageSwitch(this.state.pageSwitch, this)
+                            }
+                        </QueueAnim>
+                    </div>
+                    <audio
+                        ref="audio"
+                        src={this.state.defaultPage.musicurl}
+                        onCanPlay={() => this.state.isMusic && this.refs.audio.play()}
+                    />
+                </div> : <Result
+                    img={<div className="iconfont icon-tanhao result-tanhao" /> }
+                    title="浏览器提示"
+                    message="请在微信浏览器打开"
                 />
-            </div>
-        );
+            }
+        </div>
     }
 }
 

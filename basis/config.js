@@ -46,7 +46,7 @@ module.exports = () => {
 
     if (ENV !== 'dev') {
         fileLoaderOptions.outputPath = '/build/images/';
-        fileLoaderOptions.publicPath = url => url.split('/build')[1];
+        fileLoaderOptions.publicPath = url => `/chaojing/${url.split('/build')[1]}`;
     }
 
     const fileRule = {

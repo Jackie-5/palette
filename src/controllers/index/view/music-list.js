@@ -87,7 +87,7 @@ export default class extends Component {
                         state.musicList.map((item, i) => {
                             return <Item
                                 key={i}
-                                onClick={self.pageLeftSwitch.bind(self, self.state.leftIcon[0], {music: item})}
+                                onClick={self.pageLeftSwitch.bind(self,  {item: self.state.leftIcon[0], music: item})}
                                 className="music-body__row__title" multipleLine>
                                 <span>{item.m_name}</span>
                                 <Brief className="music-body__row__title__sub-title">{item.m_author}</Brief>

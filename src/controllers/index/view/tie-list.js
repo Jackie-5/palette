@@ -84,7 +84,7 @@ export default class extends Component {
                         state.tieList.map((item, i) => {
                             return <Item
                                 key={i}
-                                onClick={self.pageLeftSwitch.bind(self, self.state.leftIcon[0], {tie: item})}
+                                onClick={self.pageLeftSwitch.bind(self,  {item: self.state.leftIcon[0],tie: item})}
                                 className="tie-body__row__title"
                                 multipleLine>
                                 <span>{item.lectionname}</span>

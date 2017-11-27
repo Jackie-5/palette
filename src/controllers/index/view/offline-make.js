@@ -194,7 +194,7 @@ export default class extends Component {
                         >提交</Button>
                     </div>
                     <div className="iconfont icon-jiantou offline-make-body__list-box__return"
-                         onClick={self.pageLeftSwitch.bind(self, self.state.leftIcon[self.state.leftIcon.length - 1])}/>
+                         onClick={self.pageLeftSwitch.bind(self, {item: self.state.leftIcon[self.state.leftIcon.length - 1]})}/>
                 </div>
             );
         };

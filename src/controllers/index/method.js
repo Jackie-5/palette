@@ -10,6 +10,7 @@ import pageAjax from '../../libs/pageAjax';
 import { Toast, Modal } from 'antd-mobile';
 import copy from 'clone';
 import { wxShareConfig } from '../../libs/wx-share-config';
+import userAgent from '../../libs/user-agent';
 
 const alert = Modal.alert;
 
@@ -23,38 +24,40 @@ export default class method extends React.Component {
 
     async componentDidMount() {
         // 进入页面 set 默认值
-        await axios({ url: pageAjax.LoginPower });
-        const wxConfig = await axios({ url: pageAjax.ShareGetParm });
-        wx.config({
-            debug: true,
-            appId: wxConfig.data.appId,
-            timestamp: wxConfig.data.timestamp,
-            nonceStr: wxConfig.data.nonceStr,
-            signature: wxConfig.data.signature,
-            jsApiList: [
-                'onMenuShareTimeline',
-                'onMenuShareAppMessage',
-                'startRecord',
-                'stopRecord',
-                'onVoiceRecordEnd',
-                'chooseImage',
-                'previewImage',
-                'uploadImage',
-                'downloadImage',
-                'openLocation',
-                'getLocation',
-                'hideOptionMenu',
-                'showOptionMenu',
-                'hideMenuItems',
-                'showMenuItems',
-                'closeWindow',
-                'scanQRCode',
-            ],
-        });
+        if(userAgent()){
+            await axios({ url: pageAjax.LoginPower });
+            const wxConfig = await axios({ url: pageAjax.ShareGetParm });
+            wx.config({
+                debug: true,
+                appId: wxConfig.data.appId,
+                timestamp: wxConfig.data.timestamp,
+                nonceStr: wxConfig.data.nonceStr,
+                signature: wxConfig.data.signature,
+                jsApiList: [
+                    'onMenuShareTimeline',
+                    'onMenuShareAppMessage',
+                    'startRecord',
+                    'stopRecord',
+                    'onVoiceRecordEnd',
+                    'chooseImage',
+                    'previewImage',
+                    'uploadImage',
+                    'downloadImage',
+                    'openLocation',
+                    'getLocation',
+                    'hideOptionMenu',
+                    'showOptionMenu',
+                    'hideMenuItems',
+                    'showMenuItems',
+                    'closeWindow',
+                    'scanQRCode',
+                ],
+            });
 
-        wx.ready(() => {
-            this.initCanvas();
-        });
+            wx.ready(() => {
+                this.initCanvas();
+            });
+        }
     }
 
     async saveUpdate(type, options = {}, state) {
@@ -87,7 +90,8 @@ export default class method extends React.Component {
     }
 
 
-    async pageLeftSwitch(item, options = {}, e) {
+    async pageLeftSwitch(options, e) {
+        const { item } = options;
         e.stopPropagation();
         e.preventDefault();
         const self = this;
