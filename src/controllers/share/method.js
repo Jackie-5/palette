@@ -91,9 +91,9 @@ export default class method extends React.Component {
         const state = self.state;
         const data = await axios({
             url: pageAjax.ShareZan,
+            method: 'post',
             params: {
                 bh_id: self.urlSearch.shareId,
-                method: 'post'
             }
         });
 

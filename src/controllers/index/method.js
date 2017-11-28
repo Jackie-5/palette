@@ -94,7 +94,7 @@ export default class method extends React.Component {
         const self = this;
         const state = copy(self.state);
         this.isInitCanvas = false;
-        state.reviewImgIsPerson = false;
+        state.isReviewImgIsPerson = false;
         // 默认分享
         wxShareConfig(self.state.indexShareOpt);
 
@@ -143,7 +143,8 @@ export default class method extends React.Component {
                         color: state.defaultPage.color,
                     }, state);
                 } else if (options.person) {
-                    state.reviewImgIsPerson = true;
+                    state.isReviewImgIsPerson = true;
+                    state.reviewImgIsPerson = options.person;
                     self.setState(state);
                 } else if (options.offline) {
                     state.offlineMakeState.param.bs_id = options.offline.bs_id;
@@ -171,7 +172,7 @@ export default class method extends React.Component {
                             url: pageAjax.UserLectionDelWorks,
                             method: 'post',
                             params: {
-                                bh_id: state.defaultPage.bh_id
+                                bh_id: state.reviewImgIsPerson.bh_id
                             }
                         }).then((data) => {
                             if (data.code === 0) {
@@ -183,12 +184,12 @@ export default class method extends React.Component {
                         axios({
                             url: pageAjax.UserLectionGetShareKey,
                             params: {
-                                bh_id: state.defaultPage.bh_id
+                                bh_id: state.reviewImgIsPerson.bh_id
                             }
                         }).then((data) => {
                             if (data.code === 0) {
                                 wxShareConfig({
-                                    title: `[乙度抄经] ${state.defaultPage.Lectionname}`,
+                                    title: `[乙度抄经] ${state.reviewImgIsPerson.lectionname}`,
                                     desc: '『乙东方 · 度千处』点亮一盏心灯，送出一份祝福。',
                                     link: `http://wechat.eastdoing.com/chaojing/share.html?shareId=${data.msg}`,
                                     imgUrl: 'http://wechat.eastdoing.com/chaojing/share.jpg'
@@ -221,7 +222,7 @@ export default class method extends React.Component {
     async initCanvas() {
         const self = this;
         const state = copy(this.state);
-        state.reviewImgIsPerson = false;
+        state.isReviewImgIsPerson = false;
         const detailData = await axios({ url: pageAjax.userLectionMyDetail });
         const data = await axios({ url: pageAjax.LectionGetWordList, params: { b_id: detailData.data.b_id } });
         document.title = detailData.data.lectionname;

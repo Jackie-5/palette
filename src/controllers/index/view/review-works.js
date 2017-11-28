@@ -15,11 +15,11 @@ const MyBody = (props) => {
 
 const isBtnShow = (propsSelf, self) => {
     const { currentNumber, allNumber } = propsSelf.state.indexState;
-    const { reviewImgIsPerson } = propsSelf.state;
+    const { isReviewImgIsPerson } = propsSelf.state;
     return <div>
         {
             propsSelf.state.reviewBtn[
-                reviewImgIsPerson ? 2 :
+                isReviewImgIsPerson ? 2 :
                     (currentNumber >= allNumber) ? 1 : 0
                 ].map((item, i) => {
                 return <div key={i}>
@@ -75,9 +75,9 @@ export default class extends Component {
         const self = this.props.self;
         const state = self.state;
         const data = await axios({
-            url: state.reviewImgIsPerson ? pageAjax.UserLectionGetMyWorksByID : pageAjax.UserLectionPreviewWorks,
+            url: state.isReviewImgIsPerson ? pageAjax.UserLectionGetMyWorksByID : pageAjax.UserLectionPreviewWorks,
             params: {
-                bh_id: state.defaultPage.bh_id
+                bh_id: state.isReviewImgIsPerson ? state.reviewImgIsPerson.bh_id : state.defaultPage.bh_id
             }
         });
         state.currentReviewImgSrc = data.msg;
