@@ -20,9 +20,14 @@ export default class method extends React.Component {
         const self = this;
         this.urlSearch = new URI(location.href).query(true);
         await axios({ url: pageAjax.LoginPower });
-        const wxConfig = await axios({ url: pageAjax.ShareGetParm });
+        const wxConfig = await axios({
+            url: pageAjax.ShareGetParm,
+            params: {
+                flag: 2
+            }
+        });
         wx.config({
-            debug: true,
+            debug: false,
             appId: wxConfig.data.appId,
             timestamp: wxConfig.data.timestamp,
             nonceStr: wxConfig.data.nonceStr,
@@ -76,7 +81,7 @@ export default class method extends React.Component {
         });
     }
 
-    async praise(){
+    async praise() {
         const self = this;
         const state = self.state;
         const data = await axios({
@@ -87,7 +92,7 @@ export default class method extends React.Component {
             }
         });
 
-        if(data.code === 0){
+        if (data.code === 0) {
             state.param.ispraise = state.param.ispraise === 1 ? 0 : 1;
             self.setState(state);
         }

@@ -24,11 +24,16 @@ export default class method extends React.Component {
 
     async componentDidMount() {
         // 进入页面 set 默认值
-        if(userAgent()){
+        if (userAgent()) {
             await axios({ url: pageAjax.LoginPower });
-            const wxConfig = await axios({ url: pageAjax.ShareGetParm });
+            const wxConfig = await axios({
+                url: pageAjax.ShareGetParm,
+                params: {
+                    flag: 1
+                }
+            });
             wx.config({
-                debug: true,
+                debug: false,
                 appId: wxConfig.data.appId,
                 timestamp: wxConfig.data.timestamp,
                 nonceStr: wxConfig.data.nonceStr,
@@ -58,7 +63,7 @@ export default class method extends React.Component {
                 this.initCanvas();
             });
         }
-        document.addEventListener('body', (e)=>{
+        document.addEventListener('body', (e) => {
             e.preventDefault()
         })
     }
@@ -227,7 +232,7 @@ export default class method extends React.Component {
         const state = copy(this.state);
         state.reviewImgIsPerson = false;
         const detailData = await axios({ url: pageAjax.userLectionMyDetail });
-        const data = await axios({ url: pageAjax.LectionGetWordList , params:{ b_id : detailData.data.b_id}});
+        const data = await axios({ url: pageAjax.LectionGetWordList, params: { b_id: detailData.data.b_id } });
         document.title = detailData.data.Lectionname;
         state.defaultPage = detailData.data;
 
