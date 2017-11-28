@@ -61,6 +61,19 @@ export default class method extends React.Component {
 
             wx.ready(() => {
                 this.initCanvas();
+                //wx.onMenuShareTimeline({
+                //    title: '乙度抄经', // 分享标题
+                //    link: 'http://wechat.eastdoing.com/chaojing/index.html', // 分享链接
+                //    imgUrl: 'http://wechat.eastdoing.com/chaojing/share.jpg', // 分享图标
+                //    success: function () {
+                //        // 用户确认分享后执行的回调函数
+                //        Toast.success('分享成功', 1);
+                //    },
+                //    cancel: function () {
+                //        // 用户取消分享后执行的回调函数
+                //        Toast.success('分享失败', 1);
+                //    }
+                //});
                 wxShareConfig({
                     wx,
                     title: `[乙度抄经]`,
@@ -240,7 +253,7 @@ export default class method extends React.Component {
         state.reviewImgIsPerson = false;
         const detailData = await axios({ url: pageAjax.userLectionMyDetail });
         const data = await axios({ url: pageAjax.LectionGetWordList, params: { b_id: detailData.data.b_id } });
-        document.title = detailData.data.Lectionname;
+        document.title = detailData.data.lectionname;
         state.defaultPage = detailData.data;
 
         state.indexState.currentNumber = detailData.data.position - 1;
@@ -269,7 +282,7 @@ export default class method extends React.Component {
         }
     }
 
-    nextFont() {
+    async nextFont() {
         const self = this;
         const state = copy(this.state);
         if (this.canvasMethod.beginWrite) {
@@ -278,11 +291,10 @@ export default class method extends React.Component {
                     state.indexState.currentNumber += 1;
                     if (self.canvasNextArr.length < state.nextNumberAjax) {
                         self.canvasNextArr.push({
-                            w_id: state.indexState.indexData[state.indexState.currentNumber - 1].w_id,
+                            w_id: state.indexState.indexData[state.indexState.currentNumber].w_id,
                             baseImg: this.canvasMethod.canvasToBase()
-                        })
-                    }
-                    if (self.canvasNextArr.length >= state.nextNumberAjax) {
+                        });
+                    } else {
                         axios({
                             url: pageAjax.UserLectionUploadImg,
                             method: 'post',
@@ -290,7 +302,6 @@ export default class method extends React.Component {
                                 bh_id: state.defaultPage.bh_id,
                                 imgdata: self.canvasNextArr
                             },
-
                         });
                         self.canvasNextArr = [];
                     }
@@ -299,14 +310,24 @@ export default class method extends React.Component {
                 }, 200);
             } else {
                 // 当写完最后一字的时候自动保存作品
-                axios({
+                if(self.canvasNextArr.length > 0){
+                    await axios({
+                        url: pageAjax.UserLectionUploadImg,
+                        method: 'post',
+                        params: {
+                            bh_id: state.defaultPage.bh_id,
+                            imgdata: self.canvasNextArr
+                        },
+                    });
+                }
+                await axios({
                     url: pageAjax.UserLectionSaveWorks,
+                    method: 'post',
                     params: {
                         bh_id: state.defaultPage.bh_id
                     }
-                }).then(() => {
-                    Toast.info(state.indexState.nextToast, 2);
                 });
+                Toast.info(state.indexState.nextToast, 2);
             }
         } else {
             Toast.info(state.indexState.tips, 2);
