@@ -49,7 +49,7 @@ class App extends method {
     render() {
         return <div className="palette-page-box">
             {
-                userAgent() ?  <div>
+                userAgent() ?  <div style={{height: '100%'}}>
                     <PullLeft self={this}/>
                     <div className="page-content">
                         <QueueAnim appear={false} className="queue-simple"

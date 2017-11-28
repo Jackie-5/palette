@@ -42,12 +42,13 @@ class App extends method {
                         <div className="palette-share-box__page-view__box">
                             <div className="palette-share-box__page-view__box__img">
                                 <div className="ov">
-                                    <img src={param.bh_imgurl} />
+                                    <img className="loadImg" src={param.bh_imgurl} />
                                 </div>
                             </div>
 
                         </div>
                     </div>
+
                     <div className="palette-share-box__praise clearfix" onClick={this.praise.bind(this)}>
                         <span className="palette-share-box__praise__font">{param.praiseNum}赞</span>
                         <div className={param.ispraise === 1 ? 'iconfont icon-xin palette-share-box__praise__icon' : 'iconfont icon-xin1 palette-share-box__praise__icon'} />

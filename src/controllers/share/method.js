@@ -56,6 +56,9 @@ export default class method extends React.Component {
         wx.ready(() => {
             self.initShare();
         });
+        document.querySelector('.loadImg').onload = ()=>{
+            document.querySelector('.palette-share-box__page-view__box').scrollLeft = document.querySelector('.loadImg').offsetWidth;
+        };
     }
 
     async initShare() {
@@ -70,6 +73,8 @@ export default class method extends React.Component {
                 param: data.data,
             }
         );
+
+
     }
 
     imgClick() {

@@ -89,6 +89,10 @@ export default class extends Component {
         });
 
         self.setState(state);
+        // 让图片从右往左滚动
+        document.querySelector('.loadImg').onload = ()=>{
+            document.querySelector('.review-color-body').scrollLeft = document.querySelector('.loadImg').offsetWidth;
+        };
     }
     showImg(){
         wx.previewImage({
@@ -104,7 +108,7 @@ export default class extends Component {
         const row = (rowData, sectionID, rowID) => {
             return (
                 <div className="review-color-body__color" key={rowID}>
-                    <img src={self.state.currentReviewImgSrc} onClick={this.showImg.bind(self)} />
+                    <img className="loadImg" src={self.state.currentReviewImgSrc} onClick={this.showImg.bind(self)} />
                 </div>
             );
         };
