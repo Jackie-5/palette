@@ -58,6 +58,7 @@ export default class extends Component {
     }
 
     async enter() {
+        const self = this;
         const state = copy(this.state);
         // 查看当前是否全都没选中
         let isTrue = true;
@@ -100,7 +101,6 @@ export default class extends Component {
         });
 
         if(data.code === 0){
-            Toast.success(data.msg, 1);
             for (let i in state.pageSwitch) {
                 state.pageSwitch[i] = state.leftIcon[state.leftIcon.length - 1].link === i;
             }
@@ -110,7 +110,10 @@ export default class extends Component {
                     it.active = i === 0 && k === 0;
                 });
             });
-            this.setState(state);
+            Toast.success(data.msg, 1, ()=>{
+                self.setState(state);
+            });
+
         }
     }
 

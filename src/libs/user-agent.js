@@ -3,6 +3,6 @@
  */
 
 export default ()=>{
-    //return navigator.userAgent.toLowerCase().includes('micromessenger');
-    return true;
+    return navigator.userAgent.toLowerCase().includes('micromessenger');
+    //return true;
 }

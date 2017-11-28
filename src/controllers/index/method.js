@@ -9,7 +9,7 @@ import axiosAll from 'axios';
 import pageAjax from '../../libs/pageAjax';
 import { Toast, Modal } from 'antd-mobile';
 import copy from 'clone';
-import { wxShareConfig } from '../../libs/wx-share-config';
+import { wxShareConfig, hideConfig, wxConfigSet } from '../../libs/wx-share-config';
 import userAgent from '../../libs/user-agent';
 
 const alert = Modal.alert;
@@ -24,6 +24,7 @@ export default class method extends React.Component {
 
     async componentDidMount() {
         // 进入页面 set 默认值
+        const self = this;
         if (userAgent()) {
             await axios({ url: pageAjax.LoginPower });
             const wxConfig = await axios({
@@ -32,60 +33,15 @@ export default class method extends React.Component {
                     flag: 1
                 }
             });
-            wx.config({
-                debug: false,
-                appId: wxConfig.data.appId,
-                timestamp: wxConfig.data.timestamp,
-                nonceStr: wxConfig.data.nonceStr,
-                signature: wxConfig.data.signature,
-                jsApiList: [
-                    'onMenuShareTimeline',
-                    'onMenuShareAppMessage',
-                    'startRecord',
-                    'stopRecord',
-                    'onVoiceRecordEnd',
-                    'chooseImage',
-                    'previewImage',
-                    'uploadImage',
-                    'downloadImage',
-                    'openLocation',
-                    'getLocation',
-                    'hideOptionMenu',
-                    'showOptionMenu',
-                    'hideMenuItems',
-                    'showMenuItems',
-                    'closeWindow',
-                    'scanQRCode',
-                ],
-            });
-
+            wxConfigSet(wxConfig);
             wx.ready(() => {
-                this.initCanvas();
-                //wx.onMenuShareTimeline({
-                //    title: '乙度抄经', // 分享标题
-                //    link: 'http://wechat.eastdoing.com/chaojing/index.html', // 分享链接
-                //    imgUrl: 'http://wechat.eastdoing.com/chaojing/share.jpg', // 分享图标
-                //    success: function () {
-                //        // 用户确认分享后执行的回调函数
-                //        Toast.success('分享成功', 1);
-                //    },
-                //    cancel: function () {
-                //        // 用户取消分享后执行的回调函数
-                //        Toast.success('分享失败', 1);
-                //    }
-                //});
-                wxShareConfig({
-                    wx,
-                    title: `[乙度抄经]`,
-                    desc: '『乙东方 · 度千处』点亮一盏心灯，送出一份祝福。',
-                    link: `http://wechat.eastdoing.com/chaojing/index.html`,
-                    imgUrl: 'http://wechat.eastdoing.com/chaojing/share.jpg'
-                });
+                self.initCanvas();
+                hideConfig();
+                wxShareConfig(self.state.indexShareOpt);
+                self.refs.audio.play();
             });
         }
-        document.addEventListener(document.querySelector('#app-page'), (e) => {
-            e.preventDefault()
-        });
+
     }
 
     async saveUpdate(type, options = {}, state) {
@@ -126,6 +82,8 @@ export default class method extends React.Component {
         const state = copy(self.state);
         this.isInitCanvas = false;
         state.reviewImgIsPerson = false;
+        // 默认分享
+        wxShareConfig(self.state.indexShareOpt);
 
         if (item.link === 'rubber') {
             if (state.pageSwitch['index']) {
@@ -208,6 +166,13 @@ export default class method extends React.Component {
                             }
                         });
                     } else if (options.review === 'share') {
+                        wxShareConfig({
+                            wx,
+                            title: `[乙度抄经] asdfadf`,
+                            desc: '『乙东方 · 度千处』点亮一盏心灯，送出一份祝福。',
+                            link: `http://wechat.eastdoing.com/chaojing/share.html?adfasdf`,
+                            imgUrl: 'http://wechat.eastdoing.com/chaojing/share.jpg'
+                        });
                         axios({
                             url: pageAjax.UserLectionGetShareKey,
                             params: {
@@ -216,7 +181,6 @@ export default class method extends React.Component {
                         }).then((data) => {
                             if (data.code === 0) {
                                 wxShareConfig({
-                                    wx,
                                     title: `[乙度抄经] ${state.defaultPage.Lectionname}`,
                                     desc: '『乙东方 · 度千处』点亮一盏心灯，送出一份祝福。',
                                     link: `http://wechat.eastdoing.com/chaojing/share.html?shareId=${data.msg}`,
@@ -286,40 +250,35 @@ export default class method extends React.Component {
         const self = this;
         const state = copy(this.state);
         if (this.canvasMethod.beginWrite) {
-            if (state.indexState.currentNumber < state.indexState.allNumber) {
-                setTimeout(() => {
-                    state.indexState.currentNumber += 1;
-                    if (self.canvasNextArr.length < state.nextNumberAjax) {
-                        self.canvasNextArr.push({
-                            w_id: state.indexState.indexData[state.indexState.currentNumber].w_id,
-                            baseImg: this.canvasMethod.canvasToBase()
-                        });
-                    } else {
-                        axios({
-                            url: pageAjax.UserLectionUploadImg,
-                            method: 'post',
-                            params: {
-                                bh_id: state.defaultPage.bh_id,
-                                imgdata: self.canvasNextArr
-                            },
-                        });
-                        self.canvasNextArr = [];
-                    }
-                    self.clearCanvas();
-                    self.setState(state);
-                }, 200);
+            // 每次push一下canvas的base64
+            self.canvasNextArr.push({
+                w_id: state.indexState.indexData[state.indexState.currentNumber].w_id,
+                baseImg: this.canvasMethod.canvasToBase()
+            });
+            // 当前canvas的Arr里到了规定的个数的时候，或者抄到最后一个字的时候去做上传
+            if (self.canvasNextArr.length === state.nextNumberAjax || state.indexState.currentNumber === state.indexState.allNumber) {
+                await axios({
+                    url: pageAjax.UserLectionUploadImg,
+                    method: 'post',
+                    params: {
+                        bh_id: state.defaultPage.bh_id,
+                        imgdata: self.canvasNextArr
+                    },
+                });
+                // 每次上传成功后把base64代码清理掉
+                self.canvasNextArr = [];
+            }
+            // 作为保险当网络请求堵塞的时候，查看当前是否超出了上传最大值，如果超出了让用户终止上传。
+            if(self.canvasNextArr.length > state.nextNumberAjax){
+                Toast.info(state.indexState.notSaveToast, 2);
+                return;
+            }
+            // 当前的数如果不等于总数，那么就可以继续往下写。
+            if(state.indexState.currentNumber !== state.indexState.allNumber){
+                self.clearCanvas();
+                state.indexState.currentNumber += 1;
             } else {
-                // 当写完最后一字的时候自动保存作品
-                if(self.canvasNextArr.length > 0){
-                    await axios({
-                        url: pageAjax.UserLectionUploadImg,
-                        method: 'post',
-                        params: {
-                            bh_id: state.defaultPage.bh_id,
-                            imgdata: self.canvasNextArr
-                        },
-                    });
-                }
+                // 当写到最后一个字的时候，帮助用户自动保存作品。
                 await axios({
                     url: pageAjax.UserLectionSaveWorks,
                     method: 'post',
@@ -329,6 +288,9 @@ export default class method extends React.Component {
                 });
                 Toast.info(state.indexState.nextToast, 2);
             }
+
+            self.setState(state);
+
         } else {
             Toast.info(state.indexState.tips, 2);
         }

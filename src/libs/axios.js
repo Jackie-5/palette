@@ -17,8 +17,8 @@ export default (options = {}) =>
         }
         // 当在本地的时候 默认全部等于get请求，方便本地调试
         if (hostname === 'localhost') {
-            //options.method = 'get';
-            options.url = `http://wechat.eastdoing.com${options.url}`
+            options.method = 'get';
+            //options.url = `http://wechat.eastdoing.com${options.url}`
         }
         const getAndPost = options.method === 'get' ? axios.get(options.url, { params: options.params }) : axios.post(options.url, options.params);
         getAndPost.then((data) => {

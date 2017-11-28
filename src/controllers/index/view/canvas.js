@@ -205,7 +205,9 @@ export default class extends React.Component {
                     <div className={self.state.isMusic ? '' : 'canvas-top-icon-stop iconfont icon-jinzhi'}/>
                 </div>
                 <div className="canvas-images">
-                    <img src={currentNumber <= 0 ? '' : indexData[currentNumber - 1].imgurl} alt=""/>
+                    {
+                        currentNumber <= 0 ? '' : <img src={indexData[currentNumber - 1].imgurl} alt=""/>
+                    }
                 </div>
             </div>
             <div className="canvas-box" ref="canvasBox">
@@ -227,7 +229,9 @@ export default class extends React.Component {
                     <div>{currentNumber >= allNumber ? '' : indexData[currentNumber + 1].chinese}</div>
                 </div>
                 <div className="canvas-images">
-                    <img src={currentNumber >= allNumber ? '' : indexData[currentNumber + 1].imgurl} alt=""/>
+                    {
+                        currentNumber >= allNumber ? '' : <img src={indexData[currentNumber + 1].imgurl} alt=""/>
+                    }
                 </div>
             </div>
             <div className="canvas-bottom-icon about-current iconfont icon-i1"

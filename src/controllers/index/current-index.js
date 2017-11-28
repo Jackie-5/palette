@@ -62,7 +62,6 @@ class App extends method {
                     <audio
                         ref="audio"
                         src={this.state.defaultPage.musicurl}
-                        onCanPlay={() => this.state.isMusic && this.refs.audio.play()}
                     />
                 </div> : <Result
                     img={<div className="iconfont icon-tanhao result-tanhao" /> }
