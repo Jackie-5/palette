@@ -22,6 +22,19 @@ export default class method extends React.Component {
         this.canvasNextArr = [];
     }
 
+    shouldComponentUpdate(nextProps, nextState){
+        const self = this;
+        if(self.state.defaultPage.musicurl !== nextState.defaultPage.musicurl){
+            const audio = new Audio(this.state.defaultPage.musicurl);
+            audio.onloadedmetadata = ()=>{
+                if(self.refs.audio.paused && self.state.isMusic){
+                    self.refs.audio.play()
+                }
+            };
+        }
+        return true;
+    }
+
     async componentDidMount() {
         // 进入页面 set 默认值
         const self = this;
@@ -30,7 +43,7 @@ export default class method extends React.Component {
             const wxConfig = await axios({
                 url: pageAjax.ShareGetParm,
                 params: {
-                    flag: 1
+                    flag: location.href,
                 }
             });
             wxConfigSet(wxConfig);
@@ -156,6 +169,7 @@ export default class method extends React.Component {
                     } else if (options.review === 'delete') {
                         axios({
                             url: pageAjax.UserLectionDelWorks,
+                            method: 'post',
                             params: {
                                 bh_id: state.defaultPage.bh_id
                             }
@@ -166,13 +180,6 @@ export default class method extends React.Component {
                             }
                         });
                     } else if (options.review === 'share') {
-                        wxShareConfig({
-                            wx,
-                            title: `[乙度抄经] asdfadf`,
-                            desc: '『乙东方 · 度千处』点亮一盏心灯，送出一份祝福。',
-                            link: `http://wechat.eastdoing.com/chaojing/share.html?adfasdf`,
-                            imgUrl: 'http://wechat.eastdoing.com/chaojing/share.jpg'
-                        });
                         axios({
                             url: pageAjax.UserLectionGetShareKey,
                             params: {
@@ -224,6 +231,7 @@ export default class method extends React.Component {
         state.indexState.allNumber = data.data.length - 1;
         state.indexState.indexData = data.data;
         self.setState(state);
+
         this.canvasMethod.initCanvas();
     }
 
@@ -257,22 +265,24 @@ export default class method extends React.Component {
             });
             // 当前canvas的Arr里到了规定的个数的时候，或者抄到最后一个字的时候去做上传
             if (self.canvasNextArr.length === state.nextNumberAjax || state.indexState.currentNumber === state.indexState.allNumber) {
-                await axios({
+                const uploadData = await axios({
                     url: pageAjax.UserLectionUploadImg,
                     method: 'post',
+                    loading: true,
                     params: {
-                        bh_id: state.defaultPage.bh_id,
+                        bh_id: self.state.defaultPage.bh_id,
                         imgdata: self.canvasNextArr
                     },
                 });
-                // 每次上传成功后把base64代码清理掉
-                self.canvasNextArr = [];
+                if(uploadData.code === 0){
+                    // 每次上传成功后把base64代码清理掉
+                    self.canvasNextArr = [];
+                } else {
+                    Toast.info(state.indexState.notSaveToast, 2);
+                    return;
+                }
             }
-            // 作为保险当网络请求堵塞的时候，查看当前是否超出了上传最大值，如果超出了让用户终止上传。
-            if(self.canvasNextArr.length > state.nextNumberAjax){
-                Toast.info(state.indexState.notSaveToast, 2);
-                return;
-            }
+
             // 当前的数如果不等于总数，那么就可以继续往下写。
             if(state.indexState.currentNumber !== state.indexState.allNumber){
                 self.clearCanvas();

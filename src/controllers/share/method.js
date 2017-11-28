@@ -23,7 +23,7 @@ export default class method extends React.Component {
         const wxConfig = await axios({
             url: pageAjax.ShareGetParm,
             params: {
-                flag: 2
+                flag: location.href
             }
         });
         wx.config({
