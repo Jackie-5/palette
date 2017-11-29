@@ -96,7 +96,10 @@ export default class method extends React.Component {
         this.isInitCanvas = false;
         state.isReviewImgIsPerson = false;
         // 默认分享
-        wxShareConfig(self.state.indexShareOpt);
+        if(!(options.review && options.review === 'share')){
+            wxShareConfig(self.state.indexShareOpt);
+        }
+
 
         if (item.link === 'rubber') {
             if (state.pageSwitch['index']) {
@@ -106,7 +109,9 @@ export default class method extends React.Component {
             if (!state.pageSwitch[item.link]) {
                 document.title = item.title;
                 for (let i in state.pageSwitch) {
-                    state.pageSwitch[i] = item.link === i;
+                    if(options.review !== 'share'){
+                        state.pageSwitch[i] = item.link === i;
+                    }
                 }
                 // 如果是从各个页面点回到首页的那么做页面处理
                 if (options.tie) {
@@ -181,22 +186,21 @@ export default class method extends React.Component {
                             }
                         });
                     } else if (options.review === 'share') {
-                        axios({
+                        state.isReviewImgIsPerson = true;
+                        const data = await axios({
                             url: pageAjax.UserLectionGetShareKey,
                             params: {
                                 bh_id: state.reviewImgIsPerson.bh_id
                             }
-                        }).then((data) => {
-                            if (data.code === 0) {
-                                wxShareConfig({
-                                    title: `[乙度抄经] ${state.reviewImgIsPerson.lectionname}`,
-                                    desc: '『乙东方 · 度千处』点亮一盏心灯，送出一份祝福。',
-                                    link: `http://wechat.eastdoing.com/chaojing/share.html?shareId=${data.msg}`,
-                                    imgUrl: 'http://wechat.eastdoing.com/chaojing/share.jpg'
-                                });
-                            }
                         });
-
+                        wxShareConfig({
+                            title: `[乙度抄经] [${data.data.lectionname}]`,
+                            desc: '『乙东方 · 度千处』点亮一盏心灯，送出一份祝福。',
+                            link: `http://wechat.eastdoing.com/chaojing/share.html?i=${data.data.key}&n=${encodeURIComponent(data.data.lectionname)}`,
+                            imgUrl: 'http://wechat.eastdoing.com/chaojing/share.jpg'
+                        });
+                        state.isShowSharePop = true;
+                        self.setState(state);
                     }
                 } else {
                     self.setState(state)
@@ -240,26 +244,43 @@ export default class method extends React.Component {
         this.canvasMethod.clearCanvas();
     }
 
-    prevFont() {
+    preventDefaultMove(e){
+        e.preventDefault();
+    }
+
+    prevFont(e) {
+        e.preventDefault();
         const self = this;
         const state = copy(this.state);
+
         if (state.indexState.currentNumber > 0) {
-            state.indexState.currentNumber -= 1;
+            // 初始化当前canvas
             this.clearCanvas();
-            self.setState(state);
+
             if (self.canvasNextArr.length > 0) {
-                self.canvasNextArr.pop()
+                self.canvasNextArr.pop();
             }
+
+            if(state.saveNextArr.length > 1){
+                state.saveNextArr.pop();
+            } else {
+                Toast.info(state.indexState.notPrevToast, 2);
+                return
+            }
+            state.indexState.currentNumber -= 1;
+            self.setState(state);
         } else {
-            Toast.info(state.indexState.prevToast, 2)
+            Toast.info(state.indexState.prevToast, 2);
         }
     }
 
-    async nextFont() {
+    async nextFont(e) {
+        e.preventDefault();
         const self = this;
         const state = copy(this.state);
         if (this.canvasMethod.beginWrite) {
             // 每次push一下canvas的base64
+            state.saveNextArr.push(this.canvasMethod.canvasToBase());
             self.canvasNextArr.push({
                 w_id: state.indexState.indexData[state.indexState.currentNumber].w_id,
                 baseImg: this.canvasMethod.canvasToBase()
@@ -282,6 +303,10 @@ export default class method extends React.Component {
                     Toast.info(state.indexState.notSaveToast, 2);
                     return;
                 }
+            }
+            // 当抄经的数量大于固定次数的时候，删掉最前面的 确定 saveNextArr 数组里只有5个值
+            if(state.saveNextArr.length > state.nextNumberAjax + 1){
+                state.saveNextArr.shift();
             }
 
             // 当前的数如果不等于总数，那么就可以继续往下写。

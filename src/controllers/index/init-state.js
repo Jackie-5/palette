@@ -10,7 +10,10 @@ import offlineMake from './state/offline-make';
 export default {
     defaultPage: {},
     isMusic: true,
-    nextNumberAjax: 3,
+    isShowSharePop: false,
+    nextNumberAjax: 5,
+    // 用来保存所有也写过作品的base64代码
+    saveNextArr: [],
     leftIcon: [
         {
             icon: 'icon-maobi',

@@ -6,6 +6,8 @@ import React from 'react';
 import axios from '../../libs/axios';
 import pageAjax from '../../libs/pageAjax';
 import URI from 'urijs'
+import { wxShareConfig, hideConfig, wxConfigSet } from '../../libs/wx-share-config';
+import { Toast } from 'antd-mobile';
 
 export default class method extends React.Component {
     constructor(props) {
@@ -26,46 +28,29 @@ export default class method extends React.Component {
                 flag: location.href
             }
         });
-        wx.config({
-            debug: false,
-            appId: wxConfig.data.appId,
-            timestamp: wxConfig.data.timestamp,
-            nonceStr: wxConfig.data.nonceStr,
-            signature: wxConfig.data.signature,
-            jsApiList: [
-                'onMenuShareTimeline',
-                'onMenuShareAppMessage',
-                'startRecord',
-                'stopRecord',
-                'onVoiceRecordEnd',
-                'chooseImage',
-                'previewImage',
-                'uploadImage',
-                'downloadImage',
-                'openLocation',
-                'getLocation',
-                'hideOptionMenu',
-                'showOptionMenu',
-                'hideMenuItems',
-                'showMenuItems',
-                'closeWindow',
-                'scanQRCode',
-            ],
-        });
-
+        wxConfigSet(wxConfig);
         wx.ready(() => {
+            wxShareConfig({
+                title: `[乙度抄经] [${decodeURIComponent(this.urlSearch.n)}]`,
+                desc: '『乙东方 · 度千处』点亮一盏心灯，送出一份祝福。',
+                link: `http://wechat.eastdoing.com/chaojing/share.html?i=${this.urlSearch.i}&n=${this.urlSearch.n}`,
+                imgUrl: 'http://wechat.eastdoing.com/chaojing/share.jpg'
+            });
+            hideConfig();
             self.initShare();
         });
+        document.title = decodeURIComponent(this.urlSearch.n);
         document.querySelector('.loadImg').onload = ()=>{
             document.querySelector('.palette-share-box__page-view__box').scrollLeft = document.querySelector('.loadImg').offsetWidth;
         };
     }
 
     async initShare() {
+
         const data = await axios({
             url: pageAjax.ShareGetShareDetails,
             params: {
-                bh_id: this.urlSearch.shareId
+                key: this.urlSearch.i
             }
         });
         this.setState(
@@ -73,8 +58,6 @@ export default class method extends React.Component {
                 param: data.data,
             }
         );
-
-
     }
 
     imgClick() {
@@ -93,13 +76,12 @@ export default class method extends React.Component {
             url: pageAjax.ShareZan,
             method: 'post',
             params: {
-                bh_id: self.urlSearch.shareId,
+                key: self.urlSearch.i,
             }
         });
 
         if (data.code === 0) {
-            state.param.ispraise = state.param.ispraise === 1 ? 0 : 1;
-            self.setState(state);
+            self.initShare();
         }
     }
 };

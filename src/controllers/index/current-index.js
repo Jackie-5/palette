@@ -48,6 +48,11 @@ const pageSwitch = (pageSwitch, self) => {
 class App extends method {
     render() {
         return <div className="palette-page-box">
+            <div className={this.state.isShowSharePop ? 'wx-popup-tips' : 'hide'} onClick={()=>{
+                const state = this.state;
+                state.isShowSharePop = false;
+                this.setState(state);
+            }} />
             {
                 userAgent() ?  <div style={{height: '100%'}}>
                     <PullLeft self={this}/>

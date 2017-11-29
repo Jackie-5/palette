@@ -19,17 +19,17 @@ class App extends method {
         <div>
             {
                 userAgent() ? <div className="palette-share-box">
-                    <div className="palette-share-box__hope">
+                    <div className={ (param.bh_prayman && param.bh_prayother) || param.pt_name || param.bh_wish ? 'palette-share-box__hope' : 'hide' }>
                         <div className="palette-share-box__hope__title clearfix">
                             <div className="palette-share-box__hope__title__name">祈福信息</div>
                         </div>
                         <div className="palette-share-box__hope__box">
-                            <div className="palette-share-box__hope__box__content">{param.bh_prayman}为{param.bh_prayother}祈福</div>
-                            <div className="palette-share-box__hope__box__content">
+                            <div className={ (param.bh_prayman && param.bh_prayother) ? 'palette-share-box__hope__box__content' : 'hide'}>{param.bh_prayman}为{param.bh_prayother}祈福</div>
+                            <div className={param.pt_name ? 'palette-share-box__hope__box__content' : 'hide'}>
                                 <span>祈福种类:</span>
                                 <span>{param.pt_name}</span>
                             </div>
-                            <div className="palette-share-box__hope__box__content">
+                            <div className={param.bh_wish ? 'palette-share-box__hope__box__content' : 'hide'}>
                                 <span>心愿:</span>
                                 <span>{param.bh_wish}</span>
                             </div>
@@ -51,7 +51,7 @@ class App extends method {
 
                     <div className="palette-share-box__praise clearfix" onClick={this.praise.bind(this)}>
                         <span className="palette-share-box__praise__font">{param.praiseNum}赞</span>
-                        <div className={param.ispraise === 1 ? 'iconfont icon-xin palette-share-box__praise__icon' : 'iconfont icon-xin1 palette-share-box__praise__icon'} />
+                        <div className={param.ispraise === 1 ? 'iconfont icon-xin1 palette-share-box__praise__icon' : 'iconfont icon-xin palette-share-box__praise__icon'} />
                     </div>
                     <div className="palette-share-box__versesImg">
                         <div className="palette-share-box__versesImg__border" />

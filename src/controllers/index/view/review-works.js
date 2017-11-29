@@ -76,6 +76,7 @@ export default class extends Component {
         const state = self.state;
         const data = await axios({
             url: state.isReviewImgIsPerson ? pageAjax.UserLectionGetMyWorksByID : pageAjax.UserLectionPreviewWorks,
+            method: state.isReviewImgIsPerson ? undefined :'post',
             params: {
                 bh_id: state.isReviewImgIsPerson ? state.reviewImgIsPerson.bh_id : state.defaultPage.bh_id
             }
