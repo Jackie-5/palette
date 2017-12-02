@@ -18,6 +18,7 @@
                 background: @bgColor;
                 padding-left: 10px;
                 padding-top: 20px;
+                position:relative;
                 .am-list-line{
                     padding: 0;
                     .am-list-content{
@@ -26,6 +27,13 @@
                             font-size: 25px;
                         }
                     }
+                }
+                &__now{
+                    position:absolute;
+                    right: 20px;
+                    bottom: 0;
+                    color:@penColor;
+                    font-size: 25px;
                 }
             }
             &__author{

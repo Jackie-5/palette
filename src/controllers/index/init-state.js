@@ -111,7 +111,7 @@ export default {
     reviewBtn: [
         [
             {
-                value: '返回主页',
+                value: '继续书写',
                 icon: 'icon-fanhui',
                 key: 'return',
             },
@@ -123,7 +123,7 @@ export default {
                 key: 'save',
             },
             {
-                value: '返回主页',
+                value: '继续书写',
                 icon: 'icon-fanhui',
                 key: 'return',
             },

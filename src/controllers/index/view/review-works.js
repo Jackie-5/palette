@@ -23,14 +23,28 @@ const isBtnShow = (propsSelf, self) => {
                     (currentNumber >= allNumber) ? 1 : 0
                 ].map((item, i) => {
                 return <div key={i}>
-                    <Button
+                    {
+                        item.key === 'delete' ?
+                            <div className={item.icon + ' iconfont font-size review-delete-btn'}
+                                 onClick={propsSelf.pageLeftSwitch.bind(propsSelf, {
+                                     item: propsSelf.state.leftIcon[0],
+                                     review: item.key
+                                 })}
+                            >
+
+                            </div> : <Button
                             type="ghost" size="small"
-                            onClick={propsSelf.pageLeftSwitch.bind(propsSelf, { item: propsSelf.state.leftIcon[0], review: item.key })}
+                            onClick={propsSelf.pageLeftSwitch.bind(propsSelf, {
+                                item: propsSelf.state.leftIcon[0],
+                                review: item.key
+                            })}
                             inline
-                    >
-                        <span>{item.value}</span>
-                        <span className={item.icon + ' iconfont font-size'}/>
-                    </Button>
+                        >
+                            <span>{item.value}</span>
+                            <span className={item.icon + ' iconfont font-size'}/>
+                        </Button>
+                    }
+
                 </div>
             })
         }
@@ -76,7 +90,7 @@ export default class extends Component {
         const state = self.state;
         const data = await axios({
             url: state.isReviewImgIsPerson ? pageAjax.UserLectionGetMyWorksByID : pageAjax.UserLectionPreviewWorks,
-            method: state.isReviewImgIsPerson ? undefined :'post',
+            method: state.isReviewImgIsPerson ? undefined : 'post',
             params: {
                 bh_id: state.isReviewImgIsPerson ? state.reviewImgIsPerson.bh_id : state.defaultPage.bh_id
             }
@@ -91,11 +105,12 @@ export default class extends Component {
 
         self.setState(state);
         // 让图片从右往左滚动
-        document.querySelector('.loadImg').onload = ()=>{
+        document.querySelector('.loadImg').onload = () => {
             document.querySelector('.review-color-body').scrollLeft = document.querySelector('.loadImg').offsetWidth;
         };
     }
-    showImg(){
+
+    showImg() {
         wx.previewImage({
             current: this.state.currentReviewImgSrc, // 当前显示图片的http链接
             urls: [
@@ -109,7 +124,7 @@ export default class extends Component {
         const row = (rowData, sectionID, rowID) => {
             return (
                 <div className="review-color-body__color" key={rowID}>
-                    <img className="loadImg" src={self.state.currentReviewImgSrc} onClick={this.showImg.bind(self)} />
+                    <img className="loadImg" src={self.state.currentReviewImgSrc} onClick={this.showImg.bind(self)}/>
                 </div>
             );
         };

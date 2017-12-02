@@ -12,10 +12,12 @@ export default {
         chinese: '',
         pinyin: ''
     },],
-    prevToast: '已经是第一个字了',
-    nextToast: '恭喜您,已抄完,作品已经保存在个人主页下',
-    tips: '您还没有写字哦~',
-    notSaveToast: '您写的字正在上传中，请稍后在写下一个字',
-    notPrevToast: '无法回退',
+    prevToast: '请提笔书写哦~',
+    nextToast: '恭喜您完成书写！请至用户中心查看。',
+    tips: '请按顺序书写哦~',
+    notSaveToast: '资料保存中，请稍候。',
+    notPrevToast: '回退次数超限',
+    isSaveTips: '您是否要保存？保存后无法修改此作品了哦~',
+    deleteTips: '是否删除该作品？'
 
 }

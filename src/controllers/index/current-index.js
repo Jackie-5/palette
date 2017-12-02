@@ -66,6 +66,7 @@ class App extends method {
                     </div>
                     <audio
                         ref="audio"
+                        loop="loop"
                         src={this.state.defaultPage.musicurl}
                     />
                 </div> : <Result

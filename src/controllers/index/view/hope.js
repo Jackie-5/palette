@@ -71,12 +71,16 @@ export default class extends Component {
 
     speciesClick(item) {
         const state = copy(this.state);
+        const arr = [];
         state.hopeState.species.map((it) => {
-            it.active = item.pt_id === it.pt_id;
+            if(item.pt_id === it.pt_id){
+                it.active = !it.active;
+            }
             if (it.active) {
-                state.hopeState.param.pt_id = it.pt_id;
+                arr.push(it.pt_id);
             }
         });
+        state.hopeState.param.pt_id = arr.join(',');
         this.setState(state);
     }
 
@@ -92,7 +96,7 @@ export default class extends Component {
         state.hopeState.param.bh_id = state.defaultPage.bh_id;
         if(!/^[A-Za-z0-9\u4e00-\u9fa5]+$/.test(state.hopeState.param.bh_prayman)
             || !/^[A-Za-z0-9\u4e00-\u9fa5]+$/.test(state.hopeState.param.bh_prayother)
-            || !state.hopeState.param.bh_wish
+            || !state.hopeState.param.pt_id
         ){
             Toast.offline('请填写完整信息哦~');
             return;
@@ -144,7 +148,7 @@ export default class extends Component {
                         }
                     </div>
                     <WhiteSpace size="xl"/>
-                    <div className="hope-body__list-box__wish-title">心愿(可选填)</div>
+                    <div className="hope-body__list-box__wish-title">心愿:(可选填)</div>
                     <WhiteSpace size="lg"/>
                     <TextareaItem
                         className="hope-body__list-box__textarea"
@@ -156,13 +160,13 @@ export default class extends Component {
                     />
                     <WhiteSpace size="xl"/>
                     <div className="hope-body__list-box__enter-box">
-                        <Button type="primary" size="small" className="hope-body__list-box__enter-box__btn"
-                                style={{marginRight: '10px'}}
-                                onClick={self.pageLeftSwitch.bind(self, {item: self.state.leftIcon[0]})}
-                                inline>返回抄经</Button>
+                        {/*<Button type="primary" size="small" className="hope-body__list-box__enter-box__btn"*/}
+                                {/*style={{marginRight: '10px'}}*/}
+                                {/*onClick={self.pageLeftSwitch.bind(self, {item: self.state.leftIcon[0]})}*/}
+                                {/*inline>返回抄经</Button>*/}
                         <Button type="primary" size="small" className="hope-body__list-box__enter-box__btn"
                                 onClick={this.enter.bind(self)}
-                                inline>提交祈福</Button>
+                                inline>保存信息</Button>
                     </div>
                 </div>
             );

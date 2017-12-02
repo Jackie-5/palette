@@ -91,6 +91,7 @@ export default class extends Component {
                                 className="music-body__row__title" multipleLine>
                                 <span>{item.m_name}</span>
                                 <Brief className="music-body__row__title__sub-title">{item.m_author}</Brief>
+                                <Brief className="music-body__row__title__sub-title">人气:xxx</Brief>
                             </Item>
                         })
                     }

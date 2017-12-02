@@ -22,12 +22,12 @@ export default class method extends React.Component {
         this.canvasNextArr = [];
     }
 
-    shouldComponentUpdate(nextProps, nextState){
+    shouldComponentUpdate(nextProps, nextState) {
         const self = this;
-        if(self.state.defaultPage.musicurl !== nextState.defaultPage.musicurl){
+        if (self.state.defaultPage.musicurl !== nextState.defaultPage.musicurl) {
             const audio = new Audio(this.state.defaultPage.musicurl);
-            audio.onloadedmetadata = ()=>{
-                if(self.refs.audio.paused && self.state.isMusic){
+            audio.onloadedmetadata = () => {
+                if (self.refs.audio.paused && self.state.isMusic) {
                     self.refs.audio.play()
                 }
             };
@@ -53,6 +53,20 @@ export default class method extends React.Component {
                 wxShareConfig(self.state.indexShareOpt);
                 self.refs.audio.play();
             });
+        }
+    }
+
+    async deleteWork(params, state) {
+        console.log('asdfa');
+        const data = await axios({
+            url: pageAjax.UserLectionDelWorks,
+            method: 'post',
+            params: params
+        });
+
+        if (data.code === 0) {
+            Toast.success(data.msg, 1);
+            this.setState(state);
         }
 
     }
@@ -89,14 +103,17 @@ export default class method extends React.Component {
 
     async pageLeftSwitch(options, e) {
         const { item } = options;
-        e.stopPropagation();
-        e.preventDefault();
+        if(e){
+            e.stopPropagation();
+            e.preventDefault();
+        }
+
         const self = this;
         const state = copy(self.state);
         this.isInitCanvas = false;
         state.isReviewImgIsPerson = false;
         // 默认分享
-        if(!(options.review && options.review === 'share')){
+        if (!(options.review && options.review === 'share')) {
             wxShareConfig(self.state.indexShareOpt);
         }
 
@@ -109,14 +126,18 @@ export default class method extends React.Component {
             if (!state.pageSwitch[item.link]) {
                 document.title = item.title;
                 for (let i in state.pageSwitch) {
-                    if(options.review !== 'share'){
+                    if (options.review !== 'share') {
                         state.pageSwitch[i] = item.link === i;
                     }
                 }
+                // 查看当前切换页面是否要上传图片
+                if (self.canvasNextArr.length > 0) {
+                    await self.uploadCanvas()
+                }
+
                 // 如果是从各个页面点回到首页的那么做页面处理
                 if (options.tie) {
                     // 先查看用户是否可以保存作品
-                    // TODO 这里逻辑 看一下
                     const isSave = await axiosAll.get(pageAjax.UserLectionWorksIsOver);
                     if (isSave.data.code !== 0) {
                         alert('提示', isSave.data.msg, [
@@ -127,15 +148,18 @@ export default class method extends React.Component {
                             },
                             {
                                 text: '确定', onPress: () => {
+                                self.deleteWork({
+                                    bh_id: state.defaultPage.bh_id
+                                }, state);
                                 self.saveUpdate('addWork', {
-                                    bh_id: options.tie.b_id,
+                                    b_id: options.tie.b_id,
                                 }, state);
                             }
                             },
                         ]);
                     } else {
                         self.saveUpdate('addWork', {
-                            bh_id: options.tie.b_id,
+                            b_id: options.tie.b_id,
                         }, state);
                     }
                 } else if (options.music) {
@@ -173,18 +197,20 @@ export default class method extends React.Component {
                             }
                         });
                     } else if (options.review === 'delete') {
-                        axios({
-                            url: pageAjax.UserLectionDelWorks,
-                            method: 'post',
-                            params: {
-                                bh_id: state.reviewImgIsPerson.bh_id
-                            }
-                        }).then((data) => {
-                            if (data.code === 0) {
-                                Toast.success(data.msg, 1);
+                        alert('提示', state.indexState.deleteTips, [
+                            {
+                                text: '取消', onPress: () => {
                                 this.setState(state);
                             }
-                        });
+                            },
+                            {
+                                text: '确定', onPress: () => {
+                                self.deleteWork({
+                                    bh_id: state.reviewImgIsPerson.bh_id
+                                }, state);
+                            }
+                            },
+                        ]);
                     } else if (options.review === 'share') {
                         state.isReviewImgIsPerson = true;
                         const data = await axios({
@@ -244,7 +270,30 @@ export default class method extends React.Component {
         this.canvasMethod.clearCanvas();
     }
 
-    preventDefaultMove(e){
+    async uploadCanvas() {
+        const self = this;
+        const state = this.state;
+        const uploadData = await axios({
+            url: pageAjax.UserLectionUploadImg,
+            method: 'post',
+            loading: true,
+            isFail: true,
+            params: {
+                bh_id: self.state.defaultPage.bh_id,
+                imgdata: self.canvasNextArr
+            },
+        });
+        if (uploadData.code === 0) {
+            // 每次上传成功后把base64代码清理掉
+            self.canvasNextArr = [];
+            return true
+        } else {
+            Toast.info(state.indexState.notSaveToast, 2);
+            return false
+        }
+    }
+
+    preventDefaultMove(e) {
         e.preventDefault();
     }
 
@@ -261,7 +310,7 @@ export default class method extends React.Component {
                 self.canvasNextArr.pop();
             }
 
-            if(state.saveNextArr.length > 1){
+            if (state.saveNextArr.length > 0) {
                 state.saveNextArr.pop();
             } else {
                 Toast.info(state.indexState.notPrevToast, 2);
@@ -279,50 +328,64 @@ export default class method extends React.Component {
         const self = this;
         const state = copy(this.state);
         if (this.canvasMethod.beginWrite) {
-            // 每次push一下canvas的base64
-            state.saveNextArr.push(this.canvasMethod.canvasToBase());
-            self.canvasNextArr.push({
-                w_id: state.indexState.indexData[state.indexState.currentNumber].w_id,
-                baseImg: this.canvasMethod.canvasToBase()
-            });
-            // 当前canvas的Arr里到了规定的个数的时候，或者抄到最后一个字的时候去做上传
-            if (self.canvasNextArr.length === state.nextNumberAjax || state.indexState.currentNumber === state.indexState.allNumber) {
-                const uploadData = await axios({
-                    url: pageAjax.UserLectionUploadImg,
-                    method: 'post',
-                    loading: true,
-                    params: {
-                        bh_id: self.state.defaultPage.bh_id,
-                        imgdata: self.canvasNextArr
-                    },
-                });
-                if(uploadData.code === 0){
-                    // 每次上传成功后把base64代码清理掉
-                    self.canvasNextArr = [];
-                } else {
-                    Toast.info(state.indexState.notSaveToast, 2);
-                    return;
-                }
-            }
-            // 当抄经的数量大于固定次数的时候，删掉最前面的 确定 saveNextArr 数组里只有5个值
-            if(state.saveNextArr.length > state.nextNumberAjax + 1){
-                state.saveNextArr.shift();
-            }
-
             // 当前的数如果不等于总数，那么就可以继续往下写。
-            if(state.indexState.currentNumber !== state.indexState.allNumber){
+            if (state.indexState.currentNumber !== state.indexState.allNumber) {
+                // 每次push一下canvas的base64
+                state.saveNextArr.push(this.canvasMethod.canvasToBase());
+                self.canvasNextArr.push({
+                    w_id: state.indexState.indexData[state.indexState.currentNumber].w_id,
+                    baseImg: this.canvasMethod.canvasToBase()
+                });
+                // 当前canvas的Arr里到了规定的个数的时候，或者抄到最后一个字的时候去做上传
+                if (self.canvasNextArr.length === state.nextNumberAjax || state.indexState.currentNumber === state.indexState.allNumber) {
+                    const upload = await self.uploadCanvas();
+                    if (!upload) {
+                        return;
+                    }
+                }
+                // 当抄经的数量大于固定次数的时候，删掉最前面的 确定 saveNextArr 数组里只有5个值
+                if (state.saveNextArr.length > state.nextNumberAjax + 1) {
+                    state.saveNextArr.shift();
+                }
                 self.clearCanvas();
                 state.indexState.currentNumber += 1;
             } else {
                 // 当写到最后一个字的时候，帮助用户自动保存作品。
-                await axios({
-                    url: pageAjax.UserLectionSaveWorks,
-                    method: 'post',
-                    params: {
-                        bh_id: state.defaultPage.bh_id
+                alert('提示', state.indexState.isSaveTips, [
+                    {
+                        text: '取消', onPress: () => {
+                        this.setState(state);
                     }
-                });
-                Toast.info(state.indexState.nextToast, 2);
+                    },
+                    {
+                        text: '确定', async onPress () {
+                        // 点击确定后 上传最后一张图片
+                        self.canvasNextArr.push({
+                            w_id: state.indexState.indexData[state.indexState.currentNumber].w_id,
+                            baseImg: self.canvasMethod.canvasToBase()
+                        });
+                        await self.uploadCanvas();
+
+                        await axios({
+                            url: pageAjax.UserLectionSaveWorks,
+                            method: 'post',
+                            params: {
+                                bh_id: state.defaultPage.bh_id
+                            }
+                        });
+                        state.saveNextArr = [];
+                        self.setState(state);
+
+                        self.pageLeftSwitch({item: self.state.leftIcon[5], person: {
+                            bh_id: state.defaultPage.bh_id,
+                            lectionname: state.defaultPage.lectionname,
+                        }});
+                        self.clearCanvas();
+                    }
+                    },
+                ]);
+
+
             }
 
             self.setState(state);

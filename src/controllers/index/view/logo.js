@@ -75,14 +75,20 @@ export default class extends Component {
             );
         };
 
-        return <div style={{ height: '100%' }} className="logo-about">
+        return <div className="logo-about">
             <ListView ref="lv"
                       dataSource={this.state.dataSource}
                       renderBodyComponent={() => <MyBody />}
                       renderRow={row}
                       className="logo-about__box"
-                      contentContainerStyle={{ height: '100%' }}
+                      contentContainerStyle={{ height: '80%' }}
             />
+            <div className="logo-about__img">
+                <div className="logo-about__img__box">
+                    <img src="http://wechat.eastdoing.com/chaojing/about-img.png" />
+                </div>
+            </div>
+
         </div>
     }
 }
