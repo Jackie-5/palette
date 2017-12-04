@@ -215,9 +215,10 @@ export default class extends React.Component {
                      onTouchMove={self.preventDefaultMove.bind(self)}
                 >
                     {
-                        currentNumber <= 0 ? '' : <img src={!defaultPage.last_imgurl && saveNextArr.length === 0 ?
+                        currentNumber <= 0 ? '' : <img src={saveNextArr.length === 0 && defaultPage.last_imgurl ?
+                            defaultPage.last_imgurl :
                             (saveNextArr.length > 0 ? saveNextArr[saveNextArr.length - 1] : indexData[currentNumber - 1].imgurl)
-                            : defaultPage.last_imgurl} alt=""/>
+                            } alt=""/>
                     }
                 </div>
             </div>

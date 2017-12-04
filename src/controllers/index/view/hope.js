@@ -70,12 +70,16 @@ export default class extends Component {
             if (getData.pt_id === item.pt_id) {
                 item.active = true;
                 isActive = false;
+                state.hopeState.param.pt_id = getData.pt_id;
             }
         });
         // 查看当前是否有选中的 如果没有 那么选中第一个
-        if(isActive){
+        if (isActive) {
             state.hopeState.species.map((item, i) => {
-                item.active = i === 0
+                if (i === 0) {
+                    item.active = true;
+                    state.hopeState.param.pt_id = item.pt_id;
+                }
             });
         }
         // 还原祈福信息
@@ -144,6 +148,13 @@ export default class extends Component {
         }
     }
 
+    handleChange(type, event) {
+        const state = this.state;
+        const param = this.state.hopeState.param;
+        param[type] = event;
+        this.setState(state);
+    }
+
     render() {
         const self = this.props.self;
         const state = self.state;
@@ -160,6 +171,7 @@ export default class extends Component {
                                     clear
                                     onBlur={this.inputBlur.bind(self, item.key)}
                                     value={state.hopeState.param[item.key]}
+                                    onChange={this.handleChange.bind(self, item.key)}
                                 >{item.placeholder}:</InputItem>
                             </div>
                         })
@@ -188,6 +200,7 @@ export default class extends Component {
                         rows={4}
                         placeholder="(可选填)"
                         value={state.hopeState.param.bh_wish}
+                        onChange={this.handleChange.bind(self, 'bh_wish')}
                         onBlur={this.inputBlur.bind(self, 'bh_wish')}
                     />
                     <WhiteSpace size="xl"/>
