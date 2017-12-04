@@ -61,6 +61,9 @@ export default class extends Component {
 
         const getData = await axios({
             url: pageAjax.UserLectionGetPray,
+            params: {
+                bh_id: state.defaultPage.bh_id
+            }
         });
         // 选中祈福信息
         state.hopeState.species.map((item, i) => {
@@ -76,9 +79,9 @@ export default class extends Component {
             });
         }
         // 还原祈福信息
-        state.hopeState.param.bh_prayman = getData.data.bh_prayman;
-        state.hopeState.param.bh_prayother = getData.data.bh_prayother;
-        state.hopeState.param.bh_wish = getData.data.bh_wish;
+        state.hopeState.param.bh_prayman = getData.data.bh_prayman || '';
+        state.hopeState.param.bh_prayother = getData.data.bh_prayother || '';
+        state.hopeState.param.bh_wish = getData.data.bh_wish || '';
 
         this.genData();
         this.setState({

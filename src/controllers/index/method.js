@@ -54,7 +54,7 @@ export default class method extends React.Component {
                     self.initCanvas();
                     hideConfig();
                     wxShareConfig(self.state.indexShareOpt);
-                    self.refs.audio.play();
+                    self.state.isMusic && self.refs.audio.play();
                 });
             }
         }
