@@ -39,7 +39,7 @@ export default class method extends React.Component {
         // 进入页面 set 默认值
         const self = this;
         if (userAgent()) {
-            await axios({ url: pageAjax.LoginPower });
+            const isWatch =await axios({ url: pageAjax.LoginPower });
             const wxConfig = await axios({
                 url: pageAjax.ShareGetParm,
                 params: {
@@ -47,17 +47,21 @@ export default class method extends React.Component {
                 }
             });
             wxConfigSet(wxConfig);
-            wx.ready(() => {
-                self.initCanvas();
-                hideConfig();
-                wxShareConfig(self.state.indexShareOpt);
-                self.refs.audio.play();
-            });
+            if(isWatch.code === 101){
+                wx.hideAllNonBaseMenuItem();
+            } else {
+                wx.ready(() => {
+                    self.initCanvas();
+                    hideConfig();
+                    wxShareConfig(self.state.indexShareOpt);
+                    self.refs.audio.play();
+                });
+            }
+
         }
     }
 
     async deleteWork(params, state) {
-        console.log('asdfa');
         const data = await axios({
             url: pageAjax.UserLectionDelWorks,
             method: 'post',
@@ -255,7 +259,7 @@ export default class method extends React.Component {
         state.isReviewImgIsPerson = false;
         const detailData = await axios({ url: pageAjax.userLectionMyDetail });
         const data = await axios({ url: pageAjax.LectionGetWordList, params: { b_id: detailData.data.b_id } });
-        document.title = detailData.data.lectionname;
+        document.title = detailData.data.lectionname + ` [${detailData.data.b_author}]`;
         state.defaultPage = detailData.data;
 
         state.indexState.currentNumber = detailData.data.position - 1;

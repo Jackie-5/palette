@@ -8,17 +8,21 @@
             padding:0 5%;
             &__list-box{
                 &__input{
-                    margin-top: 30px;
+                    font-size: 25px;
                     .am-input-item{
-                        min-height: 50px;
-                        height:auto;
-                        background-color: #cccccc;
-                        border-radius: 10px;
+                        padding:0;
+                        //height:auto;
+                        background-color: transparent;
+                        //border-radius: 10px;
                         &::after{
-                            display: none;
+                            left:0;
                         }
-                        input{
-                            text-align: center;
+                        .am-input-label, .am-input-control {
+                            font-size: 30px;
+                            color: #333;
+                            input{
+                                font-size: 30px;
+                            }
                         }
                     }
                 }
@@ -38,11 +42,15 @@
                 }
 
                 &__wish-title{
-                    font-size: 28px;
+                    //font-size: 28px;
                 }
                 &__textarea{
-                    background:#cccccc;
+                    background:#e7e7e7;
                     min-height: 80px;
+                    color:#333;
+                    textarea{
+                        font-size: 30px;
+                    }
                     &::after{
                         display: none;
                     }

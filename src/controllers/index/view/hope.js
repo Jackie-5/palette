@@ -48,24 +48,45 @@ export default class extends Component {
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         // simulate initial Ajax
         const self = this.props.self;
         const state = self.state;
-        axios({
+        let isActive = true;
+        const data = await axios({
             url: pageAjax.PrayTypeGetList,
-        }).then((data) => {
-            data.data.map((item, i) => {
-                item.active = i === 0;
-            });
-            state.hopeState.species = data.data;
-            this.genData();
-            this.setState({
-                dataSource: this.state.dataSource.cloneWithRowsAndSections(this.dataBlob, this.sectionIDs, this.rowIDs),
-                isLoading: false,
-            });
-            self.setState(state);
         });
+
+        state.hopeState.species = data.data;
+
+        const getData = await axios({
+            url: pageAjax.UserLectionGetPray,
+        });
+        // 选中祈福信息
+        state.hopeState.species.map((item, i) => {
+            if (getData.pt_id === item.pt_id) {
+                item.active = true;
+                isActive = false;
+            }
+        });
+        // 查看当前是否有选中的 如果没有 那么选中第一个
+        if(isActive){
+            state.hopeState.species.map((item, i) => {
+                item.active = i === 0
+            });
+        }
+        // 还原祈福信息
+        state.hopeState.param.bh_prayman = getData.data.bh_prayman;
+        state.hopeState.param.bh_prayother = getData.data.bh_prayother;
+        state.hopeState.param.bh_wish = getData.data.bh_wish;
+
+        this.genData();
+        this.setState({
+            dataSource: this.state.dataSource.cloneWithRowsAndSections(this.dataBlob, this.sectionIDs, this.rowIDs),
+            isLoading: false,
+        });
+
+        self.setState(state);
 
     }
 
@@ -73,7 +94,7 @@ export default class extends Component {
         const state = copy(this.state);
         const arr = [];
         state.hopeState.species.map((it) => {
-            if(item.pt_id === it.pt_id){
+            if (item.pt_id === it.pt_id) {
                 it.active = !it.active;
             }
             if (it.active) {
@@ -94,10 +115,10 @@ export default class extends Component {
     async enter() {
         const state = copy(this.state);
         state.hopeState.param.bh_id = state.defaultPage.bh_id;
-        if(!/^[A-Za-z0-9\u4e00-\u9fa5]+$/.test(state.hopeState.param.bh_prayman)
+        if (!/^[A-Za-z0-9\u4e00-\u9fa5]+$/.test(state.hopeState.param.bh_prayman)
             || !/^[A-Za-z0-9\u4e00-\u9fa5]+$/.test(state.hopeState.param.bh_prayother)
             || !state.hopeState.param.pt_id
-        ){
+        ) {
             Toast.offline('请填写完整信息哦~');
             return;
         }
@@ -107,7 +128,7 @@ export default class extends Component {
             params: state.hopeState.param,
             method: 'post',
         });
-        if(data.code === 0){
+        if (data.code === 0) {
             for (let i in state.pageSwitch) {
                 state.pageSwitch[i] = state.leftIcon[0].link === i;
             }
@@ -118,6 +139,7 @@ export default class extends Component {
 
     render() {
         const self = this.props.self;
+        const state = self.state;
         const { getFieldProps } = self.props.form;
         const row = (rowData, sectionID, rowID) => {
             return (
@@ -127,15 +149,16 @@ export default class extends Component {
                         self.state.hopeState.input.map((item, i) => {
                             return <div className="hope-body__list-box__input" key={i}>
                                 <InputItem
-                                    placeholder={item.placeholder}
+                                    {...getFieldProps(`inputclear${i}`)}
                                     clear
                                     onBlur={this.inputBlur.bind(self, item.key)}
-                                />
+                                    value={state.hopeState.param[item.key]}
+                                >{item.placeholder}:</InputItem>
                             </div>
                         })
                     }
                     <WhiteSpace size="xl"/>
-                    <div className="hope-body__list-box__species-title">祈福种类</div>
+                    <div className="hope-body__list-box__species-title">祈福种类:</div>
                     <div className="hope-body__list-box__species-box">
                         {
                             self.state.hopeState.species.map((item, i) => {
@@ -148,7 +171,7 @@ export default class extends Component {
                         }
                     </div>
                     <WhiteSpace size="xl"/>
-                    <div className="hope-body__list-box__wish-title">心愿:(可选填)</div>
+                    <div className="hope-body__list-box__wish-title">心愿:</div>
                     <WhiteSpace size="lg"/>
                     <TextareaItem
                         className="hope-body__list-box__textarea"
@@ -156,14 +179,16 @@ export default class extends Component {
                         autoHeight
                         labelNumber={10}
                         rows={4}
+                        placeholder="(可选填)"
+                        value={state.hopeState.param.bh_wish}
                         onBlur={this.inputBlur.bind(self, 'bh_wish')}
                     />
                     <WhiteSpace size="xl"/>
                     <div className="hope-body__list-box__enter-box">
                         {/*<Button type="primary" size="small" className="hope-body__list-box__enter-box__btn"*/}
-                                {/*style={{marginRight: '10px'}}*/}
-                                {/*onClick={self.pageLeftSwitch.bind(self, {item: self.state.leftIcon[0]})}*/}
-                                {/*inline>返回抄经</Button>*/}
+                        {/*style={{marginRight: '10px'}}*/}
+                        {/*onClick={self.pageLeftSwitch.bind(self, {item: self.state.leftIcon[0]})}*/}
+                        {/*inline>返回抄经</Button>*/}
                         <Button type="primary" size="small" className="hope-body__list-box__enter-box__btn"
                                 onClick={this.enter.bind(self)}
                                 inline>保存信息</Button>

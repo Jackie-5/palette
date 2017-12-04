@@ -193,7 +193,7 @@ export default class extends React.Component {
     render() {
         const self = this.props.self;
 
-        const { saveNextArr } = self.state;
+        const { saveNextArr, defaultPage } = self.state;
 
         const { indexData, allNumber, currentNumber } = self.state.indexState;
         return <div className="canvas-index">
@@ -213,7 +213,9 @@ export default class extends React.Component {
                      onTouchMove={self.preventDefaultMove.bind(self)}
                 >
                     {
-                        currentNumber <= 0 ? '' : <img src={saveNextArr.length > 0 ? saveNextArr[saveNextArr.length - 1] : indexData[currentNumber - 1].imgurl} alt=""/>
+                        currentNumber <= 0 ? '' : <img src={!defaultPage.last_imgurl && saveNextArr.length === 0 ?
+                            (saveNextArr.length > 0 ? saveNextArr[saveNextArr.length - 1] : indexData[currentNumber - 1].imgurl)
+                            : defaultPage.last_imgurl} alt=""/>
                     }
                 </div>
             </div>

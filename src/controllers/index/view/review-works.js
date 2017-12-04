@@ -88,14 +88,23 @@ export default class extends Component {
         // simulate initial Ajax
         const self = this.props.self;
         const state = self.state;
-        const data = await axios({
-            url: state.isReviewImgIsPerson ? pageAjax.UserLectionGetMyWorksByID : pageAjax.UserLectionPreviewWorks,
-            method: state.isReviewImgIsPerson ? undefined : 'post',
-            params: {
-                bh_id: state.isReviewImgIsPerson ? state.reviewImgIsPerson.bh_id : state.defaultPage.bh_id
-            }
-        });
-        state.currentReviewImgSrc = data.msg;
+        if(state.isReviewImgIsPerson){
+            const data = await axios({
+                url: pageAjax.UserLectionGetMyWorksByID,
+                params: {
+                    bh_id: state.reviewImgIsPerson.bh_id
+                }
+            });
+            state.currentReviewImgSrc = data.msg;
+        } else {
+            const paw = await axios({
+                url: pageAjax.UserLectionGetMyWorksByID,
+                params: {
+                    bh_id: state.reviewImgIsPerson.bh_id
+                }
+            });
+        }
+
 
         this.genData();
         this.setState({
@@ -123,8 +132,62 @@ export default class extends Component {
         const self = this.props.self;
         const row = (rowData, sectionID, rowID) => {
             return (
-                <div className="review-color-body__color" key={rowID}>
-                    <img className="loadImg" src={self.state.currentReviewImgSrc} onClick={this.showImg.bind(self)}/>
+                <div className="">
+                    {
+                        state.isReviewImgIsPerson ? <div className="">
+                            <div className={ (param.bh_prayman && param.bh_prayother) || param.pt_name || param.bh_wish ? 'palette-share-box__hope' : 'hide' }>
+                                <div className="palette-share-box__hope__title clearfix">
+                                    <div className="palette-share-box__hope__title__name">祈福信息</div>
+                                </div>
+                                <div className="palette-share-box__hope__box">
+                                    <div className={ (param.bh_prayman && param.bh_prayother) ? 'palette-share-box__hope__box__content' : 'hide'}>{param.bh_prayman}为{param.bh_prayother}祈福</div>
+                                    <div className={param.pt_name ? 'palette-share-box__hope__box__content' : 'hide'}>
+                                        <span>祈福种类:</span>
+                                        <span>{param.pt_name}</span>
+                                    </div>
+                                    <div className={param.bh_wish ? 'palette-share-box__hope__box__content' : 'hide'}>
+                                        <span>心愿:</span>
+                                        <span>{param.bh_wish}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="palette-share-box__page-view">
+                                <div className="palette-share-box__page-view__title clearfix">
+                                    <div className="palette-share-box__page-view__title__name">我的作品</div>
+                                </div>
+                                <div className="palette-share-box__page-view__box">
+                                    <div className="palette-share-box__page-view__box__img">
+                                        <div className="ov">
+                                            <img className="loadImg" src={param.bh_imgurl} />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div className="palette-share-box__praise clearfix" onClick={this.praise.bind(this)}>
+                                <span className="palette-share-box__praise__font">{param.praiseNum}赞</span>
+                                <div className={param.ispraise === 1 ? 'iconfont icon-xin1 palette-share-box__praise__icon' : 'iconfont icon-xin palette-share-box__praise__icon'} />
+                            </div>
+                            <div className="palette-share-box__versesImg">
+                                <div className="palette-share-box__versesImg__border" />
+                                <div className="palette-share-box__versesImg__img" onClick={this.imgClick.bind(this)}>
+                                    <img src={param.versesImg} />
+                                </div>
+                                <div className="palette-share-box__versesImg__border" />
+                            </div>
+                            <div className="palette-share-box__qcode">
+                                <div className="palette-share-box__qcode__img">
+                                    <img src={param.wxImg} />
+                                </div>
+                            </div>
+                        </div> :
+                            <div className="review-color-body__color" key={rowID}>
+                                <img className="loadImg" src={self.state.currentReviewImgSrc}
+                                     onClick={this.showImg.bind(self)}/>
+                            </div>
+                    }
+
                 </div>
             );
         };

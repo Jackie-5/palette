@@ -1,15 +1,18 @@
 {
     "data": {
-        "total": 264,
-        "position": 260,
-        "musicurl": "http://ydadmin.pooyoo.net/Upload/files/music/formal/00C5CDD94981B2B305EAA4B35E3DF48A.mp3",
-        "lectionname": "心经",
-        "fontsize": 10,
-        "color": "#e94139",
-        "w_id": 2115,
-        "m_id": 9,
-        "b_id": 3,
-        "bh_id": 1
+        "total": 268,
+        "position": 5,
+        "musicurl": "http://admin.eastdoing.com/Upload/files/music/formal/5A702ACBA0E79E227F2CDDB38005ECE3.mp3",
+        "lectionname": "般若波罗蜜多心经",
+        "fontsize": "10",
+        "color": "#000",
+        "w_id": 3451,
+        "m_id": 11,
+        "b_id": 12,
+        "bh_id": 194,
+        "last_w_id": 3450,
+        "last_imgurl": "http://wechat.eastdoing.com/UserImg/32830B92BF02FC8E0B5D1A6628B456D726DD0FA28549A33949BD3106DCA14DC5/temp/CF6BC684AD5056A2/31F3EAF920FD2B3E6D8F324EF1972A47.png",
+        "b_author": "沈度（明）"
     },
     "code": 0,
     "msg": "成功"
