@@ -4,12 +4,12 @@
 import index from './state/index-satate';
 import penColor from './state/pen-color';
 import hopeState from './state/hope-state';
-import logoState from './state/logo-state';
 import offlineMake from './state/offline-make';
+import cookie from 'js-cookie';
 
 export default {
     defaultPage: {},
-    isMusic: true,
+    isMusic: cookie.get('isMusic') ? JSON.parse(cookie.get('isMusic')) : true,
     isShowSharePop: false,
     nextNumberAjax: 5,
     // 用来保存所有也写过作品的base64代码

@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import copy from 'clone';
+import cookie from 'js-cookie';
 
 export default class extends React.Component {
     constructor(props) {
@@ -182,6 +183,7 @@ export default class extends React.Component {
         e && e.stopPropagation();
         const state = copy(this.state);
         state.isMusic = !state.isMusic;
+        cookie.set('isMusic', state.isMusic);
         if (state.isMusic) {
             this.refs.audio.play()
         } else {

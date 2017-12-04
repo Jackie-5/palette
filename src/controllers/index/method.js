@@ -51,13 +51,12 @@ export default class method extends React.Component {
                 self.initCanvas();
                 hideConfig();
                 wxShareConfig(self.state.indexShareOpt);
-                self.refs.audio.play();
+                self.state.isMusic && self.refs.audio.play();
             });
         }
     }
 
     async deleteWork(params, state) {
-        console.log('asdfa');
         const data = await axios({
             url: pageAjax.UserLectionDelWorks,
             method: 'post',
@@ -140,23 +139,29 @@ export default class method extends React.Component {
                     // 先查看用户是否可以保存作品
                     const isSave = await axiosAll.get(pageAjax.UserLectionWorksIsOver);
                     if (isSave.data.code !== 0) {
-                        alert('提示', isSave.data.msg, [
-                            {
-                                text: '取消', onPress: () => {
-                                this.setState(state);
-                            }
-                            },
-                            {
-                                text: '确定', onPress: () => {
-                                self.deleteWork({
-                                    bh_id: state.defaultPage.bh_id
-                                }, state);
-                                self.saveUpdate('addWork', {
-                                    b_id: options.tie.b_id,
-                                }, state);
-                            }
-                            },
-                        ]);
+                        console.log(options.tie);
+                        if(options.tie.b_id !== state.defaultPage.b_id){
+                            alert('提示', isSave.data.msg, [
+                                {
+                                    text: '取消', onPress: () => {
+                                    this.setState(state);
+                                }
+                                },
+                                {
+                                    text: '确定', onPress: () => {
+                                    self.deleteWork({
+                                        bh_id: state.defaultPage.bh_id
+                                    }, state);
+                                    self.saveUpdate('addWork', {
+                                        b_id: options.tie.b_id,
+                                    }, state);
+                                }
+                                },
+                            ]);
+                        } else {
+                            this.setState(state);
+                        }
+
                     } else {
                         self.saveUpdate('addWork', {
                             b_id: options.tie.b_id,
@@ -167,9 +172,11 @@ export default class method extends React.Component {
                         m_id: options.music.m_id,
                     }, state);
                 } else if (options.pen) {
+                    state.defaultPage.fontsize = options.pen.size;
+                    state.defaultPage.color = options.pen.color;
                     self.saveUpdate('update', {
-                        fontsize: state.defaultPage.fontsize,
-                        color: state.defaultPage.color,
+                        fontsize: options.pen.size,
+                        color: options.pen.color,
                     }, state);
                 } else if (options.person) {
                     state.isReviewImgIsPerson = true;
@@ -257,6 +264,9 @@ export default class method extends React.Component {
         const data = await axios({ url: pageAjax.LectionGetWordList, params: { b_id: detailData.data.b_id } });
         document.title = detailData.data.lectionname;
         state.defaultPage = detailData.data;
+        state.penColorState.pen.map((item)=>{
+            item.active = detailData.data.color === item.color && detailData.data.fontsize === item.size.toString();
+        });
 
         state.indexState.currentNumber = detailData.data.position - 1;
         state.indexState.allNumber = data.data.length - 1;
@@ -298,7 +308,7 @@ export default class method extends React.Component {
     }
 
     prevFont(e) {
-        e.preventDefault();
+        this.preventDefaultMove(e);
         const self = this;
         const state = copy(this.state);
 
@@ -396,20 +406,20 @@ export default class method extends React.Component {
 
     }
 
-    changePenColor(index, type) {
-        const state = copy(this.state);
-        if (type === 'pen') {
-            state.penColorState.penSize.map((item, i) => {
-                item.active = index === i;
-                if (item.active) (state.defaultPage.fontsize = item.size)
-            });
-
-        } else {
-            state.penColorState.color.map((item, i) => {
-                item.active = index === i;
-                if (item.active) (state.defaultPage.color = item.value)
-            });
-        }
-        this.setState(state);
-    }
+    //changePenColor(index, type) {
+    //    const state = copy(this.state);
+    //    if (type === 'pen') {
+    //        state.penColorState.penSize.map((item, i) => {
+    //            item.active = index === i;
+    //            if (item.active) (state.defaultPage.fontsize = item.size)
+    //        });
+    //
+    //    } else {
+    //        state.penColorState.color.map((item, i) => {
+    //            item.active = index === i;
+    //            if (item.active) (state.defaultPage.color = item.value)
+    //        });
+    //    }
+    //    this.setState(state);
+    //}
 };

@@ -1,5 +1,32 @@
 @penColor: #996633;
 .pen-page-box{
+    .pen-grid-box{
+        border-bottom:1px solid #ddd;
+        .am-flexbox{
+            background:transparent;
+            //padding: 40px 0;
+            height: 2rem;
+        }
+        .__active{
+            background:#ddd;
+        }
+        &__list{
+            height:100%;
+            padding-top: 20px;
+            &__item-color{
+                width: 120px;
+                height: 120px;
+                border-radius: 100%;
+                margin:0 auto;
+                overflow: hidden;
+            }
+            &__item-font{
+                margin-top: 10px;
+            }
+        }
+    }
+
+
     .pen-color-box{
         height:75%;
         border-bottom:1px solid @ccc;

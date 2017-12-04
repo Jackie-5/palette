@@ -71,16 +71,20 @@ export default class extends Component {
 
     speciesClick(item) {
         const state = copy(this.state);
-        const arr = [];
+        //const arr = [];
         state.hopeState.species.map((it) => {
-            if(item.pt_id === it.pt_id){
-                it.active = !it.active;
-            }
+            it.active = item.pt_id === it.pt_id;
             if (it.active) {
-                arr.push(it.pt_id);
+                state.hopeState.param.pt_id = it.pt_id;
             }
+            //if(item.pt_id === it.pt_id){
+            //    it.active = !it.active;
+            //}
+            //if (it.active) {
+            //    arr.push(it.pt_id);
+            //}
         });
-        state.hopeState.param.pt_id = arr.join(',');
+        //state.hopeState.param.pt_id = arr.join(',');
         this.setState(state);
     }
 
@@ -135,7 +139,7 @@ export default class extends Component {
                         })
                     }
                     <WhiteSpace size="xl"/>
-                    <div className="hope-body__list-box__species-title">祈福种类</div>
+                    <div className="hope-body__list-box__species-title">祈福种类:</div>
                     <div className="hope-body__list-box__species-box">
                         {
                             self.state.hopeState.species.map((item, i) => {
