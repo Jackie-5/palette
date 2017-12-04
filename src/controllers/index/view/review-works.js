@@ -3,9 +3,11 @@
  */
 
 import React, { Component } from 'react'
-import { ListView, Button } from 'antd-mobile';
+import { ListView, Button, Checkbox } from 'antd-mobile';
 import axios from '../../../libs/axios';
 import pageAjax from '../../../libs/pageAjax';
+
+const CheckboxItem = Checkbox.CheckboxItem;
 
 const MyBody = (props) => {
     return <div className="review-color-body">
@@ -15,6 +17,7 @@ const MyBody = (props) => {
 
 const isBtnShow = (propsSelf, self) => {
     const { currentNumber, allNumber } = propsSelf.state.indexState;
+    const currentReviewDetail = propsSelf.state.currentReviewDetail;
     const { isReviewImgIsPerson } = propsSelf.state;
     return <div>
         {
@@ -25,14 +28,15 @@ const isBtnShow = (propsSelf, self) => {
                 return <div key={i}>
                     {
                         item.key === 'delete' ?
-                            <div className={item.icon + ' iconfont font-size review-delete-btn'}
-                                 onClick={propsSelf.pageLeftSwitch.bind(propsSelf, {
-                                     item: propsSelf.state.leftIcon[0],
-                                     review: item.key
-                                 })}
-                            >
-
-                            </div> : <Button
+                            <div className="">
+                                <div className={item.icon + ' iconfont font-size review-delete-btn'}
+                                     onClick={propsSelf.pageLeftSwitch.bind(propsSelf, {
+                                         item: propsSelf.state.leftIcon[0],
+                                         review: item.key
+                                     })}
+                                />
+                            </div>
+                            : <Button
                             type="ghost" size="small"
                             onClick={propsSelf.pageLeftSwitch.bind(propsSelf, {
                                 item: propsSelf.state.leftIcon[0],
@@ -44,7 +48,6 @@ const isBtnShow = (propsSelf, self) => {
                             <span className={item.icon + ' iconfont font-size'}/>
                         </Button>
                     }
-
                 </div>
             })
         }
@@ -88,7 +91,7 @@ export default class extends Component {
         // simulate initial Ajax
         const self = this.props.self;
         const state = self.state;
-        if(state.isReviewImgIsPerson){
+        if(!state.isReviewImgIsPerson){
             const data = await axios({
                 url: pageAjax.UserLectionGetMyWorksByID,
                 params: {
@@ -98,91 +101,90 @@ export default class extends Component {
             state.currentReviewImgSrc = data.msg;
         } else {
             const paw = await axios({
-                url: pageAjax.UserLectionGetMyWorksByID,
+                url: pageAjax.UserLectionGetShareKey,
                 params: {
                     bh_id: state.reviewImgIsPerson.bh_id
                 }
             });
+            const data = await axios({
+                url: pageAjax.ShareGetShareDetails,
+                params: {
+                    key: paw.data.key
+                }
+            });
+            state.currentReviewDetail = data.data;
         }
 
 
         this.genData();
         this.setState({
+            ...state,
             dataSource: this.state.dataSource.cloneWithRowsAndSections(this.dataBlob, this.sectionIDs, this.rowIDs),
             isLoading: false,
         });
-
-        self.setState(state);
         // 让图片从右往左滚动
         document.querySelector('.loadImg').onload = () => {
-            document.querySelector('.review-color-body').scrollLeft = document.querySelector('.loadImg').offsetWidth;
+            document.querySelector(state.isReviewImgIsPerson ? '.palette-review-box__page-view__box': '.review-color-body').scrollLeft = document.querySelector('.loadImg').offsetWidth;
         };
     }
 
     showImg() {
         wx.previewImage({
-            current: this.state.currentReviewImgSrc, // 当前显示图片的http链接
+            current: this.state.isReviewImgIsPerson ? this.state.currentReviewDetail.bh_imgurl : this.state.currentReviewImgSrc, // 当前显示图片的http链接
             urls: [
-                this.state.currentReviewImgSrc
+                this.state.isReviewImgIsPerson ? this.state.currentReviewDetail.bh_imgurl : this.state.currentReviewImgSrc
             ]
         });
     }
 
     render() {
         const self = this.props.self;
+        const state = self.state;
+        const currentReviewDetail = self.state.currentReviewDetail;
         const row = (rowData, sectionID, rowID) => {
             return (
-                <div className="">
+                <div style={{height: '100%'}} key={rowID}>
                     {
-                        state.isReviewImgIsPerson ? <div className="">
-                            <div className={ (param.bh_prayman && param.bh_prayother) || param.pt_name || param.bh_wish ? 'palette-share-box__hope' : 'hide' }>
-                                <div className="palette-share-box__hope__title clearfix">
-                                    <div className="palette-share-box__hope__title__name">祈福信息</div>
+                        state.isReviewImgIsPerson ? <div>
+                            <div className={ (currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother) || currentReviewDetail.pt_name || currentReviewDetail.bh_wish ? 'palette-share-box__hope' : 'hide' }>
+                                <div className="palette-review-box__hope__title clearfix">
+                                    <div className="palette-review-box__hope__title__name">祈福信息</div>
                                 </div>
-                                <div className="palette-share-box__hope__box">
-                                    <div className={ (param.bh_prayman && param.bh_prayother) ? 'palette-share-box__hope__box__content' : 'hide'}>{param.bh_prayman}为{param.bh_prayother}祈福</div>
-                                    <div className={param.pt_name ? 'palette-share-box__hope__box__content' : 'hide'}>
+                                <div className="palette-review-box__hope__box">
+                                    <div className={ (currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother) ? 'palette-review-box__hope__box__content' : 'hide'}>[{currentReviewDetail.bh_prayman}] 为 [{currentReviewDetail.bh_prayother}]祈福</div>
+                                    <div className={currentReviewDetail.pt_name ? 'palette-review-box__hope__box__content' : 'hide'}>
                                         <span>祈福种类:</span>
-                                        <span>{param.pt_name}</span>
+                                        <span>{currentReviewDetail.pt_name}</span>
                                     </div>
-                                    <div className={param.bh_wish ? 'palette-share-box__hope__box__content' : 'hide'}>
+                                    <div className={currentReviewDetail.bh_wish ? 'palette-review-box__hope__box__content' : 'hide'}>
                                         <span>心愿:</span>
-                                        <span>{param.bh_wish}</span>
+                                        <span>{currentReviewDetail.bh_wish}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div className="palette-share-box__page-view">
-                                <div className="palette-share-box__page-view__title clearfix">
-                                    <div className="palette-share-box__page-view__title__name">我的作品</div>
+                            <div className="palette-review-box__page-view">
+                                <div className="palette-review-box__page-view__title clearfix">
+                                    <div className="palette-review-box__page-view__title__name">我的作品</div>
                                 </div>
-                                <div className="palette-share-box__page-view__box">
-                                    <div className="palette-share-box__page-view__box__img">
+                                <div className="palette-review-box__page-view__box">
+                                    <div className="palette-review-box__page-view__box__img">
                                         <div className="ov">
-                                            <img className="loadImg" src={param.bh_imgurl} />
+                                            <img className="loadImg" src={currentReviewDetail.bh_imgurl} onClick={this.showImg.bind(self)} />
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
 
-                            <div className="palette-share-box__praise clearfix" onClick={this.praise.bind(this)}>
-                                <span className="palette-share-box__praise__font">{param.praiseNum}赞</span>
-                                <div className={param.ispraise === 1 ? 'iconfont icon-xin1 palette-share-box__praise__icon' : 'iconfont icon-xin palette-share-box__praise__icon'} />
-                            </div>
-                            <div className="palette-share-box__versesImg">
-                                <div className="palette-share-box__versesImg__border" />
-                                <div className="palette-share-box__versesImg__img" onClick={this.imgClick.bind(this)}>
-                                    <img src={param.versesImg} />
+                            <div className="palette-review-box__versesImg">
+                                <div className="palette-review-box__versesImg__border" />
+                                <div className="palette-review-box__versesImg__img">
+                                    <img src={currentReviewDetail.versesImg} />
                                 </div>
-                                <div className="palette-share-box__versesImg__border" />
-                            </div>
-                            <div className="palette-share-box__qcode">
-                                <div className="palette-share-box__qcode__img">
-                                    <img src={param.wxImg} />
-                                </div>
+                                <div className="palette-review-box__versesImg__border" />
                             </div>
                         </div> :
-                            <div className="review-color-body__color" key={rowID}>
+                            <div className="review-color-body__color">
                                 <img className="loadImg" src={self.state.currentReviewImgSrc}
                                      onClick={this.showImg.bind(self)}/>
                             </div>
@@ -204,6 +206,17 @@ export default class extends Component {
                     {
                         isBtnShow(self)
                     }
+                    {currentReviewDetail && currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother && currentReviewDetail.pt_name && currentReviewDetail.bh_wish ?
+                        <CheckboxItem
+                            checked={self.state.isShareCheck}
+                            className="isCheck"
+                            onClick={(e) => {
+                                self.state.isShareCheck = !self.state.isShareCheck;
+                                self.setState(self.state)
+                            }}
+                        >
+                            祈福信息是否随作品分享
+                        </CheckboxItem> : '' }
                 </div>
             </div>
         );

@@ -24,7 +24,7 @@ class App extends method {
                             <div className="palette-share-box__hope__title__name">祈福信息</div>
                         </div>
                         <div className="palette-share-box__hope__box">
-                            <div className={ (param.bh_prayman && param.bh_prayother) ? 'palette-share-box__hope__box__content' : 'hide'}>{param.bh_prayman}为{param.bh_prayother}祈福</div>
+                            <div className={ (param.bh_prayman && param.bh_prayother) ? 'palette-share-box__hope__box__content' : 'hide'}>[{param.bh_prayman}] 为 [{param.bh_prayother}]祈福</div>
                             <div className={param.pt_name ? 'palette-share-box__hope__box__content' : 'hide'}>
                                 <span>祈福种类:</span>
                                 <span>{param.pt_name}</span>

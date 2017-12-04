@@ -57,7 +57,6 @@ export default class method extends React.Component {
                     self.refs.audio.play();
                 });
             }
-
         }
     }
 

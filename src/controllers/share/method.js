@@ -21,7 +21,6 @@ export default class method extends React.Component {
         // 进入页面 set 默认值
         const self = this;
         this.urlSearch = new URI(location.href).query(true);
-        await axios({ url: pageAjax.LoginPower });
         const wxConfig = await axios({
             url: pageAjax.ShareGetParm,
             params: {

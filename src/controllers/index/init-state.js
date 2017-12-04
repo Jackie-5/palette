@@ -11,6 +11,7 @@ export default {
     defaultPage: {},
     isMusic: cookie.get('isMusic') ? JSON.parse(cookie.get('isMusic')) : true,
     isShowSharePop: false,
+    isShareCheck: true,
     nextNumberAjax: 5,
     // 用来保存所有也写过作品的base64代码
     saveNextArr: [],
