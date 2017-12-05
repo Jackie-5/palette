@@ -28,14 +28,12 @@ const isBtnShow = (propsSelf, self) => {
                 return <div key={i}>
                     {
                         item.key === 'delete' ?
-                            <div className="">
-                                <div className={item.icon + ' iconfont font-size review-delete-btn'}
-                                     onClick={propsSelf.pageLeftSwitch.bind(propsSelf, {
-                                         item: propsSelf.state.leftIcon[0],
-                                         review: item.key
-                                     })}
-                                />
-                            </div>
+                            <div className={item.icon + ' iconfont font-size review-delete-btn'}
+                                 onClick={propsSelf.pageLeftSwitch.bind(propsSelf, {
+                                     item: propsSelf.state.leftIcon[6],
+                                     review: item.key
+                                 })}
+                            />
                             : <Button
                             type="ghost" size="small"
                             onClick={propsSelf.pageLeftSwitch.bind(propsSelf, {
@@ -91,11 +89,12 @@ export default class extends Component {
         // simulate initial Ajax
         const self = this.props.self;
         const state = self.state;
-        if(!state.isReviewImgIsPerson){
+        if (!state.isReviewImgIsPerson) {
             const data = await axios({
-                url: pageAjax.UserLectionGetMyWorksByID,
+                url: pageAjax.UserLectionPreviewWorks,
+                method: 'post',
                 params: {
-                    bh_id: state.reviewImgIsPerson.bh_id
+                    bh_id: state.defaultPage.bh_id
                 }
             });
             state.currentReviewImgSrc = data.msg;
@@ -124,7 +123,11 @@ export default class extends Component {
         });
         // 让图片从右往左滚动
         document.querySelector('.loadImg').onload = () => {
-            document.querySelector(state.isReviewImgIsPerson ? '.palette-review-box__page-view__box': '.review-color-body').scrollLeft = document.querySelector('.loadImg').offsetWidth;
+            if (document.querySelector('.palette-review-box__page-view__box')) {
+                document.querySelector('.palette-review-box__page-view__box').scrollLeft = document.querySelector('.loadImg').offsetWidth;
+            } else {
+                document.querySelector('#review-box').scrollLeft = document.querySelector('.loadImg').offsetWidth;
+            }
         };
     }
 
@@ -137,26 +140,39 @@ export default class extends Component {
         });
     }
 
+    checkedClick(e) {
+        const self = this;
+        const state = self.state;
+        state.isShareCheck = !state.isShareCheck;
+        self.setState(state);
+    }
+
     render() {
         const self = this.props.self;
         const state = self.state;
         const currentReviewDetail = self.state.currentReviewDetail;
         const row = (rowData, sectionID, rowID) => {
             return (
-                <div style={{height: '100%'}} key={rowID}>
+                <div style={{ height: '100%', overflowY:'scroll' }} key={rowID} id="review-box">
                     {
                         state.isReviewImgIsPerson ? <div>
-                            <div className={ (currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother) || currentReviewDetail.pt_name || currentReviewDetail.bh_wish ? 'palette-share-box__hope' : 'hide' }>
+                            <div
+                                className={ (currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother) || currentReviewDetail.pt_name || currentReviewDetail.bh_wish ? 'palette-share-box__hope' : 'hide' }>
                                 <div className="palette-review-box__hope__title clearfix">
                                     <div className="palette-review-box__hope__title__name">祈福信息</div>
                                 </div>
                                 <div className="palette-review-box__hope__box">
-                                    <div className={ (currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother) ? 'palette-review-box__hope__box__content' : 'hide'}>[{currentReviewDetail.bh_prayman}] 为 [{currentReviewDetail.bh_prayother}]祈福</div>
-                                    <div className={currentReviewDetail.pt_name ? 'palette-review-box__hope__box__content' : 'hide'}>
+                                    <div
+                                        className={ (currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother) ? 'palette-review-box__hope__box__content' : 'hide'}>
+                                        [{currentReviewDetail.bh_prayman}] 为 [{currentReviewDetail.bh_prayother}]祈福
+                                    </div>
+                                    <div
+                                        className={currentReviewDetail.pt_name ? 'palette-review-box__hope__box__content' : 'hide'}>
                                         <span>祈福种类:</span>
                                         <span>{currentReviewDetail.pt_name}</span>
                                     </div>
-                                    <div className={currentReviewDetail.bh_wish ? 'palette-review-box__hope__box__content' : 'hide'}>
+                                    <div
+                                        className={currentReviewDetail.bh_wish ? 'palette-review-box__hope__box__content' : 'hide'}>
                                         <span>心愿:</span>
                                         <span>{currentReviewDetail.bh_wish}</span>
                                     </div>
@@ -169,7 +185,8 @@ export default class extends Component {
                                 <div className="palette-review-box__page-view__box">
                                     <div className="palette-review-box__page-view__box__img">
                                         <div className="ov">
-                                            <img className="loadImg" src={currentReviewDetail.bh_imgurl} onClick={this.showImg.bind(self)} />
+                                            <img className="loadImg" src={currentReviewDetail.bh_imgurl}
+                                                 onClick={this.showImg.bind(self)}/>
                                         </div>
                                     </div>
 
@@ -177,11 +194,11 @@ export default class extends Component {
                             </div>
 
                             <div className="palette-review-box__versesImg">
-                                <div className="palette-review-box__versesImg__border" />
+                                <div className="palette-review-box__versesImg__border"/>
                                 <div className="palette-review-box__versesImg__img">
-                                    <img src={currentReviewDetail.versesImg} />
+                                    <img src={currentReviewDetail.versesImg}/>
                                 </div>
-                                <div className="palette-review-box__versesImg__border" />
+                                <div className="palette-review-box__versesImg__border"/>
                             </div>
                         </div> :
                             <div className="review-color-body__color">
@@ -202,21 +219,21 @@ export default class extends Component {
                           className="review-color-box"
                           contentContainerStyle={{ height: '100%' }}
                 />
-                <div className="review-page-box__review">
+                {state.isReviewImgIsPerson && currentReviewDetail && currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother && currentReviewDetail.pt_name && currentReviewDetail.bh_wish ?
+                    <CheckboxItem
+                        checked={self.state.isShareCheck}
+                        className="isCheck"
+                        onClick={this.checkedClick.bind(self)}
+                    >
+                        祈福信息是否随作品分享
+                    </CheckboxItem> : '' }
+                <div className={
+                    state.isReviewImgIsPerson && currentReviewDetail && currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother && currentReviewDetail.pt_name && currentReviewDetail.bh_wish ?
+                        'review-page-box__review review-page-box__height' : 'review-page-box__review'
+                }>
                     {
                         isBtnShow(self)
                     }
-                    {currentReviewDetail && currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother && currentReviewDetail.pt_name && currentReviewDetail.bh_wish ?
-                        <CheckboxItem
-                            checked={self.state.isShareCheck}
-                            className="isCheck"
-                            onClick={(e) => {
-                                self.state.isShareCheck = !self.state.isShareCheck;
-                                self.setState(self.state)
-                            }}
-                        >
-                            祈福信息是否随作品分享
-                        </CheckboxItem> : '' }
                 </div>
             </div>
         );

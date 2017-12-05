@@ -53,6 +53,12 @@ class App extends method {
                 state.isShowSharePop = false;
                 this.setState(state);
             }} />
+
+            <div className={this.state.isShowFollowPop ? 'wx-popup-follow' : 'hide'} onClick={()=>{
+                const state = this.state;
+                state.isShowFollowPop = false;
+                this.setState(state);
+            }} />
             {
                 userAgent() ?  <div style={{height: '100%'}}>
                     <PullLeft self={this}/>

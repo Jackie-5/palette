@@ -39,7 +39,15 @@ export default class method extends React.Component {
         // 进入页面 set 默认值
         const self = this;
         if (userAgent()) {
-            const isWatch =await axios({ url: pageAjax.LoginPower });
+            const isWatch = await axios({ url: pageAjax.LoginPower });
+            console.log(isWatch);
+            if (isWatch.code === 101) {
+                wx.hideAllNonBaseMenuItem();
+                self.state.isShowFollowPop = true;
+                self.setState(self.state);
+                return;
+            }
+
             const wxConfig = await axios({
                 url: pageAjax.ShareGetParm,
                 params: {
@@ -47,16 +55,12 @@ export default class method extends React.Component {
                 }
             });
             wxConfigSet(wxConfig);
-            if(isWatch.code === 101){
-                wx.hideAllNonBaseMenuItem();
-            } else {
-                wx.ready(() => {
-                    self.initCanvas();
-                    hideConfig();
-                    wxShareConfig(self.state.indexShareOpt);
-                    self.state.isMusic && self.refs.audio.play();
-                });
-            }
+            wx.ready(() => {
+                self.initCanvas();
+                hideConfig();
+                wxShareConfig(self.state.indexShareOpt);
+                self.state.isMusic && self.refs.audio.play();
+            });
         }
     }
 
@@ -106,7 +110,7 @@ export default class method extends React.Component {
 
     async pageLeftSwitch(options, e) {
         const { item } = options;
-        if(e){
+        if (e) {
             e.stopPropagation();
             e.preventDefault();
         }
@@ -144,7 +148,7 @@ export default class method extends React.Component {
                     const isSave = await axiosAll.get(pageAjax.UserLectionWorksIsOver);
                     if (isSave.data.code !== 0) {
                         console.log(options.tie);
-                        if(options.tie.b_id !== state.defaultPage.b_id){
+                        if (options.tie.b_id !== state.defaultPage.b_id) {
                             alert('提示', isSave.data.msg, [
                                 {
                                     text: '取消', onPress: () => {
@@ -230,6 +234,13 @@ export default class method extends React.Component {
                                 bh_id: state.reviewImgIsPerson.bh_id
                             }
                         });
+                        await axios({
+                            url: pageAjax.UserLectionGetShareKey,
+                            params: {
+                                bh_id: state.reviewImgIsPerson.bh_id,
+                                bh_power: state.isShareCheck ? 1 : 0,
+                            }
+                        });
                         wxShareConfig({
                             title: `[乙度抄经] [${data.data.lectionname}]`,
                             desc: '『乙东方 · 度千处』点亮一盏心灯，送出一份祝福。',
@@ -268,7 +279,7 @@ export default class method extends React.Component {
         const data = await axios({ url: pageAjax.LectionGetWordList, params: { b_id: detailData.data.b_id } });
         document.title = detailData.data.lectionname + ` [${detailData.data.b_author}]`;
         state.defaultPage = detailData.data;
-        state.penColorState.pen.map((item)=>{
+        state.penColorState.pen.map((item) => {
             item.active = detailData.data.color === item.color && detailData.data.fontsize === item.size.toString();
         });
 
@@ -390,10 +401,12 @@ export default class method extends React.Component {
                         state.saveNextArr = [];
                         self.setState(state);
 
-                        self.pageLeftSwitch({item: self.state.leftIcon[5], person: {
-                            bh_id: state.defaultPage.bh_id,
-                            lectionname: state.defaultPage.lectionname,
-                        }});
+                        self.pageLeftSwitch({
+                            item: self.state.leftIcon[5], person: {
+                                bh_id: state.defaultPage.bh_id,
+                                lectionname: state.defaultPage.lectionname,
+                            }
+                        });
                         self.clearCanvas();
                     }
                     },

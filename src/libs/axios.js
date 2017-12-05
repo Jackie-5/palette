@@ -33,6 +33,9 @@ export default (options = {}) =>
                     reject(data.data.code);
                     return;
                 }
+                if(data.data.code === 101){
+                    resolve(data.data);
+                }
                 if(!options.isFail){
                     Toast.fail(data.data.msg, 1);
                 }

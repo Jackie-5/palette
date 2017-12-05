@@ -22,6 +22,43 @@
             }
         }
     }
+
+    .isCheck{
+        height:8%;
+        background:transparent;
+        .am-list-thumb{
+            margin-right: 10px;
+            .am-checkbox-wrapper{
+                .am-checkbox{
+                    width: 30px;
+                    height: 30px;
+                    .am-checkbox-inner{
+                        top: -2px;
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 0;
+                        border-color:@penColor;
+                        &::after{
+                            top: -0.02rem;
+                            right: 0.05rem;
+                            height: 0.17rem;
+                            width: 0.1rem;
+                            border-color:@penColor;
+                        }
+                    }
+                }
+            }
+        }
+        .am-list-thumb:first-child{
+            margin-right: 10px;
+        }
+        .am-list-line{
+            .am-list-content{
+                font-size: 25px;
+            }
+        }
+
+    }
     &__review{
         display: flex;
         justify-content:center;
@@ -29,43 +66,6 @@
         height:20%;
         position:relative;
         border-top:1px solid #ccc;
-        .isCheck{
-            position:absolute;
-            left:0;
-            bottom: 0;
-            background:transparent;
-            .am-list-thumb{
-                margin-right: 10px;
-                .am-checkbox-wrapper{
-                    .am-checkbox{
-                        width: 30px;
-                        height: 30px;
-                        .am-checkbox-inner{
-                            top: -2px;
-                            width: 30px;
-                            height: 30px;
-                            border-color:@penColor;
-                            &::after{
-                                top:0;
-                                right: 0.05rem;
-                                height: 0.17rem;
-                                width: 0.1rem;
-                                border-color:@penColor;
-                            }
-                        }
-                    }
-                }
-            }
-            .am-list-thumb:first-child{
-                margin-right: 10px;
-            }
-            .am-list-line{
-                .am-list-content{
-                    font-size: 25px;
-                }
-            }
-
-        }
         .review-delete-btn{
             position:absolute;
             right: 20px;
@@ -116,6 +116,9 @@
             }
 
         }
+    }
+    &__height{
+        height:12%;
     }
 }
 
