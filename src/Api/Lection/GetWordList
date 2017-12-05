@@ -30,14 +30,14 @@
         },
         {
             "w_id": 2381,
-            "imgurl": "http://admin.eastdoing.com/Upload/files/book/3B2F06CC7998816A/img/4D390C1C6D32FE21FBB0155081A40D21.png",
+            "imgurl": null,
             "position": 5,
-            "chinese": "蜜",
+            "chinese": "",
             "pinyin": "mì"
         },
         {
             "w_id": 2382,
-            "imgurl": "http://admin.eastdoing.com/Upload/files/book/3B2F06CC7998816A/img/E0BAF6C5039F0654EDCCD87985F4657A.png",
+            "imgurl": null,
             "position": 6,
             "chinese": "多",
             "pinyin": "duō"

@@ -54,11 +54,9 @@ class App extends method {
                 this.setState(state);
             }} />
 
-            <div className={this.state.isShowFollowPop ? 'wx-popup-follow' : 'hide'} onClick={()=>{
-                const state = this.state;
-                state.isShowFollowPop = false;
-                this.setState(state);
-            }} />
+            <div className={this.state.isShowFollowPop ? 'wx-popup-follow' : 'hide'}>
+                <img src="http://wechat.eastdoing.com/chaojing/follow.png" />
+            </div>
             {
                 userAgent() ?  <div style={{height: '100%'}}>
                     <PullLeft self={this}/>

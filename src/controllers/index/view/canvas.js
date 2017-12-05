@@ -215,6 +215,7 @@ export default class extends React.Component {
                      onTouchMove={self.preventDefaultMove.bind(self)}
                 >
                     {
+
                         currentNumber <= 0 ? '' : <img src={saveNextArr.length === 0 && defaultPage.last_imgurl ?
                             defaultPage.last_imgurl :
                             (saveNextArr.length > 0 ? saveNextArr[saveNextArr.length - 1] : indexData[currentNumber - 1].imgurl)
@@ -233,7 +234,13 @@ export default class extends React.Component {
                         onTouchEnd={this.canvasTouchMoveEnd.bind(this)}
                         style={{ position: 'absolute', top: 0, left: 0, zIndex: 9 }}/>
                 <canvas ref="bgCanvas"/>
-                <img src={indexData[currentNumber].imgurl} alt="" className="canvas-images canvas-img-middle"/>
+                {
+                    indexData[currentNumber].imgurl ? <img src={indexData[currentNumber].imgurl} alt="" className="canvas-images canvas-img-middle"/>
+                        : <div className="canvas-images">
+                        <div className="canvas-images__chinese">{indexData[currentNumber].chinese}</div>
+                    </div>
+                }
+
             </div>
             <div className="canvas-switch">
                 <div
@@ -245,7 +252,12 @@ export default class extends React.Component {
                         <div>{currentNumber >= allNumber ? '' : indexData[currentNumber + 1].chinese}</div>
                     </div>
                     {
-                        currentNumber >= allNumber ? '' : <img src={indexData[currentNumber + 1].imgurl} alt=""/>
+                        currentNumber >= allNumber ? '' : indexData[currentNumber + 1].imgurl ?
+                            <img src={indexData[currentNumber + 1].imgurl} alt=""/> :
+
+                            <div className="canvas-images">
+                            <div className="canvas-images__chinese-1">{indexData[currentNumber + 1].chinese}</div>
+                        </div>
                     }
                 </div>
                 <div className="canvas-bottom-icon about-current iconfont icon-i1"
