@@ -11,6 +11,7 @@ import { Toast, Modal } from 'antd-mobile';
 import copy from 'clone';
 import { wxShareConfig, hideConfig, wxConfigSet } from '../../libs/wx-share-config';
 import userAgent from '../../libs/user-agent';
+import second from '../../libs/second';
 
 const alert = Modal.alert;
 
@@ -147,7 +148,6 @@ export default class method extends React.Component {
                     // 先查看用户是否可以保存作品
                     const isSave = await axiosAll.get(pageAjax.UserLectionWorksIsOver);
                     if (isSave.data.code !== 0) {
-                        console.log(options.tie);
                         if (options.tie.b_id !== state.defaultPage.b_id) {
                             alert('提示', isSave.data.msg, [
                                 {
@@ -305,9 +305,10 @@ export default class method extends React.Component {
             isFail: true,
             params: {
                 bh_id: self.state.defaultPage.bh_id,
-                imgdata: self.canvasNextArr
+                imgdata: self.canvasNextArr,
             },
         });
+
         if (uploadData.code === 0) {
             // 每次上传成功后把base64代码清理掉
             self.canvasNextArr = [];
@@ -349,18 +350,22 @@ export default class method extends React.Component {
     }
 
     async nextFont(e) {
-        e.preventDefault();
+        e && e.preventDefault();
         const self = this;
         const state = copy(this.state);
         if (this.canvasMethod.beginWrite) {
+            const newDate = new Date().getTime();
+
             // 当前的数如果不等于总数，那么就可以继续往下写。
             if (state.indexState.currentNumber !== state.indexState.allNumber) {
                 // 每次push一下canvas的base64
                 state.saveNextArr.push(this.canvasMethod.canvasToBase());
                 self.canvasNextArr.push({
                     w_id: state.indexState.indexData[state.indexState.currentNumber].w_id,
-                    baseImg: this.canvasMethod.canvasToBase()
+                    baseImg: this.canvasMethod.canvasToBase(),
+                    wh_time: second(newDate - self.canvasMethod.isStartTime)
                 });
+                self.canvasMethod.isStartTime = undefined;
                 // 当前canvas的Arr里到了规定的个数的时候，或者抄到最后一个字的时候去做上传
                 if (self.canvasNextArr.length === state.nextNumberAjax || state.indexState.currentNumber === state.indexState.allNumber) {
                     const upload = await self.uploadCanvas();
@@ -387,8 +392,10 @@ export default class method extends React.Component {
                         // 点击确定后 上传最后一张图片
                         self.canvasNextArr.push({
                             w_id: state.indexState.indexData[state.indexState.currentNumber].w_id,
-                            baseImg: self.canvasMethod.canvasToBase()
+                            baseImg: self.canvasMethod.canvasToBase(),
+                            wh_time: second(newDate - self.canvasMethod.isStartTime)
                         });
+                        self.canvasMethod.isStartTime = undefined;
                         await self.uploadCanvas();
 
                         await axios({
@@ -413,6 +420,10 @@ export default class method extends React.Component {
                 ]);
 
 
+            }
+
+            if(self.canvasMethod.setTimeOutFn){
+                clearTimeout(self.canvasMethod.setTimeOutFn);
             }
 
             self.setState(state);

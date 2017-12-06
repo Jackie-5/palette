@@ -92,6 +92,7 @@ export default class extends Component {
                                 <span>{item.m_name}</span>
                                 <Brief className="music-body__row__title__sub-title">{item.m_author}</Brief>
                                 <Brief className="music-body__row__title__sub-title">人气:{item.total}</Brief>
+                                <div className={state.defaultPage.m_id === item.m_id ? 'music-body__row__title__now' : 'hide'}>{state.defaultPage.m_id === item.m_id ? '正在播放' : ''}</div>
                             </Item>
                         })
                     }

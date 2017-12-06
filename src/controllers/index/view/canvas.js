@@ -38,6 +38,14 @@ export default class extends React.Component {
 
     canvasTouchStart(e) {
         const self = this;
+        // 当没有start的时候 new一个
+        if(!self.isStartTime){
+            self.isStartTime = new Date().getTime();
+        }
+        if(this.setTimeOutFn){
+            clearTimeout(this.setTimeOutFn);
+        }
+
         //const x = e.touches[0].pageX - this.canvasPos.left + (document.querySelector('.page-left-function').offsetWidth / 2);
         const x = e.touches[0].pageX - this.canvasPos.left;
         const y = e.touches[0].pageY - this.canvasPos.top;
@@ -68,7 +76,7 @@ export default class extends React.Component {
         this.canvasMoving(x, y)
     }
 
-    canvasTouchMoveEnd(d) {
+    canvasTouchMoveEnd(self) {
         var e = this;
         e.penmanship.length ? e.stroke.newDate -= e.penmanshipTime :
             (e.penmanshipTime = e.stroke.newDate,
@@ -79,7 +87,12 @@ export default class extends React.Component {
             e.stroke = null;
         --this.writeCtx.lineWidth;
         for (var b; this.moveQueue.length;)b = this.moveQueue.shift(), this.actionPaint(b, this.fontWidth / 320 * this.penSize / 8);
-        this.showToCanvas()
+        this.showToCanvas();
+        if(self.state.isTimeOut){
+            this.setTimeOutFn = setTimeout(()=>{
+                self.nextFont();
+            },self.state.isTimeNext);
+        }
     }
 
     showToCanvas() {
@@ -191,6 +204,15 @@ export default class extends React.Component {
         }
         this.setState(state)
     }
+    timeOut(e){
+        e && e.stopPropagation();
+        const state = copy(this.state);
+        state.isTimeOut = !state.isTimeOut;
+        if(state.isTimeOut && this.canvasMethod.setTimeOutFn){
+            clearTimeout(this.canvasMethod.setTimeOutFn);
+        }
+        this.setState(state);
+    }
 
     render() {
         const self = this.props.self;
@@ -209,6 +231,10 @@ export default class extends React.Component {
                 <div className="canvas-top-icon iconfont icon-TMS_yinlefuhao"
                      onClick={this.stopAndPlayMusic.bind(self)}>
                     <div className={self.state.isMusic ? '' : 'canvas-top-icon-stop iconfont icon-jinzhi'}/>
+                </div>
+                <div className="canvas-top-icon-time iconfont icon-shijian1"
+                     onClick={this.timeOut.bind(self)}>
+                    <div className={self.state.isTimeOut ? '' : 'canvas-top-icon-stop-1 iconfont icon-jinzhi'}/>
                 </div>
                 <div className="canvas-images"
                      onTouchStart={self.prevFont.bind(self)}
@@ -231,7 +257,7 @@ export default class extends React.Component {
                 <canvas ref="writeCanvas"
                         onTouchStart={this.canvasTouchStart.bind(this)}
                         onTouchMove={this.canvasTouchMove.bind(this)}
-                        onTouchEnd={this.canvasTouchMoveEnd.bind(this)}
+                        onTouchEnd={this.canvasTouchMoveEnd.bind(this,self)}
                         style={{ position: 'absolute', top: 0, left: 0, zIndex: 9 }}/>
                 <canvas ref="bgCanvas"/>
                 {

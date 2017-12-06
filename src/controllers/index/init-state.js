@@ -13,6 +13,9 @@ export default {
     isShowSharePop: false,
     isShareCheck: true,
     isShowFollowPop: false,
+    isTimeOut: true,
+    // 2秒跳转
+    isTimeNext: 2000,
     nextNumberAjax: 5,
     // 用来保存所有也写过作品的base64代码
     saveNextArr: [],
