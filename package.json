@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node ./basis/webpack-start.js",
     "start": "npm run dev",
+    "ftp": "node ./basis/ftp.js",
     "clean": "rimraf build",
     "build": "npm run clean && node ./basis/webpack-start.js"
   },
