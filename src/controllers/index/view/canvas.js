@@ -4,6 +4,7 @@
 import React from 'react';
 import copy from 'clone';
 import cookie from 'js-cookie';
+import moment from 'moment';
 
 export default class extends React.Component {
     constructor(props) {
@@ -41,6 +42,8 @@ export default class extends React.Component {
         // 当没有start的时候 new一个
         if(!self.isStartTime){
             self.isStartTime = new Date().getTime();
+            self.isStartTimeMoment = moment().format('YYYY-MM-DD HH:mm:ss')
+
         }
         if(this.setTimeOutFn){
             clearTimeout(this.setTimeOutFn);

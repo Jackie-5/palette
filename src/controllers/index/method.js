@@ -363,9 +363,11 @@ export default class method extends React.Component {
                 self.canvasNextArr.push({
                     w_id: state.indexState.indexData[state.indexState.currentNumber].w_id,
                     baseImg: this.canvasMethod.canvasToBase(),
-                    wh_time: second(newDate - self.canvasMethod.isStartTime)
+                    wh_time: second(newDate - self.canvasMethod.isStartTime),
+                    wh_starttime: self.canvasMethod.isStartTimeMoment
                 });
                 self.canvasMethod.isStartTime = undefined;
+                self.canvasMethod.isStartTimeMoment = undefined;
                 // 当前canvas的Arr里到了规定的个数的时候，或者抄到最后一个字的时候去做上传
                 if (self.canvasNextArr.length === state.nextNumberAjax || state.indexState.currentNumber === state.indexState.allNumber) {
                     const upload = await self.uploadCanvas();
@@ -393,9 +395,12 @@ export default class method extends React.Component {
                         self.canvasNextArr.push({
                             w_id: state.indexState.indexData[state.indexState.currentNumber].w_id,
                             baseImg: self.canvasMethod.canvasToBase(),
-                            wh_time: second(newDate - self.canvasMethod.isStartTime)
+                            wh_time: second(newDate - self.canvasMethod.isStartTime),
+                            wh_starttime: self.canvasMethod.isStartTimeMoment
                         });
                         self.canvasMethod.isStartTime = undefined;
+                        self.canvasMethod.isStartTimeMoment = undefined;
+
                         await self.uploadCanvas();
 
                         await axios({

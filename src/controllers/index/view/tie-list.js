@@ -88,8 +88,8 @@ export default class extends Component {
                                 className="tie-body__row__title"
                                 multipleLine>
                                 <span>{item.lectionname}</span>
-                                <Brief className="tie-body__row__title__sub-title">书法家:{item.b_author}</Brief>
-                                <Brief className="tie-body__row__title__sub-title">人气:{item.total}</Brief>
+                                <Brief className="tie-body__row__title__sub-title">作者: {item.b_author}</Brief>
+                                <Brief className="tie-body__row__title__sub-title">人气: {item.total}</Brief>
                                 <div className={state.defaultPage.b_id === item.b_id ? 'tie-body__row__title__now' : 'hide'}>{state.defaultPage.b_id === item.b_id ? '正在书写' : ''}</div>
                             </Item>
                         })
