@@ -242,7 +242,7 @@ export default class method extends React.Component {
                             }
                         });
                         wxShareConfig({
-                            title: `[乙度抄经] [${data.data.lectionname}]`,
+                            title: `[乙度抄经] 快来欣赏我作品!`,
                             desc: '『乙东方 · 度千处』点亮一盏心灯，送出一份祝福。',
                             link: `http://wechat.eastdoing.com/chaojing/share.html?i=${data.data.key}&n=${encodeURIComponent(data.data.lectionname)}`,
                             imgUrl: 'http://wechat.eastdoing.com/chaojing/share.jpg'
@@ -250,6 +250,21 @@ export default class method extends React.Component {
                         state.isShowSharePop = true;
                         self.setState(state);
                     }
+                } else if(options.over){
+                    alert('提示', state.indexState.isSaveTips, [
+                        {
+                            text: '取消', onPress: () => {}
+                        },
+                        {
+                            text: '确定', onPress: () => {
+                            //self.deleteWork({
+                            //    bh_id: state.reviewImgIsPerson.bh_id
+                            //}, state);
+                            console.log('asdfas');
+                            self.setState(state);
+                        }
+                        },
+                    ]);
                 } else {
                     self.setState(state)
                 }

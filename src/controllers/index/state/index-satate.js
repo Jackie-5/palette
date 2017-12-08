@@ -17,7 +17,7 @@ export default {
     tips: '请按顺序书写哦~',
     notSaveToast: '资料保存中，请稍候。',
     notPrevToast: '回退次数超限',
-    isSaveTips: '您是否要保存？保存后无法修改此作品了哦~',
+    isSaveTips: '恭喜您完成书写!',
     deleteTips: '是否删除该作品？'
 
 }

@@ -30,7 +30,7 @@ export default class method extends React.Component {
         wxConfigSet(wxConfig);
         wx.ready(() => {
             wxShareConfig({
-                title: `[乙度抄经] [${decodeURIComponent(this.urlSearch.n)}]`,
+                title: `[乙度抄经] 快来欣赏我作品!`,
                 desc: '『乙东方 · 度千处』点亮一盏心灯，送出一份祝福。',
                 link: `http://wechat.eastdoing.com/chaojing/share.html?i=${this.urlSearch.i}&n=${this.urlSearch.n}`,
                 imgUrl: 'http://wechat.eastdoing.com/chaojing/share.jpg'

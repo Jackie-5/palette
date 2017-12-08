@@ -219,7 +219,7 @@ export default class extends Component {
                           className="review-color-box"
                           contentContainerStyle={{ height: '100%' }}
                 />
-                {state.isReviewImgIsPerson && currentReviewDetail && currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother && currentReviewDetail.pt_name && currentReviewDetail.bh_wish ?
+                {state.isReviewImgIsPerson && currentReviewDetail && (currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother) || currentReviewDetail.pt_name || currentReviewDetail.bh_wish ?
                     <CheckboxItem
                         checked={self.state.isShareCheck}
                         className="isCheck"
@@ -228,7 +228,7 @@ export default class extends Component {
                         祈福信息是否随作品分享
                     </CheckboxItem> : '' }
                 <div className={
-                    state.isReviewImgIsPerson && currentReviewDetail && currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother && currentReviewDetail.pt_name && currentReviewDetail.bh_wish ?
+                    state.isReviewImgIsPerson && currentReviewDetail && (currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother) || currentReviewDetail.pt_name || currentReviewDetail.bh_wish ?
                         'review-page-box__review review-page-box__height' : 'review-page-box__review'
                 }>
                     {

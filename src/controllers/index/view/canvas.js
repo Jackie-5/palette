@@ -229,8 +229,6 @@ export default class extends React.Component {
                     <div>{currentNumber <= 0 ? '' : indexData[currentNumber - 1].pinyin}</div>
                     <div>{currentNumber <= 0 ? '' : indexData[currentNumber - 1].chinese}</div>
                 </div>
-                <div
-                    className="canvas-number">{ currentNumber + 1 }/{ allNumber + 1 }</div>
                 <div className="canvas-top-icon iconfont icon-TMS_yinlefuhao"
                      onClick={this.stopAndPlayMusic.bind(self)}>
                     <div className={self.state.isMusic ? '' : 'canvas-top-icon-stop iconfont icon-jinzhi'}/>
@@ -257,6 +255,8 @@ export default class extends React.Component {
                     <div>{indexData[currentNumber].pinyin}</div>
                     <div>{indexData[currentNumber].chinese}</div>
                 </div>
+                <div
+                    className="canvas-number">{ currentNumber + 1 }/{ allNumber + 1 }</div>
                 <canvas ref="writeCanvas"
                         onTouchStart={this.canvasTouchStart.bind(this)}
                         onTouchMove={this.canvasTouchMove.bind(this)}
@@ -289,10 +289,14 @@ export default class extends React.Component {
                         </div>
                     }
                 </div>
-                <div className="canvas-bottom-icon about-current iconfont icon-i1"
-                     onClick={self.pageLeftSwitch.bind(self, { item: self.state.aboutCurrent })}/>
                 <div className="canvas-bottom-icon hope-icon iconfont icon-wodeqifu"
                      onClick={self.pageLeftSwitch.bind(self, { item: self.state.hope })}/>
+
+                <div className="canvas-bottom-icon about-current iconfont icon-i1"
+                     onClick={self.pageLeftSwitch.bind(self, { item: self.state.aboutCurrent })}/>
+
+                <div className="canvas-bottom-icon over-icon iconfont icon-wan"
+                     onClick={self.pageLeftSwitch.bind(self, { item: self.state.leftIcon[6], over: true })}/>
             </div>
         </div>
     }
