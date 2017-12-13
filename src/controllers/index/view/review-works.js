@@ -151,9 +151,10 @@ export default class extends Component {
         const self = this.props.self;
         const state = self.state;
         const currentReviewDetail = self.state.currentReviewDetail;
+        const isPerson = state.isReviewImgIsPerson && currentReviewDetail && ((currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother) || currentReviewDetail.pt_name || currentReviewDetail.bh_wish);
         const row = (rowData, sectionID, rowID) => {
             return (
-                <div style={{ height: '100%', overflowY:'scroll' }} key={rowID} id="review-box">
+                <div style={{ height: '100%', overflowY: 'scroll' }} key={rowID} id="review-box">
                     {
                         state.isReviewImgIsPerson ? <div>
                             <div
@@ -216,10 +217,11 @@ export default class extends Component {
                           dataSource={this.state.dataSource}
                           renderBodyComponent={() => <MyBody />}
                           renderRow={row}
-                          className="review-color-box"
+                          className={ isPerson ? 'review-color-box review-color-box-height' : 'review-color-box'}
                           contentContainerStyle={{ height: '100%' }}
                 />
-                {state.isReviewImgIsPerson && currentReviewDetail && (currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother) || currentReviewDetail.pt_name || currentReviewDetail.bh_wish ?
+                {
+                    isPerson ?
                     <CheckboxItem
                         checked={self.state.isShareCheck}
                         className="isCheck"
@@ -227,8 +229,19 @@ export default class extends Component {
                     >
                         祈福信息是否随作品分享
                     </CheckboxItem> : '' }
+
+                {
+                    state.isReviewImgIsPerson ?
+                    <CheckboxItem
+                        checked={self.state.isShareCheck}
+                        className="isCheck"
+                        onClick={this.checkedClick.bind(self)}
+                    >
+                        是否分享回向偈
+                    </CheckboxItem> : ''
+                }
                 <div className={
-                    state.isReviewImgIsPerson && currentReviewDetail && (currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother) || currentReviewDetail.pt_name || currentReviewDetail.bh_wish ?
+                    isPerson ?
                         'review-page-box__review review-page-box__height' : 'review-page-box__review'
                 }>
                     {
