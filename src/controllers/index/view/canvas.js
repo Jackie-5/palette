@@ -223,6 +223,8 @@ export default class extends React.Component {
         const { saveNextArr, defaultPage } = self.state;
 
         const { indexData, allNumber, currentNumber } = self.state.indexState;
+
+        const lieNumber = (currentNumber + 1)%defaultPage.b_x === 0 ? defaultPage.b_x : (currentNumber + 1)%defaultPage.b_x;
         return <div className="canvas-index">
             <div className="canvas-switch canvas-top">
                 <div className="canvas-text">
@@ -257,6 +259,8 @@ export default class extends React.Component {
                 </div>
                 <div
                     className="canvas-number">{ currentNumber + 1 }/{ allNumber + 1 }</div>
+                <div
+                    className="canvas-lie-number">{lieNumber}/{defaultPage.b_x}</div>
                 <canvas ref="writeCanvas"
                         onTouchStart={this.canvasTouchStart.bind(this)}
                         onTouchMove={this.canvasTouchMove.bind(this)}

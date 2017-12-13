@@ -256,11 +256,14 @@ export default class method extends React.Component {
                             text: '取消', onPress: () => {}
                         },
                         {
-                            text: '确定', onPress: () => {
-                            //self.deleteWork({
-                            //    bh_id: state.reviewImgIsPerson.bh_id
-                            //}, state);
-                            console.log('asdfas');
+                            text: '确定', async onPress () {
+                            await axios({
+                                url: pageAjax.UserLectionSaveWorks,
+                                method: 'post',
+                                params: {
+                                    bh_id: state.defaultPage.bh_id
+                                }
+                            });
                             self.setState(state);
                         }
                         },
@@ -453,21 +456,4 @@ export default class method extends React.Component {
         }
 
     }
-
-    //changePenColor(index, type) {
-    //    const state = copy(this.state);
-    //    if (type === 'pen') {
-    //        state.penColorState.penSize.map((item, i) => {
-    //            item.active = index === i;
-    //            if (item.active) (state.defaultPage.fontsize = item.size)
-    //        });
-    //
-    //    } else {
-    //        state.penColorState.color.map((item, i) => {
-    //            item.active = index === i;
-    //            if (item.active) (state.defaultPage.color = item.value)
-    //        });
-    //    }
-    //    this.setState(state);
-    //}
 };
