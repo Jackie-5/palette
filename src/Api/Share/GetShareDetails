@@ -1,14 +1,16 @@
 {
     "data": {
-        "bh_prayman": "adfdsa",
-        "bh_prayother": "sadfaaa",
-        "pt_name": "21323",
-        "bh_wish": "aaaaa",
-        "bh_imgurl": "http://wechat.eastdoing.com/UserImg/32830B92BF02FC8E0B5D1A6628B456D726DD0FA28549A33949BD3106DCA14DC5/preview/86C596C8E902C95C2484EC9721268158.png",
+        "bh_prayman": null,
+        "bh_prayother": null,
+        "pt_name": null,
+        "bh_wish": null,
+        "bh_imgurl": "http://wechat.eastdoing.com/UserImg/CE3486A8B070283C0747CFB57E05569077CE7B7EC38A6BF9FD3805ABFE3B8344/F449DF292A1C1DA9/8B75858D10DB9985BB4B90E8E3596353.png",
         "praiseNum": 2,
         "ispraise": 1,
         "wxImg": "http://admin.eastdoing.com/img/983EA1841F855771D89897AB04C6D48C.jpg",
-        "versesImg": "http://wechat.eastdoing.com/UserImg/32830B92BF02FC8E0B5D1A6628B456D726DD0FA28549A33949BD3106DCA14DC5/preview/10CE976A9B547A19D2B65BC53A99DBEB.png"
+        "versesImg": "http://admin.eastdoing.com/img/7B7205FB7AC54D66ADB5AC2800B2CE98.jpg",
+        "bh_power": 0,
+        "bh_h_power": 1
     },
     "code": 0,
     "msg": "成功"

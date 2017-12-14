@@ -239,6 +239,7 @@ export default class method extends React.Component {
                             params: {
                                 bh_id: state.reviewImgIsPerson.bh_id,
                                 bh_power: state.isShareCheck ? 1 : 0,
+                                bh_h_powere: state.isShareHui ? 1 : 0,
                             }
                         });
                         wxShareConfig({

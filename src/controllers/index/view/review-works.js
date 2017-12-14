@@ -140,10 +140,15 @@ export default class extends Component {
         });
     }
 
-    checkedClick(e) {
+    checkedClick(type) {
         const self = this;
         const state = self.state;
-        state.isShareCheck = !state.isShareCheck;
+        if(type === 'wish'){
+            state.isShareCheck = !state.isShareCheck;
+        } else {
+            state.isShareHui = !state.isShareHui;
+        }
+
         self.setState(state);
     }
 
@@ -225,7 +230,7 @@ export default class extends Component {
                     <CheckboxItem
                         checked={self.state.isShareCheck}
                         className="isCheck"
-                        onClick={this.checkedClick.bind(self)}
+                        onClick={this.checkedClick.bind(self, 'wish')}
                     >
                         祈福信息是否随作品分享
                     </CheckboxItem> : '' }
@@ -233,17 +238,14 @@ export default class extends Component {
                 {
                     state.isReviewImgIsPerson ?
                     <CheckboxItem
-                        checked={self.state.isShareCheck}
+                        checked={self.state.isShareHui}
                         className="isCheck"
-                        onClick={this.checkedClick.bind(self)}
+                        onClick={this.checkedClick.bind(self, 'hui')}
                     >
                         是否分享回向偈
                     </CheckboxItem> : ''
                 }
-                <div className={
-                    isPerson ?
-                        'review-page-box__review review-page-box__height' : 'review-page-box__review'
-                }>
+                <div className="review-page-box__review">
                     {
                         isBtnShow(self)
                     }

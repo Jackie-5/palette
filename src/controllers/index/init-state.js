@@ -12,6 +12,7 @@ export default {
     isMusic: cookie.get('isMusic') ? JSON.parse(cookie.get('isMusic')) : true,
     isShowSharePop: false,
     isShareCheck: true,
+    isShareHui: true,
     isShowFollowPop: false,
     isTimeOut: true,
     // 2秒跳转
