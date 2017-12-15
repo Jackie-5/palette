@@ -38,14 +38,15 @@ export default class extends React.Component {
     }
 
     canvasTouchStart(e) {
+        e.preventDefault();
         const self = this;
         // 当没有start的时候 new一个
-        if(!self.isStartTime){
+        if (!self.isStartTime) {
             self.isStartTime = new Date().getTime();
             self.isStartTimeMoment = moment().format('YYYY-MM-DD HH:mm:ss')
 
         }
-        if(this.setTimeOutFn){
+        if (this.setTimeOutFn) {
             clearTimeout(this.setTimeOutFn);
         }
 
@@ -65,7 +66,6 @@ export default class extends React.Component {
             p: self.penSize
         };
         this.canvasTouchMoveBegin(x, y);
-        e.preventDefault()
     }
 
     canvasTouchMoveBegin(x, y) {
@@ -91,10 +91,10 @@ export default class extends React.Component {
         --this.writeCtx.lineWidth;
         for (var b; this.moveQueue.length;)b = this.moveQueue.shift(), this.actionPaint(b, this.fontWidth / 320 * this.penSize / 8);
         this.showToCanvas();
-        if(self.state.isTimeOut){
-            this.setTimeOutFn = setTimeout(()=>{
+        if (self.state.isTimeOut) {
+            this.setTimeOutFn = setTimeout(() => {
                 self.nextFont();
-            },self.state.isTimeNext);
+            }, self.state.isTimeNext);
         }
     }
 
@@ -207,11 +207,12 @@ export default class extends React.Component {
         }
         this.setState(state)
     }
-    timeOut(e){
+
+    timeOut(e) {
         e && e.stopPropagation();
         const state = copy(this.state);
         state.isTimeOut = !state.isTimeOut;
-        if(state.isTimeOut && this.canvasMethod.setTimeOutFn){
+        if (state.isTimeOut && this.canvasMethod.setTimeOutFn) {
             clearTimeout(this.canvasMethod.setTimeOutFn);
         }
         this.setState(state);
@@ -224,7 +225,7 @@ export default class extends React.Component {
 
         const { indexData, allNumber, currentNumber } = self.state.indexState;
 
-        const lieNumber = (currentNumber + 1)%defaultPage.b_x === 0 ? defaultPage.b_x : (currentNumber + 1)%defaultPage.b_x;
+        const lieNumber = (currentNumber + 1) % defaultPage.b_x === 0 ? defaultPage.b_x : (currentNumber + 1) % defaultPage.b_x;
         return <div className="canvas-index">
             <div className="canvas-switch canvas-top">
                 <div className="canvas-text">
@@ -248,7 +249,7 @@ export default class extends React.Component {
                         currentNumber <= 0 ? '' : <img src={saveNextArr.length === 0 && defaultPage.last_imgurl ?
                             defaultPage.last_imgurl :
                             (saveNextArr.length > 0 ? saveNextArr[saveNextArr.length - 1] : indexData[currentNumber - 1].imgurl)
-                            } alt=""/>
+                        } alt=""/>
                     }
                 </div>
             </div>
@@ -264,11 +265,12 @@ export default class extends React.Component {
                 <canvas ref="writeCanvas"
                         onTouchStart={this.canvasTouchStart.bind(this)}
                         onTouchMove={this.canvasTouchMove.bind(this)}
-                        onTouchEnd={this.canvasTouchMoveEnd.bind(this,self)}
+                        onTouchEnd={this.canvasTouchMoveEnd.bind(this, self)}
                         style={{ position: 'absolute', top: 0, left: 0, zIndex: 9 }}/>
                 <canvas ref="bgCanvas"/>
                 {
-                    indexData[currentNumber].imgurl ? <img src={indexData[currentNumber].imgurl} alt="" className="canvas-images canvas-img-middle"/>
+                    indexData[currentNumber].imgurl ?
+                        <img src={indexData[currentNumber].imgurl} alt="" className="canvas-images canvas-img-middle"/>
                         : <div className="canvas-images">
                         <div className="canvas-images__chinese">{indexData[currentNumber].chinese}</div>
                     </div>
@@ -279,7 +281,7 @@ export default class extends React.Component {
                 <div
                     className="canvas-images"
                     onTouchStart={self.nextFont.bind(self)}
-                     onTouchMove={self.preventDefaultMove.bind(self)}>
+                    onTouchMove={self.preventDefaultMove.bind(self)}>
                     <div className="canvas-text">
                         <div>{currentNumber >= allNumber ? '' : indexData[currentNumber + 1].pinyin}</div>
                         <div>{currentNumber >= allNumber ? '' : indexData[currentNumber + 1].chinese}</div>
@@ -289,18 +291,22 @@ export default class extends React.Component {
                             <img src={indexData[currentNumber + 1].imgurl} alt=""/> :
 
                             <div className="canvas-images">
-                            <div className="canvas-images__chinese-1">{indexData[currentNumber + 1].chinese}</div>
-                        </div>
+                                <div className="canvas-images__chinese-1">{indexData[currentNumber + 1].chinese}</div>
+                            </div>
                     }
                 </div>
-                <div className="canvas-bottom-icon hope-icon iconfont icon-wodeqifu"
-                     onClick={self.pageLeftSwitch.bind(self, { item: self.state.hope })}/>
-
+                <div className="canvas-bottom-icon hope-icon"
+                     onClick={self.pageLeftSwitch.bind(self, { item: self.state.hope })}>
+                    福
+                </div>
                 <div className="canvas-bottom-icon about-current iconfont icon-i1"
                      onClick={self.pageLeftSwitch.bind(self, { item: self.state.aboutCurrent })}/>
 
-                <div className="canvas-bottom-icon over-icon iconfont icon-wan"
-                     onClick={self.pageLeftSwitch.bind(self, { item: self.state.leftIcon[6], over: true })}/>
+                <div className="canvas-bottom-icon hope-icon over-icon "
+                     onClick={self.pageLeftSwitch.bind(self, { item: self.state.leftIcon[6], over: true })}>
+                    完
+                </div>
+
             </div>
         </div>
     }

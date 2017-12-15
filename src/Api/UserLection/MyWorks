@@ -3,7 +3,8 @@
         {
             "bh_id": 1,
             "lectionname": "心经",
-            "lectiontime": "2017-11-11"
+            "lectiontime": "2017-11-11",
+            "b_author":"礼拜"
         },
         {
             "bh_id": 1,
