@@ -225,7 +225,7 @@ export default class extends React.Component {
         const { indexData, allNumber, currentNumber } = self.state.indexState;
 
         const lieNumber = (currentNumber + 1)%defaultPage.b_x === 0 ? defaultPage.b_x : (currentNumber + 1)%defaultPage.b_x;
-        return <div className="canvas-index">
+        return <div className="canvas-index" onTouchStart={self.preventDefaultMove.bind(self)} onMouseOver={self.preventDefaultMove.bind(self)}>
             <div className="canvas-switch canvas-top">
                 <div className="canvas-text">
                     <div>{currentNumber <= 0 ? '' : indexData[currentNumber - 1].pinyin}</div>
@@ -265,6 +265,7 @@ export default class extends React.Component {
                         onTouchStart={this.canvasTouchStart.bind(this)}
                         onTouchMove={this.canvasTouchMove.bind(this)}
                         onTouchEnd={this.canvasTouchMoveEnd.bind(this,self)}
+                        onMouseOver={self.preventDefaultMove.bind(self)}
                         style={{ position: 'absolute', top: 0, left: 0, zIndex: 9 }}/>
                 <canvas ref="bgCanvas"/>
                 {

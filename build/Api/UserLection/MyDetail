@@ -1,0 +1,20 @@
+{
+    "data": {
+        "total": 268,
+        "position": 17,
+        "musicurl": "http://admin.eastdoing.com/Upload/files/music/formal/5A702ACBA0E79E227F2CDDB38005ECE3.mp3",
+        "lectionname": "般若波罗蜜多心经",
+        "fontsize": "10",
+        "color": "#000",
+        "w_id": 3195,
+        "m_id": 11,
+        "b_id": 11,
+        "bh_id": 252,
+        "last_w_id": 3194,
+        "last_imgurl": "http://wechat.eastdoing.com/UserImg/32830B92BF02FC8E0B5D1A6628B456D726DD0FA28549A33949BD3106DCA14DC5/temp/FD53C028AF4E84C3/231E6C08B4B1FE95BE2C67895727B06E.png",
+        "b_author": "查昇（清）",
+        "b_x": 9
+    },
+    "code": 0,
+    "msg": "成功"
+}

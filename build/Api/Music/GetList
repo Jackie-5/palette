@@ -1,0 +1,86 @@
+{
+    "data": [
+        {
+            "musicurl": "http://admin.eastdoing.com/Upload/files/music/formal/5A702ACBA0E79E227F2CDDB38005ECE3.mp3",
+            "m_name": "捣衣",
+            "m_author": "徐立荪",
+            "m_default": 1,
+            "m_id": 11,
+            "total": 9
+        },
+        {
+            "musicurl": "http://admin.eastdoing.com/Upload/files/music/formal/698722F6250506CE375D6988F021922A.mp3",
+            "m_name": "高山",
+            "m_author": "姚丙炎",
+            "m_default": 0,
+            "m_id": 19,
+            "total": 1
+        },
+        {
+            "musicurl": "http://admin.eastdoing.com/Upload/files/music/formal/A523EDC3E31425F23219EF6B8D9A1546.mp3",
+            "m_name": "酒狂",
+            "m_author": "姚炳炎",
+            "m_default": 0,
+            "m_id": 14,
+            "total": 1
+        },
+        {
+            "musicurl": "http://admin.eastdoing.com/Upload/files/music/formal/5A4D2E752D1220556A0E82E44A3C0C8D.mp3",
+            "m_name": "禅定",
+            "m_author": "李祥霆",
+            "m_default": 0,
+            "m_id": 20,
+            "total": 0
+        },
+        {
+            "musicurl": "http://admin.eastdoing.com/Upload/files/music/formal/B769E4F898ADA38218593243B3986C65.mp3",
+            "m_name": "梅花三弄",
+            "m_author": "溥雪斋",
+            "m_default": 0,
+            "m_id": 18,
+            "total": 0
+        },
+        {
+            "musicurl": "http://admin.eastdoing.com/Upload/files/music/formal/94BC3C2B40EB4573841240918CD7BB12.mp3",
+            "m_name": "阳关三叠",
+            "m_author": "管平湖",
+            "m_default": 0,
+            "m_id": 17,
+            "total": 0
+        },
+        {
+            "musicurl": "http://admin.eastdoing.com/Upload/files/music/formal/AC211F062F8E7430A7F651299A9D150A.mp3",
+            "m_name": "龙翔操",
+            "m_author": "管平湖",
+            "m_default": 0,
+            "m_id": 16,
+            "total": 0
+        },
+        {
+            "musicurl": "http://admin.eastdoing.com/Upload/files/music/formal/02B4E3127C21DDF86A422205886E5B72.mp3",
+            "m_name": "流水",
+            "m_author": "管平湖",
+            "m_default": 0,
+            "m_id": 15,
+            "total": 0
+        },
+        {
+            "musicurl": "http://admin.eastdoing.com/Upload/files/music/formal/7E3C7BEE07E1B3AD0FFCA8E800D88BF9.mp3",
+            "m_name": "静观吟",
+            "m_author": "夏一峰",
+            "m_default": 0,
+            "m_id": 13,
+            "total": 0
+        },
+        {
+            "musicurl": "http://admin.eastdoing.com/Upload/files/music/formal/C8B32DC354717084EFC4548434CFC031.mp3",
+            "m_name": "洞庭秋思",
+            "m_author": "査阜西",
+            "m_default": 0,
+            "m_id": 12,
+            "total": 0
+        }
+    ],
+    "code": 0,
+    "msg": "成功"
+}
