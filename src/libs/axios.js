@@ -9,9 +9,9 @@ import URI from 'urijs';
 export default (options = {}) =>
     new Promise((resolve, reject) => {
         const hostname = new URI(location.href).hostname();
-        if(!options.loading){
-            Toast.loading('数据加载中',1000);
-        }
+        //if(!options.loading){
+        //    Toast.loading('数据加载中',1000);
+        //}
         if(!options.method){
             options.method = 'get';
         }
@@ -24,9 +24,9 @@ export default (options = {}) =>
         getAndPost.then((data) => {
             if(data.data.code === 0){
                 resolve(data.data);
-                if(!options.loading){
-                    Toast.hide();
-                }
+                //if(!options.loading){
+                //    Toast.hide();
+                //}
             } else {
                 if(data.data.code === 100){
                     location.href = data.data.msg;

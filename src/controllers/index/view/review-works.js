@@ -232,7 +232,7 @@ export default class extends Component {
                         className="isCheck"
                         onClick={this.checkedClick.bind(self, 'wish')}
                     >
-                        祈福信息是否随作品分享
+                        是否分享祈福信息
                     </CheckboxItem> : '' }
 
                 {

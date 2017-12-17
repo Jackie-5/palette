@@ -85,7 +85,10 @@ export default class extends Component {
                                 onClick={self.pageLeftSwitch.bind(self,  {item: self.state.leftIcon[5], person: item})}
                                 className="person-color-body__row__title" multipleLine>
                                 <span>{item.lectionname}</span>
-                                <Brief>{item.lectiontime}</Brief>
+                                <Brief>
+                                    <div className="pull-left">{item.b_author}</div>
+                                    <div>{item.lectiontime}</div>
+                                </Brief>
                                 <i className="iconfont icon-yan person-color-body__row__title__icon" />
                             </Item>
                         }) : <Item
