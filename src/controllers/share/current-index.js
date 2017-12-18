@@ -19,7 +19,7 @@ class App extends method {
         <div>
             {
                 userAgent() ? <div className="palette-share-box">
-                    <div className={ param.bh_power.toString() === '1' && (param.bh_prayman && param.bh_prayother) || param.pt_name || param.bh_wish ? 'palette-share-box__hope' : 'hide' }>
+                    <div className={ param.bh_power && param.bh_power.toString() === '1' && (param.bh_prayman && param.bh_prayother) || param.pt_name || param.bh_wish ? 'palette-share-box__hope' : 'hide' }>
                         <div className="palette-share-box__hope__title clearfix">
                             <div className="palette-share-box__hope__title__name">祈福信息</div>
                         </div>
@@ -42,7 +42,7 @@ class App extends method {
                         <div className="palette-share-box__page-view__box">
                             <div className="palette-share-box__page-view__box__img">
                                 <div className="ov">
-                                    <img className="loadImg" src={param.bh_imgurl} />
+                                    <img className="loadImg" src={param.bh_imgurl} onClick={this.imgClick.bind(this)}/>
                                 </div>
                             </div>
 
@@ -55,7 +55,7 @@ class App extends method {
                     </div>
                     <div className={param.bh_h_power === '1' ? 'palette-share-box__versesImg' : 'hide'}>
                         <div className="palette-share-box__versesImg__border" />
-                        <div className="palette-share-box__versesImg__img" onClick={this.imgClick.bind(this)}>
+                        <div className="palette-share-box__versesImg__img">
                             <img src={param.versesImg} />
                         </div>
                         <div className="palette-share-box__versesImg__border" />

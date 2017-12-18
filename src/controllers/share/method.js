@@ -7,7 +7,7 @@ import axios from '../../libs/axios';
 import pageAjax from '../../libs/pageAjax';
 import URI from 'urijs'
 import { wxShareConfig, hideConfig, wxConfigSet } from '../../libs/wx-share-config';
-import { Toast } from 'antd-mobile';
+import { shareName } from '../../libs/share-content';
 
 export default class method extends React.Component {
     constructor(props) {
@@ -30,10 +30,10 @@ export default class method extends React.Component {
         wxConfigSet(wxConfig);
         wx.ready(() => {
             wxShareConfig({
-                title: `[乙度抄经] 快来欣赏我作品!`,
-                desc: '『乙东方 · 度千处』点亮一盏心灯，送出一份祝福。',
-                link: `http://wechat.eastdoing.com/chaojing/share.html?i=${this.urlSearch.i}&n=${this.urlSearch.n}`,
-                imgUrl: 'http://wechat.eastdoing.com/chaojing/share.jpg'
+                title: shareName.title + decodeURIComponent(this.urlSearch.n),
+                desc: shareName.desc,
+                link: `${shareName.link}?i=${this.urlSearch.i}&n=${this.urlSearch.n}`,
+                imgUrl: shareName.imgUrl
             });
             hideConfig();
             self.initShare();

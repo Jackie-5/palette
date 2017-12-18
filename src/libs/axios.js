@@ -22,18 +22,18 @@ export default (options = {}) =>
         }
         const getAndPost = options.method === 'get' ? axios.get(options.url, { params: options.params }) : axios.post(options.url, options.params);
         getAndPost.then((data) => {
-            if(data.data.code === 0){
+            if(data.data.code.toString() === '0'){
                 resolve(data.data);
                 //if(!options.loading){
                 //    Toast.hide();
                 //}
             } else {
-                if(data.data.code === 100){
+                if(data.data.code.toString() === '100'){
                     location.href = data.data.msg;
                     reject(data.data.code);
                     return;
                 }
-                if(data.data.code === 101){
+                if(data.data.code.toString() === '101'){
                     resolve(data.data);
                 }
                 if(!options.isFail){

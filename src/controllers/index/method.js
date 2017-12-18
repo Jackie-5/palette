@@ -12,6 +12,7 @@ import copy from 'clone';
 import { wxShareConfig, hideConfig, wxConfigSet } from '../../libs/wx-share-config';
 import userAgent from '../../libs/user-agent';
 import second from '../../libs/second';
+import { shareIndex, shareName } from '../../libs/share-content';
 
 const alert = Modal.alert;
 
@@ -59,7 +60,7 @@ export default class method extends React.Component {
             wx.ready(() => {
                 self.initCanvas();
                 hideConfig();
-                wxShareConfig(self.state.indexShareOpt);
+                wxShareConfig(shareIndex);
                 self.state.isMusic && self.refs.audio.play();
             });
         }
@@ -122,7 +123,7 @@ export default class method extends React.Component {
         state.isReviewImgIsPerson = false;
         // 默认分享
         if (!(options.review && options.review === 'share')) {
-            wxShareConfig(self.state.indexShareOpt);
+            wxShareConfig(shareIndex);
         }
 
 
@@ -243,10 +244,10 @@ export default class method extends React.Component {
                             }
                         });
                         wxShareConfig({
-                            title: `[乙度抄经] 快来欣赏我作品!`,
-                            desc: '『乙东方 · 度千处』点亮一盏心灯，送出一份祝福。',
-                            link: `http://wechat.eastdoing.com/chaojing/share.html?i=${data.data.key}&n=${encodeURIComponent(data.data.lectionname)}`,
-                            imgUrl: 'http://wechat.eastdoing.com/chaojing/share.jpg'
+                            title: shareName.title + data.data.lectionname,
+                            desc: shareName.desc,
+                            link: `${shareName.link}?i=${data.data.key}&n=${encodeURIComponent(data.data.lectionname)}`,
+                            imgUrl: shareName.imgUrl
                         });
                         state.isShowSharePop = true;
                         self.setState(state);

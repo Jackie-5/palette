@@ -146,11 +146,5 @@ export default {
                 key: 'delete',
             },
         ]
-    ],
-    indexShareOpt: {
-        title: `[乙度抄经]`,
-        desc: '『乙东方 · 度千处』点亮一盏心灯，送出一份祝福。',
-        link: `http://wechat.eastdoing.com/chaojing/index.html`,
-        imgUrl: 'http://wechat.eastdoing.com/chaojing/share.jpg'
-    }
+    ]
 };
