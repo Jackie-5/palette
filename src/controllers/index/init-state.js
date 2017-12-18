@@ -11,7 +11,7 @@ export default {
     defaultPage: {},
     isMusic: cookie.get('isMusic') ? JSON.parse(cookie.get('isMusic')) : true,
     isShowSharePop: false,
-    isShareCheck: true,
+    isShareCheck: false,
     isShareHui: false,
     isShowFollowPop: false,
     isTimeOut: true,

@@ -85,7 +85,3 @@ class App extends method {
 
 const H5NumberInputExampleWrapper = createForm()(App);
 ReactDOM.render(<H5NumberInputExampleWrapper />, document.getElementById('app-page'));
-
-document.getElementById('app-page').addEventListener('touchmove', (e)=>{
-    e.preventDefault()
-});

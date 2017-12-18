@@ -276,13 +276,30 @@ export default class method extends React.Component {
         }
     }
 
+
+
     onAnimateEnd({ key, type }) {
+        const appPage = document.getElementById('app-page');
+        const self = this;
+        const resizeWindow = ()=>{
+            self.initCanvas()
+        };
         if (key === 'index' && type === 'enter') {
             if (this.isInitCanvas) {
                 this.canvasMethod.initCanvas();
             } else {
                 this.initCanvas();
             }
+            appPage.addEventListener('touchmove', this.preventDefaultMove);
+            if(!navigator.userAgent.includes('Android')){
+                window.addEventListener('resize', resizeWindow);
+            }
+        } else {
+            appPage.removeEventListener('touchmove', this.preventDefaultMove);
+            if(!navigator.userAgent.includes('Android')){
+                window.removeEventListener('resize', resizeWindow);
+            }
+
         }
     }
 
