@@ -235,6 +235,10 @@ export default class method extends React.Component {
                                 bh_id: state.reviewImgIsPerson.bh_id
                             }
                         });
+                        const user = await axios({
+                            url: pageAjax.UserBasic,
+                        });
+
                         await axios({
                             url: pageAjax.UserLectionGetShareKey,
                             params: {
@@ -243,19 +247,21 @@ export default class method extends React.Component {
                                 bh_h_powere: state.isShareHui ? 1 : 0,
                             }
                         });
+
                         wxShareConfig({
-                            title: shareName.title + data.data.lectionname,
+                            title: `『${user.data.nickname}』${shareName.title}《${data.data.lectionname}》`,
                             desc: shareName.desc,
-                            link: `${shareName.link}?i=${data.data.key}&n=${encodeURIComponent(data.data.lectionname)}`,
+                            link: `${shareName.link}?i=${data.data.key}&n=${encodeURIComponent(data.data.lectionname)}&u=${encodeURIComponent(user.data.nickname)}`,
                             imgUrl: shareName.imgUrl
                         });
                         state.isShowSharePop = true;
                         self.setState(state);
                     }
-                } else if(options.over){
+                } else if (options.over) {
                     alert('提示', state.indexState.isSaveTips, [
                         {
-                            text: '取消', onPress: () => {}
+                            text: '取消', onPress: () => {
+                        }
                         },
                         {
                             text: '确定', async onPress () {
@@ -278,11 +284,10 @@ export default class method extends React.Component {
     }
 
 
-
     onAnimateEnd({ key, type }) {
         const appPage = document.getElementById('app-page');
         const self = this;
-        const resizeWindow = ()=>{
+        const resizeWindow = () => {
             self.initCanvas()
         };
         if (key === 'index' && type === 'enter') {
@@ -292,12 +297,12 @@ export default class method extends React.Component {
                 this.initCanvas();
             }
             appPage.addEventListener('touchmove', this.preventDefaultMove);
-            if(!navigator.userAgent.includes('Android')){
+            if (!navigator.userAgent.includes('Android')) {
                 window.addEventListener('resize', resizeWindow);
             }
         } else {
             appPage.removeEventListener('touchmove', this.preventDefaultMove);
-            if(!navigator.userAgent.includes('Android')){
+            if (!navigator.userAgent.includes('Android')) {
                 window.removeEventListener('resize', resizeWindow);
             }
 
@@ -464,7 +469,7 @@ export default class method extends React.Component {
 
             }
 
-            if(self.canvasMethod.setTimeOutFn){
+            if (self.canvasMethod.setTimeOutFn) {
                 clearTimeout(self.canvasMethod.setTimeOutFn);
             }
 

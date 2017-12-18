@@ -30,9 +30,9 @@ export default class method extends React.Component {
         wxConfigSet(wxConfig);
         wx.ready(() => {
             wxShareConfig({
-                title: shareName.title + decodeURIComponent(this.urlSearch.n),
+                title: `『${decodeURIComponent(this.urlSearch.u)}』${shareName.title}《${decodeURIComponent(this.urlSearch.n)}》`,
                 desc: shareName.desc,
-                link: `${shareName.link}?i=${this.urlSearch.i}&n=${this.urlSearch.n}`,
+                link: `${shareName.link}?i=${this.urlSearch.i}&n=${this.urlSearch.n}&u=${this.urlSearch.u}`,
                 imgUrl: shareName.imgUrl
             });
             hideConfig();

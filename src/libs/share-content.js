@@ -10,7 +10,7 @@ export const shareIndex = {
 };
 
 export const shareName = {
-    title: '乙度抄经：',
+    title: '的抄经作品',
     desc: '抄录经典，明心见性；点亮心灯，送出祝福。',
     link: 'http://wechat.eastdoing.com/chaojing/share.html',
     imgUrl: 'http://wechat.eastdoing.com/chaojing/share.jpg',
