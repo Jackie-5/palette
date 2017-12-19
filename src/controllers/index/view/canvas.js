@@ -268,7 +268,7 @@ export default class extends React.Component {
                         onTouchMove={this.canvasTouchMove.bind(this)}
                         onTouchEnd={this.canvasTouchMoveEnd.bind(this,self)}
                         style={{ position: 'absolute', top: 0, left: 0, zIndex: 9 }}/>
-                <canvas ref="bgCanvas"/>
+                <canvas ref="bgCanvas" style={{ position: 'relative', zIndex: 8 }}/>
                 {
                     indexData[currentNumber].imgurl ?
                         <img src={indexData[currentNumber].imgurl} alt="" className="canvas-images canvas-img-middle"/>
