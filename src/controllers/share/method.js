@@ -8,6 +8,7 @@ import pageAjax from '../../libs/pageAjax';
 import URI from 'urijs'
 import { wxShareConfig, hideConfig, wxConfigSet } from '../../libs/wx-share-config';
 import { shareName } from '../../libs/share-content';
+import cookies from 'js-cookie';
 
 export default class method extends React.Component {
     constructor(props) {
@@ -20,6 +21,7 @@ export default class method extends React.Component {
     async componentDidMount() {
         // 进入页面 set 默认值
         const self = this;
+        cookies.set('returnUrl', location.href);
         this.urlSearch = new URI(location.href).query(true);
         const wxConfig = await axios({
             url: pageAjax.ShareGetParm,

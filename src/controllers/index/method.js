@@ -13,6 +13,7 @@ import { wxShareConfig, hideConfig, wxConfigSet } from '../../libs/wx-share-conf
 import userAgent from '../../libs/user-agent';
 import second from '../../libs/second';
 import { shareIndex, shareName } from '../../libs/share-content';
+import cookies from 'js-cookie';
 
 const alert = Modal.alert;
 
@@ -40,9 +41,9 @@ export default class method extends React.Component {
     async componentDidMount() {
         // 进入页面 set 默认值
         const self = this;
+        cookies.set('returnUrl', location.href);
         if (userAgent()) {
             const isWatch = await axios({ url: pageAjax.LoginPower });
-            console.log(isWatch);
             if (isWatch.code === 101) {
                 wx.hideAllNonBaseMenuItem();
                 self.state.isShowFollowPop = true;

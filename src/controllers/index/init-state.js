@@ -5,6 +5,7 @@ import index from './state/index-satate';
 import penColor from './state/pen-color';
 import hopeState from './state/hope-state';
 import offlineMake from './state/offline-make';
+import person from './state/person';
 import cookie from 'js-cookie';
 
 export default {
@@ -108,7 +109,7 @@ export default {
     logoState: {},
     aboutArticle: {},
     offlineMakeState: { ...offlineMake },
-    personState: {},
+    personState: { ...person },
     musicList: [],
     tieList: [],
     offlineState: [],

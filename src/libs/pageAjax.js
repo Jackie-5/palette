@@ -29,5 +29,6 @@ export default {
     ShareZan: '/Api/Share/Zan',
     UserLectionGetPray: '/Api/UserLection/GetPray',
     UserLectionUpdateSharePower: '/Api/UserLection/UpdateSharePower',
+    GetWorkSquareList: '/Api/UserLection/GetWorkSquareList',
 
 }

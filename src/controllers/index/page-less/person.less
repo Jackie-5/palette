@@ -1,14 +1,13 @@
 @personColor: #996633;
+@borderColor: #ddd;
 .person-page-box{
     .person-color-box{
-        height:60%;
-        border-top:1px solid #333;
+        height:65.5%;
+        border-top:1px solid @borderColor;
         border-bottom:1px solid @ccc;
         .person-color-body{
             height:100%;
             &__row{
-                border-bottom: 2px solid @ccc;
-                margin-top: 10px;
                 .am-list-body{
                     background: transparent;
                     border:0;
@@ -40,6 +39,9 @@
                         font-size: 45px;
                     }
                 }
+                &__title:first-child{
+                    border-top:1px solid @borderColor
+                }
                 &__notList{
                     .am-list-content{
                         text-align: center;
@@ -57,12 +59,15 @@
             }
         }
     }
+    .am-list-footer{
+        border-top:1px solid #ddd;
+    }
     &__person{
-        height:40%;
+        height:34%;
         text-align: center;
         &__top-box{
             height:70%;
-            border-bottom: 1px solid #333;
+            //border-bottom: 1px solid #333;
             padding-top:10%;
             &__img{
                 width: 200px;
@@ -80,14 +85,32 @@
                 padding-bottom: 20px;
             }
         }
-        &__title{
-            margin-top: 20px;
-            margin-left: 10px;
-            text-align: left;
-            i{
+        //&__title{
+        //    margin-top: 20px;
+        //    margin-left: 10px;
+        //    text-align: left;
+        //    i{
+        //        margin-right: 5px;
+        //        color: @penColor;
+        //    }
+        //}
+    }
+    &__tabs{
+        height:6%;
+        border-top: 1px solid @borderColor;
+        &__li{
+            width:50%;
+            height:100%;
+            display: flex;
+            justify-content:center;
+            align-items:Center;
+            i {
                 margin-right: 5px;
                 color: @penColor;
             }
+        }
+        &__active{
+            background-color:@borderColor
         }
     }
 }
