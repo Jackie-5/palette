@@ -13,7 +13,8 @@ const Brief = Item.Brief;
 
 // 每页10条
 // 当前页数
-let pageIndex = 0;
+const defaultPageIndex = 1;
+let pageIndex = 1;
 const currentPageNumber = 10;
 
 
@@ -25,14 +26,6 @@ const MyBody = (props) => {
 
     </div>
 };
-
-//function genData(pIndex = 0) {
-//    const dataArr = [];
-//    for (let i = 0; i < NUM_ROWS; i++) {
-//        dataArr.push(`row - ${(pIndex * NUM_ROWS) + i}`);
-//    }
-//    return dataArr;
-//}
 
 export default class extends Component {
     constructor(props) {
@@ -80,14 +73,31 @@ export default class extends Component {
         const _this = this;
         const self = this.props.self;
         const state = self.state;
-        // simulate initial Ajax
+        const isTabs = state.personState.tabs[1].active;
+
+        let obj = {};
+        if (isTabs) {
+            pageIndex = defaultPageIndex;
+            obj.PageSize = currentPageNumber;
+            obj.PageIndex = pageIndex;
+        }
+
         axiosAll.all([axios({
             url: pageAjax.UserBasic,
         }), axios({
-            url: pageAjax.UserLectionMyWorks,
+            url: isTabs ? pageAjax.GetWorkSquareList : pageAjax.UserLectionMyWorks,
         })])
             .then((data) => {
-                state.personState = { ...state.personState, ...data[0].data, list: data[1].data };
+                if (isTabs) {
+                    state.personState = {
+                        ...state.personState,
+                        allPage: data[1].data.TotalPageCount, ...data[0].data,
+                        list: data[1].data.DataList
+                    };
+                } else {
+                    state.personState = { ...state.personState, ...data[0].data, list: data[1].data };
+                }
+
                 this.rData = _this.genData();
 
                 this.setState({
@@ -99,13 +109,13 @@ export default class extends Component {
 
     }
 
-    initAjax() {
+    initAjax(options = {}) {
+        const { isRefresh, isTab } = options;
         const self = this.props.self;
         const state = self.state;
         const isTabs = state.personState.tabs[1].active;
         let obj = {};
         if (isTabs) {
-            ++pageIndex;
             obj.PageSize = currentPageNumber;
             obj.PageIndex = pageIndex;
         }
@@ -115,54 +125,55 @@ export default class extends Component {
         }).then((data) => {
             if (data) {
                 if (isTabs) {
-                    this.rData = [...this.rData, ...this.genData(pageIndex)];
+                    state.personState.list = isRefresh ? data.data.DataList : [...data.data.DataList];
+                    state.personState.allPage = data.data.TotalPageCount;
+                    if (pageIndex === defaultPageIndex) {
+                        this.rData = [...this.genData()];
+                    } else {
+                        this.rData = [...this.rData, ...this.genData()];
+                    }
+                    pageIndex++;
                 } else {
+                    state.personState.list = isRefresh ? data.data : [...data.data];
                     this.rData = this.genData();
                 }
-                state.personState.list = this.rData;
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows(this.rData),
-                    isLoading: true,
+                    isLoading: false,
                     refreshing: false
                 });
 
                 self.setState(state);
+
+                if(isTab){
+                    this.refs.lv.scrollTo(0, 0);
+                }
             }
         });
     }
 
     onRefresh() {
+        pageIndex = defaultPageIndex;
         if (!this.manuallyRefresh) {
             this.setState({ refreshing: true });
         } else {
             this.manuallyRefresh = false;
         }
 
-        this.initAjax();
+        this.initAjax({
+            isRefresh: true
+        });
     };
 
     onEndReached = (event) => {
         const state = this.props.self.state;
-        console.log('asdfas');
-        // load new data
-        // hasMore: from backend data, indicates whether it is the last page, here is false
         if (state.personState.tabs[1].active) {
-            if (this.state.isLoading && !this.state.hasMore) {
+            if (pageIndex > state.personState.allPage) {
                 return;
             }
-
-            this.setState({ isLoading: true });
-
-
+            this.initAjax();
         }
 
-
-        //
-        //this.rData = [...this.rData, ...this.genData(++pageIndex)];
-        //this.setState({
-        //    dataSource: this.state.dataSource.cloneWithRows(this.rData),
-        //    isLoading: false,
-        //});
     };
 
 
@@ -170,13 +181,18 @@ export default class extends Component {
         const self = this.props.self;
         const state = self.state;
 
+        pageIndex = defaultPageIndex;
+
+
         state.personState.tabs.map((it) => {
             it.active = item.key === it.key;
         });
 
         this.setState(state);
 
-        this.initAjax();
+        this.initAjax({
+            isTab: true
+        });
     }
 
 
@@ -187,14 +203,20 @@ export default class extends Component {
             if (rowData) {
                 return <Item
                     key={rowID}
-                    onClick={self.pageLeftSwitch.bind(self, { item: self.state.leftIcon[5], person: rowData })}
+                    onClick={self.pageLeftSwitch.bind(self, { item: self.state.leftIcon[5], person: rowData, isSquare: personState.tabs[1].active })}
                     className="person-color-body__row__title" multipleLine>
                     <span>{rowData.lectionname}</span>
                     <Brief>
                         <div className="pull-left">{rowData.b_author}</div>
-                        <div>{rowData.lectiontime}</div>
+                        <div>{personState.tabs[0].active ? rowData.lectiontime :rowData.nickname }</div>
                     </Brief>
-                    <i className="iconfont icon-yan person-color-body__row__title__icon"/>
+                    {
+                        personState.tabs[0].active ?
+                            <i className="iconfont icon-yan person-color-body__row__title__icon"/>
+                            :
+                            <div className="person-color-body__row__title__total">人气: {rowData.total}</div>
+                    }
+
                 </Item>
             } else {
                 return <Item
@@ -234,7 +256,7 @@ export default class extends Component {
                 <ListView ref="lv"
                           dataSource={this.state.dataSource}
                           renderFooter={() => {
-                              if (personState.tabs[1].active) {
+                              if (personState.tabs[1].active && this.rData.length > currentPageNumber) {
                                   return <div style={{ textAlign: 'center' }}>
                                       {this.state.isLoading ? '页面加载中...' : '我是有底线的...'}
                                   </div>
@@ -255,10 +277,9 @@ export default class extends Component {
                               overflow: 'auto',
                               border: '1px solid #ddd',
                           }}
-                          scrollRenderAheadDistance={500}
-                          scrollEventThrottle={200}
+                          scrollRenderAheadDistance={50}
                           onEndReached={this.onEndReached}
-                          onEndReachedThreshold={10}
+                          onEndReachedThreshold={20}
                 />
             </div>
         );

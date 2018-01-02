@@ -190,6 +190,7 @@ export default class method extends React.Component {
                     }, state);
                 } else if (options.person) {
                     state.isReviewImgIsPerson = true;
+                    state.reviewImgIsSquare = options.isSquare;
                     state.reviewImgIsPerson = options.person;
                     self.setState(state);
                 } else if (options.offline) {
@@ -246,6 +247,7 @@ export default class method extends React.Component {
                                 bh_id: state.reviewImgIsPerson.bh_id,
                                 bh_power: state.isShareCheck ? 1 : 0,
                                 bh_h_powere: state.isShareHui ? 1 : 0,
+                                bh_square_power: state.isShareSquare ? 1 : 0,
                             }
                         });
 

@@ -115,6 +115,7 @@ export default {
     offlineState: [],
     currentReviewImgSrc: '',
     reviewImgIsPerson: false,
+    isShareSquare: true,
     reviewBtn: [
         [
             {
