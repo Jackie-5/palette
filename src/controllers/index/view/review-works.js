@@ -116,6 +116,7 @@ export default class extends Component {
                 }
             });
             state.currentReviewDetail = data.data;
+            self.setState(state);
         }
 
 
@@ -178,6 +179,7 @@ export default class extends Component {
                     }
                 }).then((data)=>{
                     state.currentReviewDetail = data.data;
+                    self.setState(state);
                 })
             }
         });
@@ -231,11 +233,12 @@ export default class extends Component {
                                         </div>
                                     </div>
                                 </div>
+
                                 {
                                     state.reviewImgIsSquare &&
                                     <div className="palette-review-box__page-view__praise clearfix" onClick={this.praise.bind(self)}>
                                         <span className="palette-review-box__page-view__praise__font">{currentReviewDetail.praiseNum}赞</span>
-                                        <div className={currentReviewDetail.ispraise.toString() === '1' ? 'iconfont icon-xin1 palette-review-box__page-view__praise__icon' : 'iconfont icon-xin palette-review-box__page-view__praise__icon'} />
+                                        <div className={currentReviewDetail.ispraise === 1 ? 'iconfont icon-xin1 palette-review-box__page-view__praise__icon' : 'iconfont icon-xin palette-review-box__page-view__praise__icon'} />
                                     </div>
                                 }
                             </div>

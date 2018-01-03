@@ -50,6 +50,10 @@ class App extends method {
                     </div>
 
                     <div className="palette-share-box__praise clearfix" onClick={this.praise.bind(this)}>
+                        <div className="pull-left">
+                            <span>作者:『{this.urlSearch && this.urlSearch.m}』</span>
+                            <span style={{marginLeft:5}}>完成时间:{this.urlSearch && this.urlSearch.d}</span>
+                        </div>
                         <span className="palette-share-box__praise__font">{param.praiseNum}赞</span>
                         <div className={param.ispraise === 1 ? 'iconfont icon-xin1 palette-share-box__praise__icon' : 'iconfont icon-xin palette-share-box__praise__icon'} />
                     </div>

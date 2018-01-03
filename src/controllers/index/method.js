@@ -250,11 +250,10 @@ export default class method extends React.Component {
                                 bh_square_power: state.isShareSquare ? 1 : 0,
                             }
                         });
-
                         wxShareConfig({
                             title: `『${user.data.nickname}』${shareName.title}《${data.data.lectionname}》`,
                             desc: shareName.desc,
-                            link: `${shareName.link}?i=${data.data.key}&n=${encodeURIComponent(data.data.lectionname)}&u=${encodeURIComponent(user.data.nickname)}`,
+                            link: `${shareName.link}?i=${data.data.key}&n=${encodeURIComponent(data.data.lectionname)}&u=${encodeURIComponent(user.data.nickname)}&d=${encodeURIComponent(state.reviewImgIsPerson.lectiontime)}&m=${encodeURIComponent(state.reviewImgIsPerson.b_author)}`,
                             imgUrl: shareName.imgUrl
                         });
                         state.isShowSharePop = true;
@@ -327,7 +326,7 @@ export default class method extends React.Component {
         state.penColorState.pen.map((item) => {
             item.active = detailData.data.color === item.color && detailData.data.fontsize === item.size.toString();
         });
-
+        state.saveNextArr = [];
         state.indexState.currentNumber = detailData.data.position - 1;
         state.indexState.allNumber = data.data.length - 1;
         state.indexState.indexData = data.data;

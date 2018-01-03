@@ -86,6 +86,7 @@ export default class extends Component {
             url: pageAjax.UserBasic,
         }), axios({
             url: isTabs ? pageAjax.GetWorkSquareList : pageAjax.UserLectionMyWorks,
+            params: obj
         })])
             .then((data) => {
                 if (isTabs) {
@@ -145,7 +146,7 @@ export default class extends Component {
 
                 self.setState(state);
 
-                if(isTab){
+                if (isTab) {
                     this.refs.lv.scrollTo(0, 0);
                 }
             }
@@ -203,12 +204,16 @@ export default class extends Component {
             if (rowData) {
                 return <Item
                     key={rowID}
-                    onClick={self.pageLeftSwitch.bind(self, { item: self.state.leftIcon[5], person: rowData, isSquare: personState.tabs[1].active })}
+                    onClick={self.pageLeftSwitch.bind(self, {
+                        item: self.state.leftIcon[5],
+                        person: rowData,
+                        isSquare: personState.tabs[1].active
+                    })}
                     className="person-color-body__row__title" multipleLine>
                     <span>{rowData.lectionname}</span>
                     <Brief>
                         <div className="pull-left">{rowData.b_author}</div>
-                        <div>{personState.tabs[0].active ? rowData.lectiontime :rowData.nickname }</div>
+                        <div>{personState.tabs[0].active ? rowData.lectiontime : rowData.nickname }</div>
                     </Brief>
                     {
                         personState.tabs[0].active ?
