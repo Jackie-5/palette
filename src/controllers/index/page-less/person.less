@@ -110,13 +110,24 @@
             display: flex;
             justify-content:center;
             align-items:Center;
+            background: @borderColor;
             i {
                 margin-right: 5px;
-                color: @penColor;
+                color: #999;
+            }
+            span{
+                color:#999;
             }
         }
         &__active{
-            background-color:@borderColor
+            background-color:@bgColor;
+            i {
+                color: @penColor;
+            }
+            span{
+                color:#333;
+            }
+
         }
     }
 }
