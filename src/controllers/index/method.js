@@ -242,7 +242,8 @@ export default class method extends React.Component {
                         });
 
                         await axios({
-                            url: pageAjax.UserLectionGetShareKey,
+                            url: pageAjax.UserLectionUpdateSharePower,
+                            method: 'post',
                             params: {
                                 bh_id: state.reviewImgIsPerson.bh_id,
                                 bh_power: state.isShareCheck ? 1 : 0,
