@@ -253,7 +253,7 @@ export default class method extends React.Component {
                         wxShareConfig({
                             title: `『${user.data.nickname}』${shareName.title}《${data.data.lectionname}》`,
                             desc: shareName.desc,
-                            link: `${shareName.link}?i=${data.data.key}&n=${encodeURIComponent(data.data.lectionname)}&u=${encodeURIComponent(user.data.nickname)}&d=${encodeURIComponent(state.reviewImgIsPerson.lectiontime)}&m=${encodeURIComponent(state.reviewImgIsPerson.b_author)}`,
+                            link: `${shareName.link}?i=${data.data.key}&n=${encodeURIComponent(data.data.lectionname)}&u=${encodeURIComponent(user.data.nickname)}&d=${encodeURIComponent(state.reviewImgIsPerson.lectiontime)}&m=${encodeURIComponent(user.data.nickname)}`,
                             imgUrl: shareName.imgUrl
                         });
                         state.isShowSharePop = true;

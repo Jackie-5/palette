@@ -40,6 +40,7 @@ export default class method extends React.Component {
             hideConfig();
             self.initShare();
         });
+        document.querySelector('#app-page').classList.add('app-page');
         document.title = decodeURIComponent(this.urlSearch.n);
         document.querySelector('.loadImg').onload = ()=>{
             document.querySelector('.palette-share-box__page-view__box').scrollLeft = document.querySelector('.loadImg').offsetWidth;
