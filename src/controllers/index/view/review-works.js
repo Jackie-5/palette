@@ -191,6 +191,7 @@ export default class extends Component {
         const state = self.state;
         const currentReviewDetail = self.state.currentReviewDetail;
         const isPerson = state.isReviewImgIsPerson && currentReviewDetail && ((currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother) || currentReviewDetail.pt_name || currentReviewDetail.bh_wish);
+        console.log(state.reviewImgIsPerson)
         const row = (rowData, sectionID, rowID) => {
             return (
                 <div style={{ height: '100%', overflowY: 'scroll' }} key={rowID} id="review-box">
@@ -237,6 +238,9 @@ export default class extends Component {
                                 {
                                     state.reviewImgIsSquare &&
                                     <div className="palette-review-box__page-view__praise clearfix" onClick={this.praise.bind(self)}>
+                                        <div className="pull-left">
+                                            <span>作者:『{state.reviewImgIsPerson.nickname}』</span>
+                                        </div>
                                         <span className="palette-review-box__page-view__praise__font">{currentReviewDetail.praiseNum}赞</span>
                                         <div className={currentReviewDetail.ispraise === 1 ? 'iconfont icon-xin1 palette-review-box__page-view__praise__icon' : 'iconfont icon-xin palette-review-box__page-view__praise__icon'} />
                                     </div>

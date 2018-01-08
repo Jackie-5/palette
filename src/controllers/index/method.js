@@ -42,6 +42,7 @@ export default class method extends React.Component {
         // 进入页面 set 默认值
         const self = this;
         cookies.set('returnUrl', location.href);
+        localStorage.setItem('returnUrl', location.href);
         if (userAgent()) {
             const isWatch = await axios({ url: pageAjax.LoginPower });
             if (isWatch.code === 101) {
@@ -243,6 +244,7 @@ export default class method extends React.Component {
 
                         await axios({
                             url: pageAjax.UserLectionUpdateSharePower,
+                            method: 'post',
                             params: {
                                 bh_id: state.reviewImgIsPerson.bh_id,
                                 bh_power: state.isShareCheck ? 1 : 0,

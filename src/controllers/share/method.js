@@ -22,6 +22,7 @@ export default class method extends React.Component {
         // 进入页面 set 默认值
         const self = this;
         cookies.set('returnUrl', location.href);
+        localStorage.setItem('returnUrl', location.href);
         this.urlSearch = new URI(location.href).query(true);
         const wxConfig = await axios({
             url: pageAjax.ShareGetParm,
