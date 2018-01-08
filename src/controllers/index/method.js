@@ -242,7 +242,7 @@ export default class method extends React.Component {
                         });
 
                         await axios({
-                            url: pageAjax.UserLectionGetShareKey,
+                            url: pageAjax.UserLectionUpdateSharePower,
                             params: {
                                 bh_id: state.reviewImgIsPerson.bh_id,
                                 bh_power: state.isShareCheck ? 1 : 0,
@@ -250,6 +250,7 @@ export default class method extends React.Component {
                                 bh_square_power: state.isShareSquare ? 1 : 0,
                             }
                         });
+
                         wxShareConfig({
                             title: `『${user.data.nickname}』${shareName.title}《${data.data.lectionname}》`,
                             desc: shareName.desc,
