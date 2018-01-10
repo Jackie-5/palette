@@ -23,7 +23,13 @@ export default class method extends React.Component {
         const self = this;
         cookies.set('returnUrl', location.href);
         localStorage.setItem('returnUrl', location.href);
-        this.urlSearch = new URI(location.href).query(true);
+        this.urlSearch = {};
+        let query = new URI(location.href).query(true);
+
+        for (let i in query) {
+            this.urlSearch[i] = decodeURIComponent(query[i])
+        }
+
         const wxConfig = await axios({
             url: pageAjax.ShareGetParm,
             params: {
@@ -33,17 +39,17 @@ export default class method extends React.Component {
         wxConfigSet(wxConfig);
         wx.ready(() => {
             wxShareConfig({
-                title: `『${decodeURIComponent(this.urlSearch.u)}』${shareName.title}《${decodeURIComponent(this.urlSearch.n)}》`,
+                title: `『${this.urlSearch.u}』${shareName.title}《${this.urlSearch.n}》`,
                 desc: shareName.desc,
-                link: `${shareName.link}?i=${this.urlSearch.i}&n=${this.urlSearch.n}&u=${this.urlSearch.u}`,
+                link: `${shareName.link}?i=${encodeURIComponent(this.urlSearch.i)}&n=${encodeURIComponent(this.urlSearch.n)}&u=${encodeURIComponent(this.urlSearch.u)}`,
                 imgUrl: shareName.imgUrl
             });
             hideConfig();
             self.initShare();
         });
         document.querySelector('#app-page').classList.add('app-page');
-        document.title = decodeURIComponent(this.urlSearch.n);
-        document.querySelector('.loadImg').onload = ()=>{
+        document.title = this.urlSearch.n;
+        document.querySelector('.loadImg').onload = () => {
             document.querySelector('.palette-share-box__page-view__box').scrollLeft = document.querySelector('.loadImg').offsetWidth;
         };
     }
