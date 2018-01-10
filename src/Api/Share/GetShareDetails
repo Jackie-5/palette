@@ -10,7 +10,8 @@
         "wxImg": "http://admin.eastdoing.com/img/85D3E646EECC83FCEE3AB0B968BBD4E2.png",
         "versesImg": "http://admin.eastdoing.com/img/9959E7D58018E001CD73721E8DB28D13.jpg",
         "bh_power": 0,
-        "bh_h_power": 0
+        "bh_h_power": 0,
+        "bh_finish": "2016-5-5"
     },
     "code": 0,
     "msg": "成功"

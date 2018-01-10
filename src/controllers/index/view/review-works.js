@@ -191,7 +191,7 @@ export default class extends Component {
         const state = self.state;
         const currentReviewDetail = self.state.currentReviewDetail;
         const isPerson = state.isReviewImgIsPerson && currentReviewDetail && ((currentReviewDetail.bh_prayman && currentReviewDetail.bh_prayother) || currentReviewDetail.pt_name || currentReviewDetail.bh_wish);
-        console.log(state.reviewImgIsPerson)
+
         const row = (rowData, sectionID, rowID) => {
             return (
                 <div style={{ height: '100%', overflowY: 'scroll' }} key={rowID} id="review-box">

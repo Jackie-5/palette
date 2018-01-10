@@ -13,6 +13,27 @@
 <section id="app-page"></section>
 
 <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script>
+  wx.onMenuShareTimeline({
+    title: '[乙度抄经]', // 分享标题
+    link: 'http://wechat.eastdoing.com/chaojing/index.html', // 分享链接
+    imgUrl: 'http://wechat.eastdoing.com/chaojing/share.jpg', // 分享图标
+    success: function () {
+    },
+    cancel: function () {
+    }
+  });
+  wx.onMenuShareAppMessage({
+    title: '[乙度抄经]', // 分享标题
+    desc: '乙度抄经，抄录经典；明心见性，放飞心灯。', // 分享描述
+    link: 'http://wechat.eastdoing.com/chaojing/index.html', // 分享链接
+    imgUrl: 'http://wechat.eastdoing.com/chaojing/share.jpg', // 分享图标
+    success: function () {
+    },
+    cancel: function () {
+    }
+  });
+</script>
 <script src="./vendor.js"></script>
 <script src="./index/current-index.js"></script>
 
