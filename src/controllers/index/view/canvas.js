@@ -297,10 +297,10 @@ export default class extends React.Component {
                             </div>
                     }
                 </div>
-                <div className="canvas-bottom-icon hope-icon"
-                     onClick={self.pageLeftSwitch.bind(self, { item: self.state.hope })}>
-                    福
-                </div>
+                {/*<div className="canvas-bottom-icon hope-icon"*/}
+                     {/*onClick={self.pageLeftSwitch.bind(self, { item: self.state.hope })}>*/}
+                    {/*福*/}
+                {/*</div>*/}
                 <div className="canvas-bottom-icon about-current iconfont icon-i1"
                      onClick={self.pageLeftSwitch.bind(self, { item: self.state.aboutCurrent })}/>
 

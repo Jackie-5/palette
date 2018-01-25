@@ -18,7 +18,7 @@ const MyBody = (props) => {
 const isBtnShow = (propsSelf, self) => {
     const { currentNumber, allNumber } = propsSelf.state.indexState;
     const currentReviewDetail = propsSelf.state.currentReviewDetail;
-    const { isReviewImgIsPerson } = propsSelf.state;
+    const { isReviewImgIsPerson , reviewImgIsSquare} = propsSelf.state;
     return <div>
         {
             propsSelf.state.reviewBtn[
@@ -28,7 +28,7 @@ const isBtnShow = (propsSelf, self) => {
                 return <div key={i}>
                     {
                         item.key === 'delete' ?
-                            <div className={item.icon + ' iconfont font-size review-delete-btn'}
+                            <div className={`${item.icon} iconfont font-size review-delete-btn ${reviewImgIsSquare && 'hide'}`}
                                  onClick={propsSelf.pageLeftSwitch.bind(propsSelf, {
                                      item: propsSelf.state.leftIcon[6],
                                      review: item.key
@@ -43,7 +43,7 @@ const isBtnShow = (propsSelf, self) => {
                             inline
                         >
                             <span>{item.value}</span>
-                            <span className={item.icon + ' iconfont font-size'}/>
+                            <span className={`${item.icon} iconfont font-size`}/>
                         </Button>
                     }
                 </div>
@@ -276,7 +276,7 @@ export default class extends Component {
                           renderRow={row}
                           className="review-color-box"
                           style={{ height: state.isReviewImgIsPerson ?
-                              state.reviewImgIsSquare ? '100%': isPerson ? '68%' : `75%`
+                              state.reviewImgIsSquare ? '88%': isPerson ? '68%' : `80%`
                               : `84%` }}
                           contentContainerStyle={{ height: '100%' }}
                 />
@@ -284,26 +284,26 @@ export default class extends Component {
                     state.reviewImgIsSquare && state.isReviewImgIsPerson ?
                         '':
                         <div className="review-page-box__box">
-                            {
-                                isPerson ?
-                                    <CheckboxItem
-                                        checked={self.state.isShareCheck}
-                                        className="isCheck"
-                                        onClick={this.checkedClick.bind(self, 'wish')}
-                                    >
-                                        是否分享祈福信息
-                                    </CheckboxItem> : '' }
+                            {/*{*/}
+                                {/*isPerson ?*/}
+                                    {/*<CheckboxItem*/}
+                                        {/*checked={self.state.isShareCheck}*/}
+                                        {/*className="isCheck"*/}
+                                        {/*onClick={this.checkedClick.bind(self, 'wish')}*/}
+                                    {/*>*/}
+                                        {/*是否分享祈福信息*/}
+                                    {/*</CheckboxItem> : '' }*/}
 
-                            {
-                                state.isReviewImgIsPerson ?
-                                    <CheckboxItem
-                                        checked={self.state.isShareHui}
-                                        className="isCheck"
-                                        onClick={this.checkedClick.bind(self, 'hui')}
-                                    >
-                                        是否分享回向偈
-                                    </CheckboxItem> : ''
-                            }
+                            {/*{*/}
+                                {/*state.isReviewImgIsPerson ?*/}
+                                    {/*<CheckboxItem*/}
+                                        {/*checked={self.state.isShareHui}*/}
+                                        {/*className="isCheck"*/}
+                                        {/*onClick={this.checkedClick.bind(self, 'hui')}*/}
+                                    {/*>*/}
+                                        {/*是否分享回向偈*/}
+                                    {/*</CheckboxItem> : ''*/}
+                            {/*}*/}
                             {
                                 state.isReviewImgIsPerson ?
                                     <CheckboxItem
@@ -317,15 +317,20 @@ export default class extends Component {
                         </div>
 
                 }
-                {
-                    state.reviewImgIsSquare && state.isReviewImgIsPerson ?
-                        '':
-                        <div className="review-page-box__review">
-                            {
-                                isBtnShow(self)
-                            }
-                        </div>
-                }
+                <div className="review-page-box__review">
+                  {
+                    isBtnShow(self)
+                  }
+                </div>
+                {/*{*/}
+                    {/*state.reviewImgIsSquare && state.isReviewImgIsPerson ?*/}
+                        {/*'':*/}
+                        {/*<div className="review-page-box__review">*/}
+                            {/*{*/}
+                                {/*isBtnShow(self)*/}
+                            {/*}*/}
+                        {/*</div>*/}
+                {/*}*/}
 
             </div>
         );
