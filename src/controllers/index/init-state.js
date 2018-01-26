@@ -112,6 +112,39 @@ export default {
     personState: { ...person },
     musicList: [],
     tieList: [],
+    tieObject: [
+        {
+            key: 'S',
+            name: '对应',
+            data: [],
+            active: true,
+        },
+        {
+            key: 'K',
+            name: '对应',
+            data: []
+        },
+        {
+            key: 'A',
+            name: '对应',
+            data: []
+        },
+        {
+            key: 'B',
+            name: '对应',
+            data: []
+        },
+        {
+            key: 'C',
+            name: '对应',
+            data: []
+        },
+        {
+            key: 'D',
+            name: '对应',
+            data: []
+        }
+    ],
     offlineState: [],
     currentReviewImgSrc: '',
     reviewImgIsPerson: false,

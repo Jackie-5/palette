@@ -76,6 +76,15 @@ export default class extends Component {
             });
     }
 
+    listClick(item){
+        const state = this.state;
+        state.tieObject.map((it)=>{
+            it.active = item.key === it.key
+        });
+
+        this.setState(state);
+    }
+
 
     render(){
         const self = this.props.self;
@@ -101,13 +110,22 @@ export default class extends Component {
             );
         };
 
-        return <ListView ref="lv"
-                         dataSource={this.state.dataSource}
-                         renderBodyComponent={() => <MyBody />}
-                         renderRow={row}
-                         className="tie-box"
-                         contentContainerStyle={{height: '100%'}}
-        />
+        return <div className="tie-container">
+            <div className="tie-container__select">
+                {
+                    state.tieObject.map((item, i)=>{
+                        return <div className={`tie-container__select__item ${item.active && 'tie-container__select__active'}`} key={i} onClick={this.listClick.bind(self,item)}>{item.name}</div>
+                    })
+                }
+            </div>
+            <ListView ref="lv"
+                      dataSource={this.state.dataSource}
+                      renderBodyComponent={() => <MyBody />}
+                      renderRow={row}
+                      className="tie-box"
+                      contentContainerStyle={{height: '100%'}}
+            />
+        </div>
     }
 }
 
