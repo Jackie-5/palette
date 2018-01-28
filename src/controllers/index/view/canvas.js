@@ -14,6 +14,8 @@ export default class extends React.Component {
 
     componentDidMount() {
         this.props.self.subCanvas(this);
+        $youziku.load(".ziti", "235e65b78e7a429f94594ba1bf36d919", "jdzhonyuanjian");
+        $youziku.draw(0);
     }
 
     initCanvas(options = {}) {
@@ -227,6 +229,7 @@ export default class extends React.Component {
         const { indexData, allNumber, currentNumber } = self.state.indexState;
 
         const lieNumber = (currentNumber + 1)%defaultPage.b_x === 0 ? defaultPage.b_x : (currentNumber + 1)%defaultPage.b_x;
+        $youziku.submit("ziti");
         return <div className="canvas-index">
             <div className="canvas-switch canvas-top">
                 <div className="canvas-text">
@@ -273,7 +276,7 @@ export default class extends React.Component {
                 {
                     indexData[currentNumber].imgurl ?
                         <img src={indexData[currentNumber].imgurl} alt="" className="canvas-images canvas-img-middle"/>
-                        : <div className="canvas-images">
+                        : <div className="canvas-images ziti">
                         <div className="canvas-images__chinese">{indexData[currentNumber].chinese}</div>
                     </div>
                 }
@@ -292,7 +295,7 @@ export default class extends React.Component {
                         currentNumber >= allNumber ? '' : indexData[currentNumber + 1].imgurl ?
                             <img src={indexData[currentNumber + 1].imgurl} alt=""/> :
 
-                            <div className="canvas-images">
+                            <div className="canvas-images ziti">
                                 <div className="canvas-images__chinese-1">{indexData[currentNumber + 1].chinese}</div>
                             </div>
                     }

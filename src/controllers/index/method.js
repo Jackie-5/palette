@@ -334,7 +334,7 @@ export default class method extends React.Component {
         state.indexState.allNumber = data.data.length - 1;
         state.indexState.indexData = data.data;
         self.setState(state);
-
+        $youziku.submit("ziti");
         this.canvasMethod.initCanvas();
     }
 
@@ -402,7 +402,6 @@ export default class method extends React.Component {
         const state = copy(this.state);
         if (this.canvasMethod.beginWrite) {
             const newDate = new Date().getTime();
-
             // 当前的数如果不等于总数，那么就可以继续往下写。
             if (state.indexState.currentNumber !== state.indexState.allNumber) {
                 // 每次push一下canvas的base64
