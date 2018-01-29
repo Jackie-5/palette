@@ -311,7 +311,7 @@ export default class extends Component {
                                         className="isCheck"
                                         onClick={this.checkedClick.bind(self, 'square')}
                                     >
-                                        是否分享至作品广场
+                                        分享至作品广场
                                     </CheckboxItem> : ''
                             }
                         </div>

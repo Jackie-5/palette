@@ -114,34 +114,34 @@ export default {
     tieList: [],
     tieObject: [
         {
+            key: 'B',
+            name: '碑帖',
+            data: [],
+        },
+        {
+            key: 'Y',
+            name: '楹联',
+            data: []
+        },
+        {
+            key: 'G',
+            name: '古诗',
+            data: [],
+        },
+        {
             key: 'S',
-            name: '对应',
+            name: '经书',
             data: [],
             active: true,
         },
         {
-            key: 'K',
-            name: '对应',
-            data: []
-        },
-        {
-            key: 'A',
-            name: '对应',
-            data: []
-        },
-        {
-            key: 'B',
-            name: '对应',
-            data: []
-        },
-        {
             key: 'C',
-            name: '对应',
+            name: '热点',
             data: []
         },
         {
-            key: 'D',
-            name: '对应',
+            key: 'K',
+            name: '空白',
             data: []
         }
     ],

@@ -12,6 +12,7 @@
             font-size: 30px;
             padding:20px 0;
             background: #dddddd;
+            color: #999;
             &:after{
                 content: ' ';
                 position:absolute;
@@ -29,6 +30,7 @@
         }
         &__active{
             background: transparent;
+            color:#333;
         }
     }
     .tie-box{
@@ -66,6 +68,24 @@
                         bottom: 0;
                         color:@penColor;
                         font-size: 25px;
+                    }
+
+                }
+
+                &__none{
+                    background: @bgColor;
+                    position:relative;
+                    .am-list-line{
+                        padding: 0;
+                        .am-list-content{
+                            line-height: 30px;
+                            text-align: center;
+                            color:#999;
+                            font-size: 30px;
+                            .am-list-brief{
+                                font-size: 25px;
+                            }
+                        }
                     }
                 }
                 &__author{
