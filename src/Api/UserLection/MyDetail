@@ -1,1 +1,21 @@
-{"data":{"total":1,"position":1,"musicurl":"http://admin.eastdoing.com/Upload/files/music/formal/BC2A2A72ABD004D97FB52F6A3183D6CD.mp3","lectionname":"佛经_缘","fontsize":"10","color":"#996633","w_id":5363,"m_id":21,"b_id":39,"bh_id":1340,"last_w_id":null,"last_imgurl":"","b_author":"照诚大和尚(龙华寺)","b_x":1,"b_no":"C004"},"code":0,"msg":"成功"}
+{
+    "data": {
+        "total": 1,
+        "position": 1,
+        "musicurl": "http://admin.eastdoing.com/Upload/files/music/formal/BC2A2A72ABD004D97FB52F6A3183D6CD.mp3",
+        "lectionname": "佛经_缘",
+        "fontsize": "10",
+        "color": "#996633",
+        "w_id": 5363,
+        "m_id": 21,
+        "b_id": 39,
+        "bh_id": 1340,
+        "last_w_id": null,
+        "last_imgurl": "",
+        "b_author": "照诚大和尚(龙华寺)",
+        "b_x": 1,
+        "b_no": "K004"
+    },
+    "code": 0,
+    "msg": "成功"
+}

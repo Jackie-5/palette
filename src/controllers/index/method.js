@@ -12,7 +12,7 @@ import copy from 'clone';
 import { wxShareConfig, hideConfig, wxConfigSet } from '../../libs/wx-share-config';
 import userAgent from '../../libs/user-agent';
 import second from '../../libs/second';
-import { shareIndex, shareName } from '../../libs/share-content';
+import { shareIndex, shareName, square } from '../../libs/share-content';
 import cookies from 'js-cookie';
 
 const alert = Modal.alert;
@@ -232,33 +232,42 @@ export default class method extends React.Component {
                         ]);
                     } else if (options.review === 'share') {
                         state.isReviewImgIsPerson = true;
-                        const data = await axios({
-                            url: pageAjax.UserLectionGetShareKey,
-                            params: {
-                                bh_id: state.reviewImgIsPerson.bh_id
-                            }
-                        });
-                        const user = await axios({
-                            url: pageAjax.UserBasic,
-                        });
+                        if(state.reviewImgIsSquare){
+                          wxShareConfig({
+                            title: `『${square.title}』作品分享:《${state.reviewImgIsPerson.lectionname}》`,
+                            desc: square.desc,
+                            link: `${square.link}?i=${state.reviewImgIsPerson.key}&n=${encodeURIComponent(state.reviewImgIsPerson.lectionname)}&u=${encodeURIComponent(state.reviewImgIsPerson.nickname)}`,
+                            imgUrl: square.imgUrl
+                          });
+                        } else {
+                            const data = await axios({
+                                url: pageAjax.UserLectionGetShareKey,
+                                params: {
+                                    bh_id: state.reviewImgIsPerson.bh_id
+                                }
+                            });
+                            const user = await axios({
+                                url: pageAjax.UserBasic,
+                            });
 
-                        await axios({
-                            url: pageAjax.UserLectionUpdateSharePower,
-                            method: 'post',
-                            params: {
-                                bh_id: state.reviewImgIsPerson.bh_id,
-                                bh_power: state.isShareCheck ? 1 : 0,
-                                bh_h_powere: state.isShareHui ? 1 : 0,
-                                bh_square_power: state.isShareSquare ? 1 : 0,
-                            }
-                        });
+                            await axios({
+                                url: pageAjax.UserLectionUpdateSharePower,
+                                method: 'post',
+                                params: {
+                                    bh_id: state.reviewImgIsPerson.bh_id,
+                                    bh_power: state.isShareCheck ? 1 : 0,
+                                    bh_h_powere: state.isShareHui ? 1 : 0,
+                                    bh_square_power: state.isShareSquare ? 1 : 0,
+                                }
+                            });
 
-                        wxShareConfig({
-                            title: `『${user.data.nickname}』${shareName.title}《${data.data.lectionname}》`,
-                            desc: shareName.desc,
-                            link: `${shareName.link}?i=${data.data.key}&n=${encodeURIComponent(data.data.lectionname)}&u=${encodeURIComponent(user.data.nickname)}`,
-                            imgUrl: shareName.imgUrl
-                        });
+                            wxShareConfig({
+                                title: `『${user.data.nickname}』${shareName.title}《${data.data.lectionname}》`,
+                                desc: shareName.desc,
+                                link: `${shareName.link}?i=${data.data.key}&n=${encodeURIComponent(data.data.lectionname)}&u=${encodeURIComponent(user.data.nickname)}`,
+                                imgUrl: shareName.imgUrl
+                            });
+                        }
                         state.isShowSharePop = true;
                         self.setState(state);
                     }

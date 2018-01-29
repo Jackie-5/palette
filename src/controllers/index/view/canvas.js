@@ -228,7 +228,11 @@ export default class extends React.Component {
 
         const { indexData, allNumber, currentNumber } = self.state.indexState;
 
-        const lieNumber = (currentNumber + 1)%defaultPage.b_x === 0 ? defaultPage.b_x : (currentNumber + 1)%defaultPage.b_x;
+        const lieNumber = (currentNumber + 1) % defaultPage.b_x === 0 ? defaultPage.b_x : (currentNumber + 1) % defaultPage.b_x;
+
+        let b_no = defaultPage.b_no;
+
+
         $youziku.submit("ziti");
         return <div className="canvas-index">
             <div className="canvas-switch canvas-top">
@@ -252,8 +256,8 @@ export default class extends React.Component {
 
                         currentNumber <= 0 ? '' : <img src={
                             saveNextArr.length === 0 && defaultPage.last_imgurl ?
-                            defaultPage.last_imgurl :
-                            (saveNextArr.length > 0 ? saveNextArr[saveNextArr.length - 1] : indexData[currentNumber - 1].imgurl)
+                                defaultPage.last_imgurl :
+                                (saveNextArr.length > 0 ? saveNextArr[saveNextArr.length - 1] : indexData[currentNumber - 1].imgurl)
                         } alt=""/>
                     }
                 </div>
@@ -270,7 +274,7 @@ export default class extends React.Component {
                 <canvas ref="writeCanvas"
                         onTouchStart={this.canvasTouchStart.bind(this)}
                         onTouchMove={this.canvasTouchMove.bind(this)}
-                        onTouchEnd={this.canvasTouchMoveEnd.bind(this,self)}
+                        onTouchEnd={this.canvasTouchMoveEnd.bind(this, self)}
                         style={{ position: 'absolute', top: 0, left: 0, zIndex: 9 }}/>
                 <canvas ref="bgCanvas" style={{ position: 'relative', zIndex: 8 }}/>
                 {
@@ -301,14 +305,15 @@ export default class extends React.Component {
                     }
                 </div>
                 {/*<div className="canvas-bottom-icon hope-icon"*/}
-                     {/*onClick={self.pageLeftSwitch.bind(self, { item: self.state.hope })}>*/}
-                    {/*福*/}
+                {/*onClick={self.pageLeftSwitch.bind(self, { item: self.state.hope })}>*/}
+                {/*福*/}
                 {/*</div>*/}
-                <div className="canvas-bottom-icon about-current iconfont icon-i1"
+                <div className={`canvas-bottom-icon about-current iconfont icon-i1 ${b_no ? b_no.slice(0, 1) === 'K' ? '' : 'over-icon' : ''}`}
                      onClick={self.pageLeftSwitch.bind(self, { item: self.state.aboutCurrent })}/>
 
-                <div className="canvas-bottom-icon hope-icon over-icon "
-                     onClick={self.pageLeftSwitch.bind(self, { item: self.state.leftIcon[6], over: true })}>
+                <div
+                    className={`canvas-bottom-icon hope-icon over-icon ${b_no ? b_no.slice(0, 1) === 'K' ? '' : 'hide' : ''}`}
+                    onClick={self.pageLeftSwitch.bind(self, { item: self.state.leftIcon[6], over: true })}>
                     完
                 </div>
 
