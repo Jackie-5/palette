@@ -59,12 +59,12 @@ export default class method extends React.Component {
                 }
             });
             wxConfigSet(wxConfig);
-            //wx.ready(() => {
+            wx.ready(() => {
                 self.initCanvas();
                 hideConfig();
                 wxShareConfig(shareIndex);
                 self.state.isMusic && self.refs.audio.play();
-            //});
+            });
         }
     }
 
