@@ -343,7 +343,6 @@ export default class method extends React.Component {
         state.indexState.allNumber = data.data.length - 1;
         state.indexState.indexData = data.data;
         self.setState(state);
-        $youziku.submit("ziti");
         this.canvasMethod.initCanvas();
     }
 

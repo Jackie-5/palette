@@ -14,8 +14,6 @@ export default class extends React.Component {
 
     componentDidMount() {
         this.props.self.subCanvas(this);
-        $youziku.load(".ziti", "235e65b78e7a429f94594ba1bf36d919", "jdzhonyuanjian");
-        $youziku.draw(0);
     }
 
     initCanvas(options = {}) {
@@ -232,8 +230,6 @@ export default class extends React.Component {
 
         let b_no = defaultPage.b_no;
 
-
-        $youziku.submit("ziti");
         return <div className="canvas-index">
             <div className="canvas-switch canvas-top">
                 <div className="canvas-text">
