@@ -262,7 +262,7 @@ export default class method extends React.Component {
                             });
 
                             wxShareConfig({
-                                title: `『${user.data.nickname}』${shareName.title}《${data.data.lectionname}》`,
+                                title: `『小乙写字』${user.data.nickname}${shareName.title}《${data.data.lectionname}》`,
                                 desc: shareName.desc,
                                 link: `${shareName.link}?i=${data.data.key}&n=${encodeURIComponent(data.data.lectionname)}&u=${encodeURIComponent(user.data.nickname)}`,
                                 imgUrl: shareName.imgUrl
