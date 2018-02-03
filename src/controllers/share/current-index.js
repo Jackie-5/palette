@@ -57,13 +57,13 @@ class App extends method {
                         <span className="palette-share-box__praise__font">{param.praiseNum}赞</span>
                         <div className={param.ispraise === 1 ? 'iconfont icon-xin1 palette-share-box__praise__icon' : 'iconfont icon-xin palette-share-box__praise__icon'} />
                     </div>
-                    <div className={param.bh_h_power === '1' ? 'palette-share-box__versesImg' : 'hide'}>
-                        <div className="palette-share-box__versesImg__border" />
-                        <div className="palette-share-box__versesImg__img">
-                            <img src={param.versesImg} />
-                        </div>
-                        <div className="palette-share-box__versesImg__border" />
-                    </div>
+                    {/*<div className={param.bh_h_power === '1' ? 'palette-share-box__versesImg' : 'hide'}>*/}
+                        {/*<div className="palette-share-box__versesImg__border" />*/}
+                        {/*<div className="palette-share-box__versesImg__img">*/}
+                            {/*<img src={param.versesImg} />*/}
+                        {/*</div>*/}
+                        {/*<div className="palette-share-box__versesImg__border" />*/}
+                    {/*</div>*/}
                     <div className="palette-share-box__qcode">
                         <div className="palette-share-box__qcode__img">
                             <img src={param.wxImg} />
