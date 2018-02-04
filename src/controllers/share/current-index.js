@@ -37,7 +37,7 @@ class App extends method {
                     </div>
                     <div className="palette-share-box__page-view">
                         <div className="palette-share-box__page-view__title clearfix">
-                            <div className="palette-share-box__page-view__title__name">我的作品</div>
+                            <div className="palette-share-box__page-view__title__name">{this.urlSearch && this.urlSearch.u}的作品</div>
                         </div>
                         <div className="palette-share-box__page-view__box">
                             <div className="palette-share-box__page-view__box__img">

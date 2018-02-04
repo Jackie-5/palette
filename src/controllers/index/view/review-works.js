@@ -246,17 +246,17 @@ export default class extends Component {
                                     </div>
                                 }
                             </div>
-                            {
-                                state.reviewImgIsSquare ?
-                                    '':
-                                    <div className="palette-review-box__versesImg">
-                                        <div className="palette-review-box__versesImg__border"/>
-                                        <div className="palette-review-box__versesImg__img">
-                                            <img src={currentReviewDetail.versesImg}/>
-                                        </div>
-                                        <div className="palette-review-box__versesImg__border"/>
-                                    </div>
-                            }
+                            {/*{*/}
+                                {/*state.reviewImgIsSquare ?*/}
+                                    {/*'':*/}
+                                    {/*<div className="palette-review-box__versesImg">*/}
+                                        {/*<div className="palette-review-box__versesImg__border"/>*/}
+                                        {/*<div className="palette-review-box__versesImg__img">*/}
+                                            {/*<img src={currentReviewDetail.versesImg}/>*/}
+                                        {/*</div>*/}
+                                        {/*<div className="palette-review-box__versesImg__border"/>*/}
+                                    {/*</div>*/}
+                            {/*}*/}
 
                         </div> :
                             <div className="review-color-body__color">
@@ -311,7 +311,7 @@ export default class extends Component {
                                         className="isCheck"
                                         onClick={this.checkedClick.bind(self, 'square')}
                                     >
-                                        是否分享至作品广场
+                                        分享至作品广场
                                     </CheckboxItem> : ''
                             }
                         </div>
