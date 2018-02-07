@@ -20,10 +20,30 @@ export default class extends React.Component {
         const self = this.props.self;
         this.beginWrite = false;
         try {
-            this.refs.writeCanvas.width = this.refs.canvasBox.offsetWidth;
-            this.refs.writeCanvas.height = this.refs.canvasBox.offsetHeight;
-            this.refs.bgCanvas.width = this.refs.writeCanvas.width;
-            this.refs.bgCanvas.height = this.refs.writeCanvas.height;
+            let middleHeight = document.body.clientHeight - this.refs.canvasBox.offsetWidth;
+            let topBottomHeight = middleHeight / 2;
+            this.refs.writeCanvas.style.left = 0;
+            this.refs.bgCanvas.style.left = 0;
+            this.refs.bgCanvas.style.borderLeft = `0`;
+            //console.log(navigator.userAgent.includes('iPad'));
+            if(document.body.clientHeight < document.body.clientWidth || navigator.userAgent.includes('iPad')){
+                middleHeight = document.body.clientHeight / 2;
+                topBottomHeight = middleHeight / 2;
+                this.refs.writeCanvas.style.left = `${this.refs.canvasBox.offsetWidth / 2 - middleHeight / 2}px`;
+                this.refs.bgCanvas.style.left = `${this.refs.canvasBox.offsetWidth / 2 - middleHeight / 2}px`;
+                this.refs.bgCanvas.style.borderLeft = `1px solid #ccc`;
+                this.refs.bgCanvas.style.borderRight = `1px solid #ccc`;
+            }
+
+
+            this.refs.canvasTop.style.height = `${topBottomHeight}px`;
+            this.refs.canvasBox.style.height = `${middleHeight}px`;
+            this.refs.canvasBottom.style.height = `${topBottomHeight}px`;
+
+            this.refs.writeCanvas.width = middleHeight;
+            this.refs.writeCanvas.height = middleHeight;
+            this.refs.bgCanvas.width = middleHeight;
+            this.refs.bgCanvas.height = middleHeight;
             this.writeCtx = this.refs.writeCanvas.getContext("2d");
             this.bgCtx = this.refs.bgCanvas.getContext("2d");
             this.penSize = self.state.defaultPage.fontsize || 10;
@@ -231,7 +251,7 @@ export default class extends React.Component {
         let b_no = defaultPage.b_no;
 
         return <div className="canvas-index">
-            <div className="canvas-switch canvas-top">
+            <div className="canvas-switch canvas-top" ref="canvasTop">
                 <div className="canvas-text">
                     <div>{currentNumber <= 0 ? '' : indexData[currentNumber - 1].pinyin}</div>
                     <div>{currentNumber <= 0 ? '' : indexData[currentNumber - 1].chinese}</div>
@@ -282,7 +302,7 @@ export default class extends React.Component {
                 }
 
             </div>
-            <div className="canvas-switch">
+            <div className="canvas-switch" ref="canvasBottom">
                 <div
                     className="canvas-images"
                     onTouchStart={self.nextFont.bind(self)}
