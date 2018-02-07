@@ -20,19 +20,25 @@ export default class extends React.Component {
         const self = this.props.self;
         this.beginWrite = false;
         try {
-            let middleHeight = document.body.clientHeight - this.refs.canvasBox.offsetWidth;
-            let topBottomHeight = middleHeight / 2;
+
+            let middleHeight = this.refs.canvasBox.clientWidth;
+
+            let topBottomHeight = (document.body.clientHeight - middleHeight ) / 2;
             this.refs.writeCanvas.style.left = 0;
             this.refs.bgCanvas.style.left = 0;
-            this.refs.bgCanvas.style.borderLeft = `0`;
-            //console.log(navigator.userAgent.includes('iPad'));
-            if(document.body.clientHeight < document.body.clientWidth || navigator.userAgent.includes('iPad')){
+            this.refs.writeCanvas.style.borderLeft = `0`;
+            this.refs.writeCanvas.style.borderRight = `0`;
+            this.refs.canvasBgImg.style.left = `0px`;
+
+
+            if (document.body.clientHeight < document.body.clientWidth || navigator.userAgent.includes('iPad')) {
                 middleHeight = document.body.clientHeight / 2;
                 topBottomHeight = middleHeight / 2;
-                this.refs.writeCanvas.style.left = `${this.refs.canvasBox.offsetWidth / 2 - middleHeight / 2}px`;
-                this.refs.bgCanvas.style.left = `${this.refs.canvasBox.offsetWidth / 2 - middleHeight / 2}px`;
-                this.refs.bgCanvas.style.borderLeft = `1px solid #ccc`;
-                this.refs.bgCanvas.style.borderRight = `1px solid #ccc`;
+                this.refs.writeCanvas.style.left = `${this.refs.canvasBox.clientWidth / 2 - middleHeight / 2}px`;
+                this.refs.bgCanvas.style.left = `${this.refs.canvasBox.clientWidth / 2 - middleHeight / 2}px`;
+                this.refs.canvasBgImg.style.left = `${this.refs.canvasBox.clientWidth / 2 - middleHeight / 2}px`;
+                this.refs.writeCanvas.style.borderLeft = `1px solid #ccc`;
+                this.refs.writeCanvas.style.borderRight = `1px solid #ccc`;
             }
 
 
@@ -44,6 +50,7 @@ export default class extends React.Component {
             this.refs.writeCanvas.height = middleHeight;
             this.refs.bgCanvas.width = middleHeight;
             this.refs.bgCanvas.height = middleHeight;
+            this.refs.canvasBgImg.style.width = `${middleHeight}px`;
             this.writeCtx = this.refs.writeCanvas.getContext("2d");
             this.bgCtx = this.refs.bgCanvas.getContext("2d");
             this.penSize = self.state.defaultPage.fontsize || 10;
@@ -295,8 +302,9 @@ export default class extends React.Component {
                 <canvas ref="bgCanvas" style={{ position: 'relative', zIndex: 8 }}/>
                 {
                     indexData[currentNumber].imgurl ?
-                        <img src={indexData[currentNumber].imgurl} alt="" className="canvas-images canvas-img-middle"/>
-                        : <div className="canvas-images ziti">
+                        <img src={indexData[currentNumber].imgurl} alt="" className="canvas-images canvas-img-middle"
+                             ref="canvasBgImg"/>
+                        : <div className="canvas-images ziti" ref="canvasBgImg">
                         <div className="canvas-images__chinese">{indexData[currentNumber].chinese}</div>
                     </div>
                 }
@@ -324,8 +332,9 @@ export default class extends React.Component {
                 {/*onClick={self.pageLeftSwitch.bind(self, { item: self.state.hope })}>*/}
                 {/*福*/}
                 {/*</div>*/}
-                <div className={`canvas-bottom-icon about-current iconfont icon-i1 ${b_no ? b_no.slice(0, 1) === 'K' ? '' : 'over-icon' : ''}`}
-                     onClick={self.pageLeftSwitch.bind(self, { item: self.state.aboutCurrent })}/>
+                <div
+                    className={`canvas-bottom-icon about-current iconfont icon-i1 ${b_no ? b_no.slice(0, 1) === 'K' ? '' : 'over-icon' : ''}`}
+                    onClick={self.pageLeftSwitch.bind(self, { item: self.state.aboutCurrent })}/>
 
                 <div
                     className={`canvas-bottom-icon hope-icon over-icon ${b_no ? b_no.slice(0, 1) === 'K' ? '' : 'hide' : ''}`}
