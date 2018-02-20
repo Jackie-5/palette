@@ -104,38 +104,7 @@
             "total": 0,
             "b_no": "C002"
         },
-        {
-            "b_id": 35,
-            "lectionname": "吉祥经",
-            "b_author": "李荣熙译",
-            "b_default": 0,
-            "total": 0,
-            "b_no": "S006"
-        },
-        {
-            "b_id": 35,
-            "lectionname": "吉祥经",
-            "b_author": "李荣熙译",
-            "b_default": 0,
-            "total": 0,
-            "b_no": "S006"
-        },
-        {
-            "b_id": 35,
-            "lectionname": "吉祥经",
-            "b_author": "李荣熙译",
-            "b_default": 0,
-            "total": 0,
-            "b_no": "S006"
-        },
-        {
-            "b_id": 35,
-            "lectionname": "吉祥经",
-            "b_author": "李荣熙译",
-            "b_default": 0,
-            "total": 0,
-            "b_no": "S006"
-        }
+
     ],
     "code": 0,
     "msg": "成功"

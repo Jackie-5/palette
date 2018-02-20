@@ -282,9 +282,10 @@ export default class extends Component {
                               overflow: 'auto',
                               border: '1px solid #ddd',
                           }}
-                          scrollRenderAheadDistance={50}
+                          scrollRenderAheadDistance={500}
+                          scrollEventThrottle={20}
                           onEndReached={this.onEndReached}
-                          onEndReachedThreshold={20}
+                          onEndReachedThreshold={10}
                 />
             </div>
         );
